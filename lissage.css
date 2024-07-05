@@ -1,13 +1,20 @@
+@@ -1,42 +1,50 @@
 body {
+    font-family: Arial, sans-serif;
     font-family: 'Roboto', sans-serif;
     background-color: #1b1b1b;
     color: #dcdcdc;
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 header {
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
     background: #121212;
     color: #00e676;
     padding: 2em 0;
@@ -17,10 +24,12 @@ header {
 
 header h1 {
     margin: 0;
+    font-size: 2em;
     font-size: 2.5em;
 }
 
 header p {
+    margin: 0.2em 0;
     margin: 0.3em 0;
 }
 
@@ -30,17 +39,23 @@ header a {
 }
 
 section {
+    padding: 1em;
     padding: 2em;
     margin: 1em auto;
     max-width: 800px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background-color: #282828;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
     border-radius: 10px;
 }
 
 h2 {
+    background: #f4f4f4;
     background: #333;
     padding: 0.5em;
+    border-left: 5px solid #333;
+    margin: 0 -1em;
     border-left: 5px solid #00e676;
     margin: 0 -2em;
     padding-left: 1em;
@@ -48,35 +63,39 @@ h2 {
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+@@ -45,19 +53,21 @@ ul {
 }
 
 ul li {
+    background: #e2e2e2;
     background: #383838;
     margin: 0.5em 0;
+    padding: 0.5em;
+    border-left: 5px solid #333;
     padding: 0.7em;
     border-left: 5px solid #00e676;
     border-radius: 5px;
 }
 
 article {
+    margin: 1em 0;
     margin: 1.5em 0;
 }
 
 article h3 {
     margin: 0;
+    font-size: 1.2em;
     font-size: 1.4em;
     color: #00e676;
 }
 
 p, ul {
-    margin: 0.5em 0;
-}
-
+@@ -67,7 +77,8 @@ p, ul {
 footer {
     text-align: center;
     padding: 1em 0;
+    background: #333;
+    color: #fff;
     background: #121212;
     color: #00e676;
     border-top: 2px solid #00e676;
