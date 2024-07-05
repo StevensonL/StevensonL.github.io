@@ -1,84 +1,185 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #1b1b1b;
-    color: #dcdcdc;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Example</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1b1b1b;
+            color: #dcdcdc;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: #121212;
+            color: #00e676;
+            padding: 2em 0;
+            text-align: center;
+            border-bottom: 2px solid #00e676;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        header p {
+            margin: 0.3em 0;
+        }
+        
+        header a {
+            color: #00e676;
+            text-decoration: none;
+        }
+        
+        section {
+            padding: 2em;
+            margin: 1em auto;
+            max-width: 800px;
+            background-color: #282828;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            border-radius: 10px;
+        }
+        
+        h2 {
+            background: #333;
+            padding: 0.5em;
+            border-left: 5px solid #00e676;
+            margin: 0 -2em;
+            padding-left: 1em;
+            color: #00e676;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul li {
+            background: #383838;
+            margin: 0.5em 0;
+            padding: 0.7em;
+            border-left: 5px solid #00e676;
+            border-radius: 5px;
+        }
+        
+        article {
+            margin: 1.5em 0;
+        }
+        
+        article h3 {
+            margin: 0;
+            font-size: 1.4em;
+            color: #00e676;
+        }
+        
+        p, ul {
+            margin: 0.5em 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background: #121212;
+            color: #00e676;
+            border-top: 2px solid #00e676;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
 
-header {
-    background: #121212;
-    color: #00e676;
-    padding: 2em 0;
-    text-align: center;
-    border-bottom: 2px solid #00e676;
-}
+<header>
+    <h1>PRÉNOM NOM</h1>
+    <p>Brève description de qui tu es et ce que tu recherches...</p>
+</header>
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
+<section>
+    <article>
+        <h2>EXPÉRIENCES DIVERSES</h2>
+        <ul>
+            <li>
+                <h3>NOM DE L’ASSOCIATION/ENTREPRISE OU DU PROJET</h3>
+                <p>(Ville, Pays) - Du 00/00/0000 au 00/00/0000</p>
+                <ul>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                </ul>
+            </li>
+            <li>
+                <h3>NOM DE L’ASSOCIATION/ENTREPRISE OU DU PROJET</h3>
+                <p>(Ville, Pays) - Du 00/00/0000 au 00/00/0000</p>
+                <ul>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                    <li>Tâches réalisées : xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+                </ul>
+            </li>
+        </ul>
+    </article>
 
-header p {
-    margin: 0.3em 0;
-}
+    <article>
+        <h2>COMPÉTENCES</h2>
+        <ul>
+            <li>Proactivité</li>
+            <li>Travail en équipe</li>
+            <li>Responsabilité</li>
+        </ul>
+    </article>
 
-header a {
-    color: #00e676;
-    text-decoration: none;
-}
+    <article>
+        <h2>LOGICIELS</h2>
+        <ul>
+            <li>Excel</li>
+            <li>Word</li>
+            <li>PowerPoint</li>
+            <li>Outlook</li>
+        </ul>
+    </article>
+</section>
 
-section {
-    padding: 2em;
-    margin: 1em auto;
-    max-width: 800px;
-    background-color: #282828;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    border-radius: 10px;
-}
+<section>
+    <article>
+        <h2>FORMATION</h2>
+        <ul>
+            <li>
+                <h3>Diplôme xxxxxxxx</h3>
+                <p>Université ou école, Ville, Pays</p>
+                <p>Année d'obtention</p>
+            </li>
+            <li>
+                <h3>Diplôme xxxxxxxx</h3>
+                <p>Université ou école, Ville, Pays</p>
+                <p>Année d'obtention</p>
+            </li>
+        </ul>
+    </article>
 
-h2 {
-    background: #333;
-    padding: 0.5em;
-    border-left: 5px solid #00e676;
-    margin: 0 -2em;
-    padding-left: 1em;
-    color: #00e676;
-}
+    <article>
+        <h2>LANGUES</h2>
+        <ul>
+            <li>Français</li>
+            <li>Anglais</li>
+            <li>Espagnol</li>
+        </ul>
+    </article>
 
-ul {
-    list-style: none;
-    padding: 0;
-}
+    <article>
+        <h2>CONTACT</h2>
+        <p><strong>Ville, Pays</strong></p>
+        <p><strong>+33 99 99 99 99</strong></p>
+        <p><strong>prenom.nom@mail.com</strong></p>
+    </article>
+</section>
 
-ul li {
-    background: #383838;
-    margin: 0.5em 0;
-    padding: 0.7em;
-    border-left: 5px solid #00e676;
-    border-radius: 5px;
-}
+<footer>
+    <p>&copy; 2024 PRÉNOM NOM. Tous droits réservés.</p>
+</footer>
 
-article {
-    margin: 1.5em 0;
-}
-
-article h3 {
-    margin: 0;
-    font-size: 1.4em;
-    color: #00e676;
-}
-
-p, ul {
-    margin: 0.5em 0;
-}
-
-footer {
-    text-align: center;
-    padding: 1em 0;
-    background: #121212;
-    color: #00e676;
-    border-top: 2px solid #00e676;
-    margin-top: 1em;
-}
+</body>
+</html>
