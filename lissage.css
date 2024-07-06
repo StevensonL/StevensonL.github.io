@@ -1,90 +1,140 @@
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
+/* Import police */
+@import 'https://fonts.googleapis.com/css2?family=Montserrat&display=swap';
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+/* CSS PC */
+.container {
+    display: flex;
+    background-color: white;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #003366;
-            color: #fff;
-        }
+/* Enlève le soulignement des liens */
+a {
+    text-decoration: none;
+    padding-right: 1px;
+    color: white;
+}
 
-        header img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
+a:hover {
+    color: #c0fdff;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
+/* Partie gauche */
+.leftBlock {
+    float: left;
+    background-color: #90a4ff;
+    padding: 2%;
+    overflow-x: auto;
+}
 
-        .contact-info {
-            text-align: right;
-        }
+/* Photo */
+.picture {
+    padding-bottom: 12%;
+    padding-left: 10%;
+}
 
-        .contact-info p {
-            margin: 5px 0;
-        }
+.rectangle {
+    width:170px;
+    height:170px;
+    background-color:#c0fdff;
+}
 
-        .content {
-            display: flex;
-            justify-content: space-between;
-        }
+/* Nom prénom profession */
+.name {
+    font-size: 25px;
+    color: white;
+    text-shadow: 2px 2px grey;
+}
 
-        .main {
-            width: 65%;
-        }
+.name .subname {
+    font-size: 15px;
+    text-shadow: 2px 2px grey;
+}
 
-        .sidebar {
-            width: 30%;
-        }
+/* Profil */
+.supertitle {
+    font-size: 21px;
+    color: #c0fdff;
+    padding-top: 10%;
+    text-shadow: 1px 1px #72f0f5;
+}
 
-        h2 {
-            background-color: #003366;
-            color: #fff;
-            padding: 10px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
+.aboutme {
+    font-size: 13px;
+    color: #e6e6e6;
+}
 
-        .experience, .education, .profile, .skills, .languages, .interests {
-            margin-bottom: 20px;
-        }
+/* Coordonnées/Hobbies */
+.leftBlock .uppertitle {
 
-        .experience ul, .skills ul, .languages ul, .interests ul {
-            list-style: none;
-            padding: 0;
-        }
+    font-size: 21px;
+    color: #c0fdff;
+    text-shadow: 1px 1px #72f0f5;
+}
 
-        .experience ul li, .skills ul li, .languages ul li, .interests ul li {
-            background-color: #f4f4f4;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-left: 5px solid #003366;
-        }
+.location {
+    font-size: 13px;
+    color: #e6e6e6;
+}
 
-        .experience h3, .education h3 {
-            margin: 0;
-            font-size: 1.2em;
-        }
+.hobbies {
+    font-size: 13px;
+    color: #e6e6e6;
+}
 
-        .experience p, .education p, .profile p {
-            margin: 5px 0;
-        }
+/* Barre sous les titres */
+.leftBar {
+    box-shadow: 2px 2px 0px 0px #72f0f5;
+}
+
+/* Partie droite */
+.rightBlock {
+    float: right;
+    background-color: #c0fdff;
+    margin-right: -25%;
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-bottom: 1%;
+    overflow-x: auto;
+}
+
+/* Compétences/Expérience/Formations */
+.rightBlock .uppertitle {
+    font-size: 21px;
+    color: #90a4ff;
+    text-shadow: 1px 1px #5272fd;
+}
+
+/* Titre */
+.rightBlock .title {
+    font-size: 19px;
+}
+
+/* Date */
+.rightBlock .subtitle {
+    font-size: 15px;
+    color: #585656;
+}
+
+/* Texte */
+.rightBlock .text {
+    font-size: 13px;
+    color: #585656;
+}
+
+/* Barre sous les titres */
+.rightBlock .rightBar {
+    box-shadow: 2px 2px 0px 0px #5272fd;
+}
+
+/* Responsive téléphone (testé uniquement sur Samsung Galaxy S8 et page responsive web)*/
+@media screen and (max-width: 800px) {
+    .rectangle {
+        width:120px;
+        height:120px;
+    }
+
+    .leftBlock {
+        padding-right: 50px;
+    }
+  } 
