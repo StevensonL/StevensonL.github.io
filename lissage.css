@@ -7,83 +7,102 @@ body {
     font-family: Arial, sans-serif;
 }
 
-header {
-    background: #333;
+/* Structure générale : 2 colonnes */
+.container {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Colonne gauche */
+.left-column {
+    background-color: #f8b400; /* Jaune/orangé */
     color: #fff;
-    text-align: center;
-    padding: 1em 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    padding: 20px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-header p {
-    margin: 0.5em 0;
-    font-size: 1.2em;
-}
-
-section {
-    padding: 2em 1em;
-    max-width: 800px;
-    margin: 2em auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 10px;
-}
-
-h2 {
-    background: #f4f4f4;
-    padding: 0.5em;
-    border-left: 5px solid #333;
-    margin: 1em 0;
-    padding-left: 1em;
+.left-column img {
+    width: 100%;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-ul {
-    list-style-type: none;
+.left-column h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.left-column h1 span {
+    color: #333;
+    font-weight: bold;
+}
+
+.left-column p.role {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.left-column h3 {
+    margin-top: 30px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+}
+
+.contact-info, .skills {
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.contact-info p, .skills li {
+    margin: 5px 0;
+}
+
+.skills ul {
+    list-style: none;
     padding: 0;
 }
 
-ul li {
-    background: #eee;
-    margin: 0.5em 0;
-    padding: 0.5em;
-    border-left: 5px solid #333;
+.skills li {
+    background: rgba(255,255,255,0.2);
+    padding: 5px;
+    margin: 5px 0;
     border-radius: 5px;
 }
 
-article h3 {
+/* Colonne droite */
+.right-column {
+    width: 65%;
+    padding: 30px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: #f8b400;
+    font-size: 1.4em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.job, .education {
+    margin-bottom: 20px;
+}
+
+.job h3, .education h3 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #333;
 }
 
-article {
-    margin: 1em 0;
-    padding: 1em;
-    background-color: #f9f9f9;
-    border-left: 5px solid #333;
-    border-radius: 5px;
-}
-
-article p {
-    margin: 0.5em 0;
-    font-size: 1em;
+.job p, .education p {
+    margin: 5px 0;
+    font-size: 0.95em;
     color: #555;
-}
-
-footer {
-    text-align: center;
-    padding: 1em 0;
-    background: #333;
-    color: #fff;
-    margin-top: 1em;
-}
-
-footer p {
-    margin: 0;
 }
