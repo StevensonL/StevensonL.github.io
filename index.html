@@ -1,125 +1,499 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Stevenson LAURENT</title>
-    <link rel="stylesheet" href="lissage.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stevenson Laurent — Comptable collaborateur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #185FA5;
+      --blue-light: #E6F1FB;
+      --blue-mid: #B5D4F4;
+      --text: #1a1a1a;
+      --muted: #5a5a5a;
+      --border: rgba(0,0,0,0.1);
+      --bg: #ffffff;
+      --surface: #f7f9fc;
+      --radius: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-name { font-size: 15px; font-weight: 600; color: var(--blue); letter-spacing: -0.01em; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg);
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    .avatar-wrap { position: relative; }
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--blue-mid);
+      flex-shrink: 0;
+    }
+    .available-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #2d9e5f;
+      border: 2px solid var(--bg);
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--blue);
+      margin: 6px 0 14px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .hero-bio {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 18px;
+    }
+    .contact-bar { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-chip:hover { border-color: var(--blue); color: var(--blue); }
+    .contact-chip svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    /* ── GRID ── */
+    .main-grid { display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem; align-items: start; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.25rem;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--blue-light);
+    }
+
+    /* ── JOB ── */
+    .job { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+    .job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .job-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; }
+    .job-company { font-size: 14px; font-weight: 600; }
+    .job-date {
+      font-size: 12px;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .job-role { font-size: 13px; color: var(--muted); margin: 3px 0 8px; font-style: italic; }
+    .bullets { list-style: none; padding: 0; }
+    .bullets li { font-size: 13px; color: var(--muted); line-height: 1.55; padding: 2px 0 2px 16px; position: relative; }
+    .bullets li::before { content: '›'; position: absolute; left: 2px; color: var(--blue); font-weight: 600; }
+
+    /* ── EDU ── */
+    .edu-item { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--border); }
+    .edu-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .edu-school { font-size: 13px; font-weight: 600; }
+    .edu-degree { font-size: 13px; color: var(--muted); margin: 2px 0; }
+    .edu-date { font-size: 12px; color: var(--blue); font-weight: 500; }
+
+    /* ── SIDEBAR ── */
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 0.5px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .skill-row:last-child { border-bottom: none; }
+    .skill-row svg { width: 15px; height: 15px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    .lang-item { margin-bottom: 12px; }
+    .lang-item:last-child { margin-bottom: 0; }
+    .lang-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+    .lang-name { font-weight: 500; }
+    .lang-level { color: var(--muted); }
+    .lang-bar { height: 4px; background: var(--blue-light); border-radius: 2px; overflow: hidden; }
+    .lang-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 1s ease; }
+
+    .cont-item { font-size: 12.5px; color: var(--muted); padding: 6px 0; border-bottom: 0.5px solid var(--border); line-height: 1.4; }
+    .cont-item:last-child { border-bottom: none; }
+    .cont-year { font-size: 11px; color: var(--blue); font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* ── PRINT ── */
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--blue);
+      background: var(--blue-light);
+      border: 0.5px solid var(--blue-mid);
+      border-radius: 20px;
+      padding: 6px 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 1rem;
+    }
+    .print-btn:hover { background: var(--blue-mid); }
+    .print-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 0 0;
+      font-size: 12px;
+      color: var(--border);
+      color: #bbb;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .avatar { margin: 0 auto; }
+      .avatar-wrap { display: flex; justify-content: center; }
+      .contact-bar { justify-content: center; }
+      .main-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 1.5rem; }
+    }
+
+    @media print {
+      nav, .print-btn { display: none !important; }
+      body { background: white; }
+      .card { border: none; padding: 0; }
+      .hero { border: none; padding: 0; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Stevenson LAURENT</h1>
-        <p>Comptable / IT Junior</p>
-        <p>+32 471 69 2067 | elaurentsteve@gmail.com</p>
-        <p>Rue Jules Broeren 30, 1070, Bruxelles</p>
-    </header>
 
-<section>
-    <h2>Profil</h2>
-    <p>Professionnel expérimenté, passionné par l’intégration des technologies de l’information au service de la performance financière, je mets à profit plus de huit années d’expérience en comptabilité, en analyse de données et en implémentation de systèmes d’information de gestion au sein de PME. Mon parcours m’a permis de développer une expertise solide en optimisation de processus financiers, en programmation (JavaScript), ainsi qu’en analyse et visualisation de données (R & Excel). Je maîtrise également la gestion de bases de données (SQL, PHP), la modélisation de processus et l’utilisation avancée de logiciels comptables et ERP.</p>
-    <p>Reconnu pour ma rigueur, ma vision stratégique et ma capacité à fédérer des équipes multidisciplinaires autour d’objectifs communs, je vise à poursuivre ma carrière à l’intersection de la finance, des technologies et du management. Mon ambition est de contribuer à des projets innovants et à forte valeur ajoutée, tout en continuant à développer mes compétences techniques et managériales afin de soutenir la réalisation des objectifs ambitieux d’une organisation dynamique.</p>
-</section>
+<nav>
+  <span class="nav-name">Stevenson Laurent</span>
+  <div class="nav-links">
+    <a href="#experience">Expérience</a>
+    <a href="#formation">Formation</a>
+    <a href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-    <section>
-        <h2>Expériences Professionnelles</h2>
-        <article>
-            <h3>Mission Locale de Molenbeek</h3>
-            <p>Décembre 2024 @ Date - Comptable | Expert Finance, Bruxelles</p>
-            <ul>
-            <h3>SIREAS, FAE, SASB ASBLs</h3>
-            <p>Juillet 2023 @ Décembre 2024 - Comptable assistant, Bruxelles</p>
-            <ul>
-                <li>Saisie informatique des documents comptables et traitement analytique, classement et archivage.</li>
-                <li>Gestion de la comptabilité fournisseurs et ventes : saisie et rapprochement des factures, lettrage des comptes, relances des correspondances, audit des justificatifs pour les bailleurs de fonds, suivis budgétaire des différents bailleurs de fonds.</li>
-            </ul>
-        </article>
-        <article>
-            <h3>SODEXO</h3>
-            <p>Août @ Sept 2023 - Comptable analyste (Etudiant), Bruxelles</p>
-            <ul>
-                <li>Gestion de compte clients: saisie et rapprochement des factures, lettrage des comptes, relances des correspondances MS Outlook.</li>
-            </ul>
-        </article>
-        <article>
-            <h3>REINBOLD EXPORT IMPORT</h3>
-            <p>Juillet 2012 @ Août 2021 - Comptable Senior & Assistant Financier, Port-au-Prince</p>
-            <ul>
-                <li>Saisie informatique des documents comptables selon les normes IRFS, classement et archivage.</li>
-                <li>Gestion de la comptabilité fournisseurs : saisie et rapprochement des factures, lettrage des comptes, relances téléphoniques.</li>
-                <li>Établissement des déclarations fiscales (TVA, IPP, ISOC) en suivant les procédures et respect des délais.</li>
-                <li>Suivi des comptes, répartition de la masse salariale et des salaires, établissement du budget, donations et rapprochements liés aux opérations de caisse et de banque.</li>
-            </ul>
-        </article>
-        <article>
-            <h3>KAY PAM ENTREPRISE & PAULNA</h3>
-            <p>Mai 2016 @ Juillet 2018 - Comptable Consultant, Port-au-Prince</p>
-            <ul>
-                <li>Identification des goulots d’étranglement dans la chaine de valeur et implémentation de système de suivis et évaluation adéquate.</li>
-                <li>Mise en œuvre de véritable processus d'innovation dans la recherche de solutions.</li>
-                <li>Gestion et suivi des entrées et sorties dans l'entrepôt ainsi que des coûts associés.</li>
-            </ul>
-        </article>
-        <article>
-            <h3>LDS EMPLOYMENT RESOURCES SERVICES</h3>
-            <p>Août @ Novembre 2011 - Data base Manager, Port-au-Prince</p>
-            <ul>
-                <li>Utilisation experte d'Excel pour les tâches quotidiennes et la production de rapport.</li>
-            </ul>
-        </article>
-    </section>
+<div class="page">
 
-    <section>
-        <h2>Formation</h2>
-        <ul>
-            <li>2021-2023 | Université Libre de Bruxelles - Master en sciences et technologies de l'information et de la communication</li>
-            <li>Mai 2022 - Oct. 2022 | Bruxelles Formation - De la comptabilité à l'expertise comptable et Key User SAP_ Certifié Europass</li>
-            <li>Mars 2022 - Avr. 2022 | Bruxelles - Introduction à la gestion comptable de l'entreprise _ Attestation</li>
-            <li>2008-2012 | Institut des Hautes Etudes Commerciales et Economique - Licence en sciences comptables : diplôme obtenu</li>
-        </ul>
-    </section>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="avatar-wrap">
+      <div class="avatar">SL</div>
+      <div class="available-dot" title="En poste"></div>
+    </div>
+    <div>
+      <h1 class="hero-name">Stevenson Laurent</h1>
+      <div class="hero-title">Comptable collaborateur · Bruxelles</div>
+      <p class="hero-bio">
+        Fort de 13 ans d'expérience en comptabilité et gestion financière, j'oriente ma carrière vers la finance et la fiscalité, en valorisant ma maîtrise des outils IT et des systèmes ERP (SAP, Odoo, Winbooks). Engagé dans le parcours professionnel en fiscalité (ITAA), j'ambitionne des fonctions de management et de pilotage financier.
+      </p>
+      <div class="contact-bar" id="contact">
+        <a href="tel:+32471692067" class="contact-chip">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.08 2.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +32 471 69 2067
+        </a>
+        <a href="mailto:elaurentsteve@gmail.com" class="contact-chip">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          elaurentsteve@gmail.com
+        </a>
+        <span class="contact-chip">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Rue Jules Broeren 30, 1070 Bruxelles
+        </span>
+      </div>
+      <button class="print-btn" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Imprimer le CV
+      </button>
+    </div>
+  </div>
 
-    <section>
-        <h2>Compétences</h2>
-        <ul>
-            <li>Autonomie</li>
-            <li>Comptabilité générale</li>
-            <li>Excel avancé</li>
-            <li>TVA / ISOC / IPP</li>
-            <li>SAP / Winbooks / Odoo</li>
-            <li>Octopus</li>
-            <li>BPMN</li>
-            <li>SQL / PHP</li>
-        </ul>
-    </section>
+  <div class="main-grid">
 
-    <section>
-        <h2>Langues</h2>
-        <ul>
-            <li>Français : Bilingue</li>
-            <li>Anglais : Courant</li>
-            <li>Néerlandais : Débutant</li>
-        </ul>
-    </section>
+    <!-- COLONNE PRINCIPALE -->
+    <div>
 
-    <section>
-        <h2>Centres d’intérêt</h2>
-        <ul>
-            <li>Technologie</li>
-            <li>Service communautaire</li>
-            <li>Toastmaster</li>
-        </ul>
-    </section>
+      <!-- EXPÉRIENCES -->
+      <div class="card" id="experience">
+        <div class="section-label">Expériences professionnelles</div>
 
-    <section>
-        <h2>Formation Continue & Autres</h2>
-        <ul>
-            <li>2024 | Erasmus | Salzburg, Autriche | The Heritage of Money and Coinage: From the Mine to the Mint.</li>
-            <li>2023 | Erasmus | Aix-en-Provence - Marseille, France | Entrepreneurship - How to create a legitimate business.</li>
-            <li>2022 | Projet MADP | ULB engagée / Be-Pax | Animateur / Volontaire</li>
-            <li>2015-2016 | Online certificate (USA) | BYU Idaho | Pathway program</li>
-            <li>2019-2020 | Toastmasters International | Président, VPE de club</li>
-            <li>2016 | AUDIT / AUDITEUR de Pieu | LDS CHURCH | Membre du Comité</li>
-        </ul>
-    </section>
+        <div class="job">
+          <div class="job-row">
+            <span class="job-company">Mission Locale de Molenbeek</span>
+            <span class="job-date">Avr. 2026 – présent</span>
+          </div>
+          <div class="job-role">Comptable senior · Bruxelles</div>
+          <ul class="bullets">
+            <li>Comptabilité de A à Z : saisie factures ventes/achats, caisse et banque (CODA), apurement des comptes, relances et audit des justificatifs pour bailleurs de fonds, suivi budgétaire et trésorerie.</li>
+            <li>Gestion de projet d'outils IT (FSE time-sheet) en supervision directe et collaborative.</li>
+            <li>Établissement des déclarations fiscales (TVA, IPM, TP) et des comptes annuels et intermédiaires.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-row">
+            <span class="job-company">SIREAS, FAE, SASB ASBLs</span>
+            <span class="job-date">Juil. 2023 – Déc. 2024</span>
+          </div>
+          <div class="job-role">Comptable · Bruxelles</div>
+          <ul class="bullets">
+            <li>Saisie informatique, traitement analytique, classement et archivage des documents comptables.</li>
+            <li>Comptabilité fournisseurs et ventes : rapprochements de factures, lettrage, relances, audit des justificatifs pour bailleurs de fonds, suivi budgétaire.</li>
+            <li>Gestion de projet d'outils IT.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-row">
+            <span class="job-company">Sodexo</span>
+            <span class="job-date">Août – Sept. 2023</span>
+          </div>
+          <div class="job-role">Comptable analyste (étudiant) · Bruxelles</div>
+          <ul class="bullets">
+            <li>Gestion de comptes clients : saisie et rapprochement des factures, lettrage des comptes, relances MS Outlook.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-row">
+            <span class="job-company">Reinbold Export Import</span>
+            <span class="job-date">Juil. 2012 – Août 2021</span>
+          </div>
+          <div class="job-role">Comptable senior & assistant financier · Port-au-Prince</div>
+          <ul class="bullets">
+            <li>Saisie des documents comptables selon les normes IFRS, classement et archivage.</li>
+            <li>Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques.</li>
+            <li>Établissement des déclarations fiscales dans le respect des procédures et des délais.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-row">
+            <span class="job-company">Kay Pam Entreprise & Paulna</span>
+            <span class="job-date">Mai 2016 – Juil. 2018</span>
+          </div>
+          <div class="job-role">Comptable consultant · Port-au-Prince</div>
+          <ul class="bullets">
+            <li>Identification des goulots d'étranglement dans la chaîne de valeur, implémentation de systèmes de suivi et évaluation.</li>
+            <li>Gestion et suivi des entrées/sorties en entrepôt et des coûts associés.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FORMATION CONTINUE -->
+      <div class="card">
+        <div class="section-label">Formation continue & autres</div>
+        <div class="cont-item"><span class="cont-year">2024 · Erasmus — Salzburg, Autriche</span>The Heritage of Money and Coinage: From the Mine to the Mint</div>
+        <div class="cont-item"><span class="cont-year">2024 · ULB</span>Atelier de recherche — Humanités numériques</div>
+        <div class="cont-item"><span class="cont-year">2023 · Erasmus — Aix-en-Provence / Marseille</span>Entrepreneurship — How to create a legitimate business</div>
+        <div class="cont-item"><span class="cont-year">2022 · ULB engagée / Be-Pax</span>Projet MADP — Animateur / Volontaire</div>
+        <div class="cont-item"><span class="cont-year">2019–2020 · Toastmasters International</span>Président, VPE de club</div>
+        <div class="cont-item"><span class="cont-year">2015–2016 · BYU Idaho (USA)</span>Online certificate — Pathway Program</div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+
+      <!-- FORMATION -->
+      <div class="card" id="formation">
+        <div class="section-label">Formation</div>
+        <div class="edu-item">
+          <div class="edu-school">ICHEC Brussels Management School</div>
+          <div class="edu-degree">Master en droit fiscal</div>
+          <div class="edu-date">Mai 2025 – 2027</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-school">Université Libre de Bruxelles</div>
+          <div class="edu-degree">Master en sciences et technologies de l'information et de la communication</div>
+          <div class="edu-date">Sept. 2021 – Oct. 2023</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-school">Bruxelles Formation</div>
+          <div class="edu-degree">Comptabilité à l'expertise comptable & Key User SAP — Certifié Europass</div>
+          <div class="edu-date">Mai 2022 – Oct. 2022</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-school">Institut des Hautes Études Commerciales et Économiques</div>
+          <div class="edu-degree">Licence en sciences comptables — NARIC Equivalence</div>
+          <div class="edu-date">2008 – 2012 · Port-au-Prince</div>
+        </div>
+      </div>
+
+      <!-- LANGUES -->
+      <div class="card">
+        <div class="section-label">Langues</div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Français</span><span class="lang-level">Bilingue</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Anglais</span><span class="lang-level">Courant</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:80%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Néerlandais</span><span class="lang-level">Basique</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
+        </div>
+      </div>
+
+      <!-- COMPÉTENCES -->
+      <div class="card" id="competences">
+        <div class="section-label">Compétences</div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Comptabilité générale
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+          Excel avancé
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          TVA / ISOC / IPP
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          SAP / Winbooks / Odoo
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Adfinity / Octopus
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 012 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+          BPMN
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          SQL / PHP
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Autonomie & rigueur
+        </div>
+      </div>
+
+      <!-- CENTRES D'INTÉRÊT -->
+      <div class="card">
+        <div class="section-label">Centres d'intérêt</div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Technologie & NTIC
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Service communautaire
+        </div>
+        <div class="skill-row">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Toastmasters International
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Stevenson Laurent · Comptable collaborateur · Bruxelles</p>
+  </footer>
+
+</div>
+
 </body>
 </html>
