@@ -8,156 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
-  --eu-blue:#003399;
-  --eu-yellow:#FFCC00;
-  --eu-blue-mid:#336699;
-  --eu-blue-light:#E8EEF8;
-  --eu-blue-pale:#F0F4FA;
-  --text:#1C1C1C;
-  --muted:#5C6470;
-  --border:#D4D8DF;
-  --bg:#FFFFFF;
-  --surface:#F5F7FA;
-  --radius:4px;
-  --accent:#003399;
+  --eu-blue:#003399;--eu-yellow:#FFCC00;--eu-blue-mid:#336699;
+  --eu-blue-light:#E8EEF8;--eu-blue-pale:#F0F4FA;--text:#1C1C1C;
+  --muted:#5C6470;--border:#D4D8DF;--bg:#FFFFFF;--surface:#F5F7FA;
+  --radius:4px;--accent:#003399;
+  --flexi-green:#2D7D46;--flexi-green-bg:#E8F5ED;--flexi-green-border:#B3DEC3;
 }
-
 html{scroll-behavior:smooth}
 body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--surface);font-size:14px;line-height:1.55}
-
-/* ── TOP BAR ── */
-.topbar{
-  background:var(--eu-blue);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 2rem;
-  height:48px;
-  position:sticky;
-  top:0;
-  z-index:200;
-  gap:1rem;
-}
+.topbar{background:var(--eu-blue);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:48px;position:sticky;top:0;z-index:200;gap:1rem;}
 .topbar-left{display:flex;align-items:center;gap:16px}
 .eu-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
 .eu-stars{font-size:10px;letter-spacing:1px;color:var(--eu-yellow)}
 .eu-wordmark{font-size:11px;font-weight:700;color:white;letter-spacing:0.08em;text-transform:uppercase}
 .topbar-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);border-left:1px solid rgba(255,255,255,0.25);padding-left:16px}
 .topbar-right{display:flex;align-items:center;gap:8px}
-
-/* Language switcher */
 .lang-switch{display:flex;gap:4px}
-.lang-btn{
-  font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);
-  background:transparent;border:1px solid rgba(255,255,255,0.25);
-  border-radius:3px;padding:3px 8px;cursor:pointer;
-  letter-spacing:0.05em;transition:all 0.2s;
-  font-family:'Source Sans 3',sans-serif;
-}
+.lang-btn{font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);background:transparent;border:1px solid rgba(255,255,255,0.25);border-radius:3px;padding:3px 8px;cursor:pointer;letter-spacing:0.05em;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;}
 .lang-btn:hover,.lang-btn.active{color:var(--eu-yellow);border-color:var(--eu-yellow);background:rgba(255,204,0,0.1)}
-
-/* Profile switcher */
 .profile-switch{display:flex;gap:4px}
-.profile-btn{
-  font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);
-  border-radius:3px;padding:3px 10px;cursor:pointer;
-  transition:all 0.2s;font-family:'Source Sans 3',sans-serif;
-  white-space:nowrap;
-}
+.profile-btn{font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:3px;padding:3px 10px;cursor:pointer;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;white-space:nowrap;}
 .profile-btn:hover,.profile-btn.active{background:rgba(255,204,0,0.15);border-color:var(--eu-yellow);color:white}
-
-.print-btn-top{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);
-  background:transparent;border:1px solid rgba(255,255,255,0.3);
-  border-radius:3px;padding:3px 10px;cursor:pointer;
-  font-family:'Source Sans 3',sans-serif;transition:all 0.2s;
-}
+.print-btn-top{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:3px;padding:3px 10px;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all 0.2s;}
 .print-btn-top:hover{border-color:var(--eu-yellow);color:var(--eu-yellow)}
-
-/* ── EUROPASS HEADER BAND ── */
-.europass-band{
-  background:var(--eu-blue);
-  padding:1.5rem 2rem;
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-.ep-flag{
-  width:42px;height:28px;background:var(--eu-blue);
-  border:1.5px solid rgba(255,255,255,0.3);border-radius:2px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:8px;letter-spacing:1px;color:var(--eu-yellow);
-  flex-shrink:0;
-}
+.europass-band{background:var(--eu-blue);padding:1.5rem 2rem;display:flex;align-items:center;gap:16px;}
+.ep-flag{width:42px;height:28px;background:var(--eu-blue);border:1.5px solid rgba(255,255,255,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:1px;color:var(--eu-yellow);flex-shrink:0;}
 .ep-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:600}
 .ep-subtitle{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px}
-
-/* ── PAGE LAYOUT ── */
 .page{max-width:980px;margin:0 auto;padding:0 1.5rem 4rem}
-
-/* ── HERO ── */
-.hero{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-top:4px solid var(--eu-blue);
-  padding:2rem 2rem 1.75rem;
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:2rem;
-  align-items:flex-start;
-  margin-bottom:1.25rem;
-}
-.avatar{
-  width:96px;height:96px;border-radius:50%;
-  background:var(--eu-blue);
-  overflow:hidden;flex-shrink:0;
-  border:2px solid var(--border);
-}
+.hero{background:var(--bg);border:1px solid var(--border);border-top:4px solid var(--eu-blue);padding:2rem 2rem 1.75rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:flex-start;margin-bottom:1.25rem;}
+.avatar{width:96px;height:96px;border-radius:50%;background:var(--eu-blue);overflow:hidden;flex-shrink:0;border:2px solid var(--border);}
 .avatar img{width:100%;height:100%;object-fit:cover}
-.avatar-fallback{
-  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  font-family:'Source Serif 4',serif;font-size:28px;color:var(--eu-yellow);
-}
+.avatar-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',serif;font-size:28px;color:var(--eu-yellow);}
 .hero-name{font-family:'Source Serif 4',serif;font-size:28px;font-weight:700;color:var(--eu-blue);letter-spacing:-0.01em;line-height:1.1}
 .hero-title{font-size:12px;font-weight:600;color:var(--muted);margin:6px 0 4px;letter-spacing:0.1em;text-transform:uppercase}
 .profile-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px}
 .hero-bio{font-size:13.5px;color:var(--muted);line-height:1.65;max-width:560px;margin-bottom:16px}
 .contact-bar{display:flex;flex-wrap:wrap;gap:8px}
-.contact-chip{
-  display:inline-flex;align-items:center;gap:5px;font-size:12px;
-  color:var(--muted);background:var(--surface);
-  border:1px solid var(--border);border-radius:3px;
-  padding:3px 10px;text-decoration:none;transition:border-color 0.2s,color 0.2s;
-}
+.contact-chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:3px 10px;text-decoration:none;transition:border-color 0.2s,color 0.2s;}
 .contact-chip:hover{border-color:var(--eu-blue);color:var(--eu-blue)}
 .contact-chip svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-
-/* ── GRID ── */
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:1.25rem;align-items:start}
-
-/* ── CARD ── */
 .card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem}
 .card:last-child{margin-bottom:0}
-
-/* ── SECTION LABEL ── */
-.section-label{
-  font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--eu-blue);margin-bottom:1rem;padding-bottom:7px;
-  border-bottom:2px solid var(--eu-blue-light);
-  display:flex;align-items:center;gap:8px;
-}
-.section-label .sl-icon{
-  width:16px;height:16px;background:var(--eu-blue);border-radius:2px;
-  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
-}
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--eu-blue);margin-bottom:1rem;padding-bottom:7px;border-bottom:2px solid var(--eu-blue-light);display:flex;align-items:center;gap:8px;}
+.section-label .sl-icon{width:16px;height:16px;background:var(--eu-blue);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 .section-label .sl-icon svg{width:10px;height:10px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── JOB ── */
 .job{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
 .job:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
 .job-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:4px}
@@ -168,22 +65,16 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--s
 .bullets{list-style:none;padding:0}
 .bullets li{font-size:12.5px;color:var(--muted);line-height:1.55;padding:2px 0 2px 14px;position:relative}
 .bullets li::before{content:'▸';position:absolute;left:0;color:var(--eu-blue);font-size:10px;top:3px}
-
-/* ── EDU ── */
 .edu-item{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
 .edu-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
 .edu-school{font-size:13px;font-weight:700}
 .edu-degree{font-size:12.5px;color:var(--muted);margin:2px 0}
 .edu-date{font-size:11px;color:var(--eu-blue);font-weight:600}
 .edu-note{font-size:11px;color:var(--muted);margin-top:2px}
-
-/* ── SKILLS ── */
 .skill-group{margin-bottom:1rem}
 .skill-group-title{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--eu-blue);margin-bottom:6px}
 .skill-tags{display:flex;flex-wrap:wrap;gap:5px}
 .skill-tag{font-size:11.5px;background:var(--eu-blue-pale);color:var(--eu-blue);border:1px solid var(--eu-blue-light);border-radius:3px;padding:2px 8px}
-
-/* ── LANG ── */
 .lang-item{margin-bottom:10px}
 .lang-item:last-child{margin-bottom:0}
 .lang-row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px}
@@ -193,47 +84,65 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--s
 .lang-dot{width:10px;height:10px;border-radius:50%;background:var(--border)}
 .lang-dot.filled{background:var(--eu-blue)}
 .cefr{font-size:10px;color:var(--muted);margin-top:2px}
-
-/* ── CONT ITEMS ── */
 .cont-item{font-size:12px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--border);line-height:1.4}
 .cont-item:last-child{border-bottom:none}
 .cont-year{font-size:10px;color:var(--eu-blue);font-weight:700;display:block;margin-bottom:1px;letter-spacing:0.05em;text-transform:uppercase}
-
-/* ── CERT ── */
 .cert-item{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
 .cert-item:last-child{border-bottom:none}
 .cert-name{font-weight:600;color:var(--text)}
 .cert-year{font-size:11px;color:var(--eu-blue);font-weight:700;flex-shrink:0}
-
-/* ── EMPLOYMENT STATUS ── */
-.status-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:11px;font-weight:600;color:#2D7D46;
-  background:#E8F5ED;border:1px solid #B3DEC3;
-  border-radius:3px;padding:3px 10px;margin-bottom:12px;
-}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#2D7D46;background:#E8F5ED;border:1px solid #B3DEC3;border-radius:3px;padding:3px 10px;margin-bottom:12px;}
 .status-dot{width:7px;height:7px;border-radius:50%;background:#2D7D46}
 
-/* ── FOOTER ── */
-footer{text-align:center;padding:2rem 0 0;font-size:11px;color:#bbb}
-footer .ep-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
-footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
+/* ── FLEXI-JOB STYLES ── */
+.flexi-card{
+  background:var(--bg);border:1px solid var(--flexi-green-border);
+  border-top:4px solid var(--flexi-green);
+  border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;
+}
+.flexi-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.flexi-badge-eligible{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:var(--flexi-green);
+  background:var(--flexi-green-bg);border:1px solid var(--flexi-green-border);
+  border-radius:3px;padding:4px 12px;
+}
+.flexi-dot{width:8px;height:8px;border-radius:50%;background:var(--flexi-green);flex-shrink:0}
+.flexi-section-label{
+  font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--flexi-green);margin-bottom:1rem;padding-bottom:7px;
+  border-bottom:2px solid var(--flexi-green-bg);
+  display:flex;align-items:center;gap:8px;
+}
+.flexi-section-label .sl-icon{width:16px;height:16px;background:var(--flexi-green);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.flexi-section-label .sl-icon svg{width:10px;height:10px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.flexi-info{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;background:var(--flexi-green-bg);border-radius:3px;padding:10px 12px;border-left:3px solid var(--flexi-green);}
+.flexi-info strong{color:var(--flexi-green);font-weight:700}
+.flexi-roles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.flexi-role{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border:1px solid var(--flexi-green-border);border-radius:3px;background:#F7FCF9;}
+.flexi-role-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.flexi-role-text{}
+.flexi-role-name{font-size:12px;font-weight:700;color:var(--text)}
+.flexi-role-desc{font-size:11px;color:var(--muted);margin-top:1px}
+.flexi-period{font-size:11px;color:var(--muted);margin-top:10px;text-align:right;font-style:italic}
+.flexi-avantages{margin-top:10px}
+.flexi-avantage-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:var(--flexi-green-bg);color:var(--flexi-green);border:1px solid var(--flexi-green-border);border-radius:3px;padding:2px 8px;margin:2px 3px 2px 0}
 
-/* ── PROFILE VARIANT SECTIONS ── */
 [data-profile]{display:none}
 [data-profile].active{display:block}
 .bio-text{display:none}
 .bio-text.active{display:block}
 
-/* ── PRINT ── */
+footer{text-align:center;padding:2rem 0 0;font-size:11px;color:#bbb}
+footer .ep-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
+
 @media print{
   .topbar,.print-btn-top,.lang-switch,.profile-switch{display:none!important}
   body{background:white}
-  .card,.hero{border:1px solid #ccc}
+  .card,.hero,.flexi-card{border:1px solid #ccc}
   .page{padding:0}
 }
-
-/* ── RESPONSIVE ── */
 @media(max-width:720px){
   .hero{grid-template-columns:1fr;text-align:center}
   .avatar{margin:0 auto}
@@ -243,12 +152,12 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .topbar-name{display:none}
   .profile-btn{font-size:10px;padding:2px 7px}
   .lang-btn{font-size:10px;padding:2px 6px}
+  .flexi-roles{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
     <div class="eu-logo">
@@ -258,7 +167,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <span class="topbar-name">Stevenson Laurent</span>
   </div>
   <div class="topbar-right" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <!-- Profile switcher -->
     <div class="profile-switch">
       <button class="profile-btn active" onclick="setProfile('comptable')" id="pb-comptable">
         <span class="t" data-fr="Comptable" data-en="Accountant" data-nl="Boekhouder">Comptable</span>
@@ -270,7 +178,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
         <span class="t" data-fr="IT & Finance" data-en="IT & Finance" data-nl="IT & Finance">IT & Finance</span>
       </button>
     </div>
-    <!-- Lang switcher -->
     <div class="lang-switch">
       <button class="lang-btn active" onclick="setLang('fr')">FR</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -283,7 +190,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   </div>
 </div>
 
-<!-- EUROPASS HEADER BAND -->
 <div class="europass-band">
   <div class="ep-flag">★★★<br>★★★<br>★★★</div>
   <div>
@@ -294,7 +200,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 
 <div class="page">
 
-<!-- HERO -->
 <div class="hero">
   <div>
     <div class="avatar">
@@ -305,38 +210,22 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   <div>
     <h1 class="hero-name">Stevenson Laurent</h1>
     <div class="hero-title t" data-fr="MSc IT · Comptable collaborateur · Bruxelles" data-en="MSc IT · Staff Accountant · Brussels" data-nl="MSc IT · Medewerkende Boekhouder · Brussel">MSc IT · Comptable collaborateur · Bruxelles</div>
-
     <div class="status-badge">
       <div class="status-dot"></div>
       <span class="t" data-fr="En poste — Mission Locale de Molenbeek" data-en="Currently employed — Mission Locale de Molenbeek" data-nl="In dienst — Mission Locale de Molenbeek">En poste — Mission Locale de Molenbeek</span>
     </div>
-
-    <!-- PROFILE BIOS -->
     <div class="bio-text active" id="bio-comptable">
       <div class="profile-title t" data-fr="Profil Comptable Senior" data-en="Senior Accountant Profile" data-nl="Profiel Senior Boekhouder">Profil Comptable Senior</div>
-      <p class="hero-bio t"
-        data-fr="Fort de 13 ans d'expérience en comptabilité générale et analytique, je maîtrise l'intégralité du cycle comptable — de la saisie des pièces jusqu'aux comptes annuels. Familier des environnements associatifs et des exigences des bailleurs de fonds, j'apporte rigueur, autonomie et expertise des outils ERP (SAP, Odoo, Winbooks, Adfinity)."
-        data-en="With 13 years of experience in general and analytical accounting, I manage the full accounting cycle — from data entry through to annual accounts. Well-versed in non-profit environments and donor requirements, I bring rigour, autonomy and strong ERP skills (SAP, Odoo, Winbooks, Adfinity)."
-        data-nl="Met 13 jaar ervaring in algemene en analytische boekhouding beheer ik de volledige boekhoudcyclus — van invoer tot jaarrekeningen. Vertrouwd met de vzw-sector en subsidierapportage, breng ik nauwkeurigheid, autonomie en ERP-expertise (SAP, Odoo, Winbooks, Adfinity)."
-      >Fort de 13 ans d'expérience en comptabilité générale et analytique, je maîtrise l'intégralité du cycle comptable — de la saisie des pièces jusqu'aux comptes annuels. Familier des environnements associatifs et des exigences des bailleurs de fonds, j'apporte rigueur, autonomie et expertise des outils ERP (SAP, Odoo, Winbooks, Adfinity).</p>
+      <p class="hero-bio t" data-fr="Fort de 13 ans d'expérience en comptabilité générale et analytique, je maîtrise l'intégralité du cycle comptable — de la saisie des pièces jusqu'aux comptes annuels. Familier des environnements associatifs et des exigences des bailleurs de fonds, j'apporte rigueur, autonomie et expertise des outils ERP (SAP, Odoo, Winbooks, Adfinity)." data-en="With 13 years of experience in general and analytical accounting, I manage the full accounting cycle — from data entry through to annual accounts. Well-versed in non-profit environments and donor requirements, I bring rigour, autonomy and strong ERP skills (SAP, Odoo, Winbooks, Adfinity)." data-nl="Met 13 jaar ervaring in algemene en analytische boekhouding beheer ik de volledige boekhoudcyclus — van invoer tot jaarrekeningen. Vertrouwd met de vzw-sector en subsidierapportage, breng ik nauwkeurigheid, autonomie en ERP-expertise (SAP, Odoo, Winbooks, Adfinity).">Fort de 13 ans d'expérience en comptabilité générale et analytique, je maîtrise l'intégralité du cycle comptable — de la saisie des pièces jusqu'aux comptes annuels. Familier des environnements associatifs et des exigences des bailleurs de fonds, j'apporte rigueur, autonomie et expertise des outils ERP (SAP, Odoo, Winbooks, Adfinity).</p>
     </div>
     <div class="bio-text" id="bio-fiscal">
       <div class="profile-title t" data-fr="Profil Fiscalité & Finance" data-en="Tax & Finance Profile" data-nl="Profiel Fiscaliteit & Financiën">Profil Fiscalité & Finance</div>
-      <p class="hero-bio t"
-        data-fr="Comptable expérimenté engagé dans le parcours professionnel ITAA (Master en droit fiscal, ICHEC, 2025–2027), j'oriente ma carrière vers la fiscalité et le pilotage financier. Maîtrise des déclarations TVA, IPM, ISOC et IPP, avec ambition de rejoindre un cabinet ou une direction financière."
-        data-en="Experienced accountant enrolled in the ITAA professional pathway (Master in Tax Law, ICHEC, 2025–2027), I am transitioning towards taxation and financial management. Proficient in VAT, corporate and income tax filings, with the goal of joining a tax firm or finance department."
-        data-nl="Ervaren boekhouder in het ITAA-professioneel traject (Master Fiscaal Recht, ICHEC, 2025–2027), gericht op fiscaliteit en financieel beheer. Vertrouwd met btw-, VenB-, RPB- en PB-aangiften, met ambitie om toe te treden tot een kantoor of financiële directie."
-      >Comptable expérimenté engagé dans le parcours professionnel ITAA (Master en droit fiscal, ICHEC, 2025–2027), j'oriente ma carrière vers la fiscalité et le pilotage financier. Maîtrise des déclarations TVA, IPM, ISOC et IPP, avec ambition de rejoindre un cabinet ou une direction financière.</p>
+      <p class="hero-bio t" data-fr="Comptable expérimenté engagé dans le parcours professionnel ITAA (Master en droit fiscal, ICHEC, 2025–2027), j'oriente ma carrière vers la fiscalité et le pilotage financier. Maîtrise des déclarations TVA, IPM, ISOC et IPP, avec ambition de rejoindre un cabinet ou une direction financière." data-en="Experienced accountant enrolled in the ITAA professional pathway (Master in Tax Law, ICHEC, 2025–2027), I am transitioning towards taxation and financial management. Proficient in VAT, corporate and income tax filings, with the goal of joining a tax firm or finance department." data-nl="Ervaren boekhouder in het ITAA-professioneel traject (Master Fiscaal Recht, ICHEC, 2025–2027), gericht op fiscaliteit en financieel beheer. Vertrouwd met btw-, VenB-, RPB- en PB-aangiften, met ambitie om toe te treden tot een kantoor of financiële directie.">Comptable expérimenté engagé dans le parcours professionnel ITAA (Master en droit fiscal, ICHEC, 2025–2027), j'oriente ma carrière vers la fiscalité et le pilotage financier. Maîtrise des déclarations TVA, IPM, ISOC et IPP, avec ambition de rejoindre un cabinet ou une direction financière.</p>
     </div>
     <div class="bio-text" id="bio-it">
       <div class="profile-title t" data-fr="Profil IT & Systèmes d'Information Financiers" data-en="IT & Financial Information Systems Profile" data-nl="Profiel IT & Financiële Informatiesystemen">Profil IT & Systèmes d'Information Financiers</div>
-      <p class="hero-bio t"
-        data-fr="Double compétence Finance & IT (MSc STIC, ULB), j'associe expertise comptable et maîtrise des systèmes d'information : ERP (SAP, Odoo), BPMN, SQL, PHP. Chef de projet outillage IT au sein d'équipes comptables, je connecte les métiers et la technique pour optimiser les processus financiers."
-        data-en="Combining Finance & IT expertise (MSc STIC, ULB), I bridge accounting knowledge and information systems: ERP (SAP, Odoo), BPMN, SQL, PHP. As IT project lead within accounting teams, I connect business needs and technical solutions to optimise financial processes."
-        data-nl="Met een dubbele competentie Finance & IT (MSc STIC, ULB) combineer ik boekhoudexpertise met informatiesystemen: ERP (SAP, Odoo), BPMN, SQL, PHP. Als IT-projectleider binnen boekhoudteams verbind ik bedrijfsbehoeften en technische oplossingen om financiële processen te optimaliseren."
-      >Double compétence Finance & IT (MSc STIC, ULB), j'associe expertise comptable et maîtrise des systèmes d'information : ERP (SAP, Odoo), BPMN, SQL, PHP. Chef de projet outillage IT au sein d'équipes comptables, je connecte les métiers et la technique pour optimiser les processus financiers.</p>
+      <p class="hero-bio t" data-fr="Double compétence Finance & IT (MSc STIC, ULB), j'associe expertise comptable et maîtrise des systèmes d'information : ERP (SAP, Odoo), BPMN, SQL, PHP. Chef de projet outillage IT au sein d'équipes comptables, je connecte les métiers et la technique pour optimiser les processus financiers." data-en="Combining Finance & IT expertise (MSc STIC, ULB), I bridge accounting knowledge and information systems: ERP (SAP, Odoo), BPMN, SQL, PHP. As IT project lead within accounting teams, I connect business needs and technical solutions to optimise financial processes." data-nl="Met een dubbele competentie Finance & IT (MSc STIC, ULB) combineer ik boekhoudexpertise met informatiesystemen: ERP (SAP, Odoo), BPMN, SQL, PHP. Als IT-projectleider binnen boekhoudteams verbind ik bedrijfsbehoeften en technische oplossingen om financiële processen te optimaliseren.">Double compétence Finance & IT (MSc STIC, ULB), j'associe expertise comptable et maîtrise des systèmes d'information : ERP (SAP, Odoo), BPMN, SQL, PHP. Chef de projet outillage IT au sein d'équipes comptables, je connecte les métiers et la technique pour optimiser les processus financiers.</p>
     </div>
-
     <div class="contact-bar">
       <a href="tel:+32471692067" class="contact-chip">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.08 2.18 2 2 0 012.08 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
@@ -363,8 +252,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 </div>
 
 <div class="main-grid">
-
-<!-- MAIN COLUMN -->
 <div>
 
 <!-- EXPERIENCE -->
@@ -373,8 +260,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
     <span class="t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
   </div>
-
-  <!-- Job 1 -->
   <div class="job">
     <div class="job-row">
       <span class="job-company">Mission Locale de Molenbeek ASBL</span>
@@ -382,25 +267,11 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable senior — Bruxelles" data-en="Senior Accountant — Brussels" data-nl="Senior Boekhouder — Brussel">Comptable senior — Bruxelles</div>
     <ul class="bullets">
-      <li class="t"
-        data-fr="Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds."
-        data-en="Full-cycle accounting: purchase/sales invoicing, cash, bank (CODA), account reconciliation, debt collection, and audit documentation for funders."
-        data-nl="Volledige boekhouding: factuurinvoer aankopen/verkopen, kas, bank (CODA), afsluiting van rekeningen, aanmaningen, auditdossiers voor subsidiënten."
-      >Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds.</li>
-      <li class="t"
-        data-fr="Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels."
-        data-en="Budget and cash-flow monitoring; tax filings (VAT, corporate income tax, payroll tax) and annual accounts."
-        data-nl="Budgetopvolging en liquiditeitsbeheer; btw-, VenB- en bedrijfsvoorheffingaangiften en jaarrekeningen."
-      >Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels.</li>
-      <li class="t"
-        data-fr="Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative."
-        data-en="IT project management (ESF timesheet tool) with direct and collaborative oversight."
-        data-nl="IT-projectbeheer (ESF-tijdregistratietool) met directe en collaboratieve opvolging."
-      >Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative.</li>
+      <li class="t" data-fr="Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds." data-en="Full-cycle accounting: purchase/sales invoicing, cash, bank (CODA), account reconciliation, debt collection, and audit documentation for funders." data-nl="Volledige boekhouding: factuurinvoer aankopen/verkopen, kas, bank (CODA), afsluiting van rekeningen, aanmaningen, auditdossiers voor subsidiënten.">Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds.</li>
+      <li class="t" data-fr="Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels." data-en="Budget and cash-flow monitoring; tax filings (VAT, corporate income tax, payroll tax) and annual accounts." data-nl="Budgetopvolging en liquiditeitsbeheer; btw-, VenB- en bedrijfsvoorheffingaangiften en jaarrekeningen.">Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels.</li>
+      <li class="t" data-fr="Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative." data-en="IT project management (ESF timesheet tool) with direct and collaborative oversight." data-nl="IT-projectbeheer (ESF-tijdregistratietool) met directe en collaboratieve opvolging.">Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative.</li>
     </ul>
   </div>
-
-  <!-- Job 2 -->
   <div class="job">
     <div class="job-row">
       <span class="job-company">SIREAS / FAE / SASB ASBLs</span>
@@ -408,25 +279,11 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable (mi-temps) — Bruxelles" data-en="Accountant (part-time) — Brussels" data-nl="Boekhouder (deeltijds) — Brussel">Comptable (mi-temps) — Bruxelles</div>
     <ul class="bullets">
-      <li class="t"
-        data-fr="Saisie, traitement analytique, classement et archivage des documents comptables."
-        data-en="Data entry, analytical processing, filing and archiving of accounting documents."
-        data-nl="Invoer, analytische verwerking, klassering en archivering van boekhoudkundige documenten."
-      >Saisie, traitement analytique, classement et archivage des documents comptables.</li>
-      <li class="t"
-        data-fr="Comptabilité fournisseurs et ventes : rapprochements, lettrage, relances, audit justificatifs bailleurs de fonds."
-        data-en="Accounts payable and receivable: reconciliations, matching, dunning, funder documentation audit."
-        data-nl="Leveranciers- en verkoopboekhouding: afstemmingen, aanpassingen, aanmaningen, subsidiëntendossiers."
-      >Comptabilité fournisseurs et ventes : rapprochements, lettrage, relances, audit justificatifs bailleurs de fonds.</li>
-      <li class="t"
-        data-fr="Gestion de projet IT et suivi budgétaire."
-        data-en="IT project management and budget monitoring."
-        data-nl="IT-projectbeheer en budgetopvolging."
-      >Gestion de projet IT et suivi budgétaire.</li>
+      <li class="t" data-fr="Saisie, traitement analytique, classement et archivage des documents comptables." data-en="Data entry, analytical processing, filing and archiving of accounting documents." data-nl="Invoer, analytische verwerking, klassering en archivering van boekhoudkundige documenten.">Saisie, traitement analytique, classement et archivage des documents comptables.</li>
+      <li class="t" data-fr="Comptabilité fournisseurs et ventes : rapprochements, lettrage, relances, audit justificatifs bailleurs de fonds." data-en="Accounts payable and receivable: reconciliations, matching, dunning, funder documentation audit." data-nl="Leveranciers- en verkoopboekhouding: afstemmingen, aanpassingen, aanmaningen, subsidiëntendossiers.">Comptabilité fournisseurs et ventes : rapprochements, lettrage, relances, audit justificatifs bailleurs de fonds.</li>
+      <li class="t" data-fr="Gestion de projet IT et suivi budgétaire." data-en="IT project management and budget monitoring." data-nl="IT-projectbeheer en budgetopvolging.">Gestion de projet IT et suivi budgétaire.</li>
     </ul>
   </div>
-
-  <!-- Job Sodexo -->
   <div class="job">
     <div class="job-row">
       <span class="job-company">Sodexo</span>
@@ -434,15 +291,9 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable analyste (étudiant) — Bruxelles" data-en="Analyst Accountant (student job) — Brussels" data-nl="Analytisch boekhouder (studentenjob) — Brussel">Comptable analyste (étudiant) — Bruxelles</div>
     <ul class="bullets">
-      <li class="t"
-        data-fr="Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances."
-        data-en="Accounts receivable management: invoice entry, reconciliations, matching and follow-up."
-        data-nl="Debiteurenbeheer: factuurinvoer, afstemmingen, aanpassingen en aanmaningen."
-      >Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances.</li>
+      <li class="t" data-fr="Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances." data-en="Accounts receivable management: invoice entry, reconciliations, matching and follow-up." data-nl="Debiteurenbeheer: factuurinvoer, afstemmingen, aanpassingen en aanmaningen.">Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances.</li>
     </ul>
   </div>
-
-  <!-- Job Reinbold -->
   <div class="job">
     <div class="job-row">
       <span class="job-company">Reinbold Export Import</span>
@@ -450,25 +301,11 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable senior & assistant financier — Port-au-Prince" data-en="Senior Accountant & Financial Assistant — Port-au-Prince" data-nl="Senior Boekhouder & Financieel Assistent — Port-au-Prince">Comptable senior & assistant financier — Port-au-Prince</div>
     <ul class="bullets">
-      <li class="t"
-        data-fr="Saisie des documents comptables selon les normes IFRS, classement et archivage."
-        data-en="Accounting entries under IFRS standards, filing and archiving."
-        data-nl="Boekhoudkundige invoer conform IFRS-normen, klassering en archivering."
-      >Saisie des documents comptables selon les normes IFRS, classement et archivage.</li>
-      <li class="t"
-        data-fr="Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques."
-        data-en="Accounts payable: invoice processing, reconciliations, matching and telephone follow-up."
-        data-nl="Leveranciersboekhouding: factuurverwerking, afstemmingen, aanpassingen en telefonische aanmaningen."
-      >Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques.</li>
-      <li class="t"
-        data-fr="Établissement des déclarations fiscales dans le respect des procédures et délais."
-        data-en="Preparation of tax returns in compliance with procedures and deadlines."
-        data-nl="Opstellen van fiscale aangiften conform procedures en termijnen."
-      >Établissement des déclarations fiscales dans le respect des procédures et délais.</li>
+      <li class="t" data-fr="Saisie des documents comptables selon les normes IFRS, classement et archivage." data-en="Accounting entries under IFRS standards, filing and archiving." data-nl="Boekhoudkundige invoer conform IFRS-normen, klassering en archivering.">Saisie des documents comptables selon les normes IFRS, classement et archivage.</li>
+      <li class="t" data-fr="Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques." data-en="Accounts payable: invoice processing, reconciliations, matching and telephone follow-up." data-nl="Leveranciersboekhouding: factuurverwerking, afstemmingen, aanpassingen en telefonische aanmaningen.">Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques.</li>
+      <li class="t" data-fr="Établissement des déclarations fiscales dans le respect des procédures et délais." data-en="Preparation of tax returns in compliance with procedures and deadlines." data-nl="Opstellen van fiscale aangiften conform procedures en termijnen.">Établissement des déclarations fiscales dans le respect des procédures et délais.</li>
     </ul>
   </div>
-
-  <!-- Job Kay Pam -->
   <div class="job">
     <div class="job-row">
       <span class="job-company">Kay Pam Entreprise & Paulna</span>
@@ -476,20 +313,90 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable consultant — Port-au-Prince" data-en="Accounting Consultant — Port-au-Prince" data-nl="Boekhoudkundig Consultant — Port-au-Prince">Comptable consultant — Port-au-Prince</div>
     <ul class="bullets">
-      <li class="t"
-        data-fr="Identification des goulots d'étranglement dans la chaîne de valeur et implémentation de systèmes de suivi."
-        data-en="Identification of bottlenecks in the value chain and implementation of monitoring systems."
-        data-nl="Identificatie van knelpunten in de waardeketen en implementatie van opvolgingssystemen."
-      >Identification des goulots d'étranglement dans la chaîne de valeur et implémentation de systèmes de suivi.</li>
-      <li class="t"
-        data-fr="Gestion et suivi des entrées/sorties en entrepôt et des coûts associés."
-        data-en="Warehouse stock management and associated cost tracking."
-        data-nl="Beheer en opvolging van magazijnstromen en bijbehorende kosten."
-      >Gestion et suivi des entrées/sorties en entrepôt et des coûts associés.</li>
+      <li class="t" data-fr="Identification des goulots d'étranglement dans la chaîne de valeur et implémentation de systèmes de suivi." data-en="Identification of bottlenecks in the value chain and implementation of monitoring systems." data-nl="Identificatie van knelpunten in de waardeketen en implementatie van opvolgingssystemen.">Identification des goulots d'étranglement dans la chaîne de valeur et implémentation de systèmes de suivi.</li>
+      <li class="t" data-fr="Gestion et suivi des entrées/sorties en entrepôt et des coûts associés." data-en="Warehouse stock management and associated cost tracking." data-nl="Beheer en opvolging van magazijnstromen en bijbehorende kosten.">Gestion et suivi des entrées/sorties en entrepôt et des coûts associés.</li>
     </ul>
   </div>
+</div>
 
-</div><!-- /card experience -->
+<!-- FLEXI-JOB CARD -->
+<div class="flexi-card">
+  <div class="flexi-section-label">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+    <span class="t" data-fr="Disponibilité Flexi-Job" data-en="Flexi-Job Availability" data-nl="Flexi-Job Beschikbaarheid">Disponibilité Flexi-Job</span>
+  </div>
+
+  <div class="flexi-header">
+    <div class="flexi-badge-eligible">
+      <div class="flexi-dot"></div>
+      <span class="t" data-fr="Éligible au Flexi-Job — confirmé mycareer.be" data-en="Flexi-Job Eligible — confirmed mycareer.be" data-nl="Flexi-Job Eligible — bevestigd mycareer.be">Éligible au Flexi-Job — confirmé mycareer.be</span>
+    </div>
+  </div>
+
+  <div class="flexi-info">
+    <span class="t"
+      data-fr="Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (art. 340 Loi-programme 2015). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d'impôt</strong> jusqu'à 18 440 € par an. Période d'éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>."
+      data-en="Full-time employee eligible for the <strong>flexi-job</strong> scheme (Art. 340 Programme Law 2015). Available for supplementary assignments outside working hours. Flexi-salary income <strong>tax-exempt</strong> up to €18,440/year. Confirmed eligibility period: <strong>April 2026 – Sept. 2026</strong>."
+      data-nl="Voltijds werknemer die in aanmerking komt voor het <strong>flexi-job</strong>-regime (art. 340 Programmawet 2015). Beschikbaar voor aanvullende opdrachten buiten de werkuren. Flexi-salaris <strong>belastingvrij</strong> tot €18.440/jaar. Bevestigde periode: <strong>april 2026 – sept. 2026</strong>."
+    >Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (art. 340 Loi-programme 2015). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d'impôt</strong> jusqu'à 18 440 € par an. Période d'éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>.</div>
+
+  <div class="flexi-roles">
+    <div class="flexi-role">
+      <div class="flexi-role-icon">🍽️</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Travailleur Horeca" data-en="Hospitality Worker" data-nl="Horeca-medewerker">Travailleur Horeca</div>
+        <div class="flexi-role-desc t" data-fr="Service en salle, plonge, aide-cuisine, caisse" data-en="Table service, dishwashing, kitchen help, cashier" data-nl="Bediening, afwas, keukenhelp, kassa">Service en salle, plonge, aide-cuisine, caisse</div>
+      </div>
+    </div>
+    <div class="flexi-role">
+      <div class="flexi-role-icon">📦</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Préparateur de commandes" data-en="Order Picker / Prep" data-nl="Orderpicker / Commande">Préparateur de commandes</div>
+        <div class="flexi-role-desc t" data-fr="Picking, scan, emballage, conditionnement" data-en="Picking, scanning, packing, conditioning" data-nl="Picking, scannen, verpakking, conditionering">Picking, scan, emballage, conditionnement</div>
+      </div>
+    </div>
+    <div class="flexi-role">
+      <div class="flexi-role-icon">🏪</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Collaborateur polyvalent" data-en="Versatile Retail Assistant" data-nl="Polyvalent Medewerker">Collaborateur polyvalent</div>
+        <div class="flexi-role-desc t" data-fr="Mise en rayon, accueil clients, réassort, encaissement" data-en="Shelf stocking, customer welcome, replenishment, checkout" data-nl="Rekken vullen, onthaal, aanvulling, kassa">Mise en rayon, accueil clients, réassort, encaissement</div>
+      </div>
+    </div>
+    <div class="flexi-role">
+      <div class="flexi-role-icon">🏭</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Magasinier / Logistique" data-en="Warehouse / Logistics" data-nl="Magazijnier / Logistiek">Magasinier / Logistique</div>
+        <div class="flexi-role-desc t" data-fr="Réception marchandises, stockage, manutention, inventaire" data-en="Goods receipt, storage, handling, inventory" data-nl="Goederenontvangst, opslag, handling, inventaris">Réception marchandises, stockage, manutention, inventaire</div>
+      </div>
+    </div>
+    <div class="flexi-role">
+      <div class="flexi-role-icon">🚀</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Autres secteurs éligibles" data-en="Other Eligible Sectors" data-nl="Andere Sectoren">Autres secteurs éligibles</div>
+        <div class="flexi-role-desc t" data-fr="Commerce, événementiel, nettoyage, sport & loisirs, soins" data-en="Retail, events, cleaning, sports & leisure, care" data-nl="Handel, evenementen, schoonmaak, sport & vrije tijd, zorg">Commerce, événementiel, nettoyage, sport & loisirs, soins</div>
+      </div>
+    </div>
+    <div class="flexi-role">
+      <div class="flexi-role-icon">💻</div>
+      <div class="flexi-role-text">
+        <div class="flexi-role-name t" data-fr="Support administratif / IT" data-en="Admin Support / IT" data-nl="Administratief / IT">Support administratif / IT</div>
+        <div class="flexi-role-desc t" data-fr="Encodage, gestion de données, support bureautique, saisie comptable" data-en="Data entry, records management, office support, accounting entry" data-nl="Gegevensinvoer, recordbeheer, kantoorsupport, boekhoudkundige invoer">Encodage, gestion de données, support bureautique, saisie comptable</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Revenu non imposable" data-en="Tax-exempt income" data-nl="Niet-belastbaar inkomen">Revenu non imposable</span></span>
+    <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Disponible soirs & week-ends" data-en="Available evenings & weekends" data-nl="Beschikbaar avonden & weekends">Disponible soirs & week-ends</span></span>
+    <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Flexible & mobile Bruxelles" data-en="Flexible & mobile Brussels" data-nl="Flexibel & mobiel Brussel">Flexible & mobile Bruxelles</span></span>
+    <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Fiable & ponctuel" data-en="Reliable & punctual" data-nl="Betrouwbaar & punctueel">Fiable & ponctuel</span></span>
+  </div>
+  <div class="flexi-period t"
+    data-fr="Source : mycareer.socialsecurity.be — Éligibilité vérifiée le 22/06/2026"
+    data-en="Source: mycareer.socialsecurity.be — Eligibility verified on 22/06/2026"
+    data-nl="Bron: mycareer.socialsecurity.be — Geschiktheid geverifieerd op 22/06/2026"
+  >Source : mycareer.socialsecurity.be — Éligibilité vérifiée le 22/06/2026</div>
+</div>
 
 <!-- FORMATION CONTINUE -->
 <div class="card">
@@ -509,8 +416,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 
 <!-- SIDEBAR -->
 <div>
-
-<!-- FORMATION -->
 <div class="card" id="formation">
   <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
@@ -541,53 +446,38 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   </div>
 </div>
 
-<!-- LANGUES -->
 <div class="card">
   <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
     <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
   <div class="lang-item">
-    <div class="lang-row">
-      <span class="lang-name t" data-fr="Français" data-en="French" data-nl="Frans">Français</span>
-      <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
-    </div>
+    <div class="lang-row"><span class="lang-name t" data-fr="Français" data-en="French" data-nl="Frans">Français</span><span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span></div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
   <div class="lang-item">
-    <div class="lang-row">
-      <span class="lang-name t" data-fr="Anglais" data-en="English" data-nl="Engels">Anglais</span>
-      <span class="lang-level t" data-fr="Courant" data-en="Fluent" data-nl="Vlot">Courant</span>
-    </div>
+    <div class="lang-row"><span class="lang-name t" data-fr="Anglais" data-en="English" data-nl="Engels">Anglais</span><span class="lang-level t" data-fr="Courant" data-en="Fluent" data-nl="Vlot">Courant</span></div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot"></div></div>
     <div class="cefr">B2–C1</div>
   </div>
   <div class="lang-item">
-    <div class="lang-row">
-      <span class="lang-name t" data-fr="Néerlandais" data-en="Dutch" data-nl="Nederlands">Néerlandais</span>
-      <span class="lang-level t" data-fr="Notions" data-en="Basic" data-nl="Basis">Notions</span>
-    </div>
+    <div class="lang-row"><span class="lang-name t" data-fr="Néerlandais" data-en="Dutch" data-nl="Nederlands">Néerlandais</span><span class="lang-level t" data-fr="Notions" data-en="Basic" data-nl="Basis">Notions</span></div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div></div>
     <div class="cefr">A1–A2</div>
   </div>
   <div class="lang-item">
-    <div class="lang-row">
-      <span class="lang-name t" data-fr="Créole haïtien" data-en="Haitian Creole" data-nl="Haïtiaans Creools">Créole haïtien</span>
-      <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
-    </div>
+    <div class="lang-row"><span class="lang-name t" data-fr="Créole haïtien" data-en="Haitian Creole" data-nl="Haïtiaans Creools">Créole haïtien</span><span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span></div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
 </div>
 
-<!-- COMPÉTENCES -->
 <div class="card" id="competences">
   <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
     <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
   </div>
-
   <div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
@@ -598,7 +488,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <span class="skill-tag t" data-fr="Trésorerie" data-en="Cash management" data-nl="Liquiditeitsbeheer">Trésorerie</span>
     </div>
   </div>
-
   <div class="skill-group">
     <div class="skill-group-title t" data-fr="Fiscalité" data-en="Taxation" data-nl="Fiscaliteit">Fiscalité</div>
     <div class="skill-tags">
@@ -608,30 +497,22 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <span class="skill-tag">TP / BV</span>
     </div>
   </div>
-
   <div class="skill-group">
     <div class="skill-group-title">ERP & Logiciels</div>
     <div class="skill-tags">
-      <span class="skill-tag">SAP</span>
-      <span class="skill-tag">Odoo</span>
-      <span class="skill-tag">Winbooks</span>
-      <span class="skill-tag">Adfinity</span>
-      <span class="skill-tag">Octopus</span>
-      <span class="skill-tag">Excel avancé</span>
+      <span class="skill-tag">SAP</span><span class="skill-tag">Odoo</span>
+      <span class="skill-tag">Winbooks</span><span class="skill-tag">Adfinity</span>
+      <span class="skill-tag">Octopus</span><span class="skill-tag">Excel avancé</span>
     </div>
   </div>
-
   <div class="skill-group">
     <div class="skill-group-title">IT & Digital</div>
     <div class="skill-tags">
-      <span class="skill-tag">SQL</span>
-      <span class="skill-tag">PHP</span>
-      <span class="skill-tag">BPMN</span>
-      <span class="skill-tag">CODA</span>
+      <span class="skill-tag">SQL</span><span class="skill-tag">PHP</span>
+      <span class="skill-tag">BPMN</span><span class="skill-tag">CODA</span>
       <span class="skill-tag">FSE/ESF Tools</span>
     </div>
   </div>
-
   <div class="skill-group">
     <div class="skill-group-title t" data-fr="Savoir-être" data-en="Soft Skills" data-nl="Professionele Vaardigheden">Savoir-être</div>
     <div class="skill-tags">
@@ -643,24 +524,14 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   </div>
 </div>
 
-<!-- CERTIFICATIONS (from PDF data) -->
 <div class="card">
   <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
     <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
-  <div class="cert-item">
-    <span class="cert-name t" data-fr="SAP Key User — Europass" data-en="SAP Key User — Europass" data-nl="SAP Key User — Europass">SAP Key User — Europass</span>
-    <span class="cert-year">2022</span>
-  </div>
-  <div class="cert-item">
-    <span class="cert-name t" data-fr="Expertise Comptable — Bruxelles Formation" data-en="Expert Accounting — Bruxelles Formation" data-nl="Expertise Boekhouding — Bruxelles Formation">Expertise Comptable — Bruxelles Formation</span>
-    <span class="cert-year">2022</span>
-  </div>
-  <div class="cert-item">
-    <span class="cert-name t" data-fr="Pathway Program — BYU Idaho (USA)" data-en="Pathway Program — BYU Idaho (USA)" data-nl="Pathway Program — BYU Idaho (USA)">Pathway Program — BYU Idaho (USA)</span>
-    <span class="cert-year">2016</span>
-  </div>
+  <div class="cert-item"><span class="cert-name">SAP Key User — Europass</span><span class="cert-year">2022</span></div>
+  <div class="cert-item"><span class="cert-name t" data-fr="Expertise Comptable — Bruxelles Formation" data-en="Expert Accounting — Bruxelles Formation" data-nl="Expertise Boekhouding — Bruxelles Formation">Expertise Comptable — Bruxelles Formation</span><span class="cert-year">2022</span></div>
+  <div class="cert-item"><span class="cert-name">Pathway Program — BYU Idaho (USA)</span><span class="cert-year">2016</span></div>
 </div>
 
 </div><!-- /sidebar -->
@@ -678,36 +549,20 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 </div><!-- /page -->
 
 <script>
-let currentLang = 'fr';
-let currentProfile = 'comptable';
-
-function setLang(lang) {
-  currentLang = lang;
-  document.documentElement.lang = lang;
-  // Update all translatable elements
-  document.querySelectorAll('.t').forEach(el => {
-    const val = el.getAttribute('data-' + lang);
-    if (val) el.textContent = val;
-  });
-  // Update lang buttons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
-  });
+let currentLang='fr',currentProfile='comptable';
+function setLang(lang){
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('.t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v;});
+  document.querySelectorAll('.lang-btn').forEach(btn=>{btn.classList.toggle('active',btn.textContent.trim().toLowerCase()===lang);});
 }
-
-function setProfile(profile) {
-  currentProfile = profile;
-  // Hide all bios
-  document.querySelectorAll('.bio-text').forEach(el => el.classList.remove('active'));
-  document.getElementById('bio-' + profile).classList.add('active');
-  // Update profile buttons
-  document.querySelectorAll('.profile-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  document.getElementById('pb-' + profile).classList.add('active');
+function setProfile(profile){
+  currentProfile=profile;
+  document.querySelectorAll('.bio-text').forEach(el=>el.classList.remove('active'));
+  document.getElementById('bio-'+profile).classList.add('active');
+  document.querySelectorAll('.profile-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById('pb-'+profile).classList.add('active');
 }
-
-// Init
 setLang('fr');
 </script>
 </body>
