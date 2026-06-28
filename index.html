@@ -17,6 +17,16 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--surface);font-size:14px;line-height:1.55}
+
+/* ── LIEN DE RÉFÉRENCE ── */
+a.ref-link{
+  color:var(--eu-blue);text-decoration:none;border-bottom:1px dotted var(--eu-blue-mid);
+  transition:color 0.15s,border-color 0.15s;display:inline-flex;align-items:center;gap:3px;
+}
+a.ref-link:hover{color:var(--eu-blue-mid);border-bottom-style:solid}
+a.ref-link .ext-icon{width:10px;height:10px;flex-shrink:0;opacity:0.6;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+a.ref-link:hover .ext-icon{opacity:1}
+
 .topbar{background:var(--eu-blue);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:48px;position:sticky;top:0;z-index:200;gap:1rem;}
 .topbar-left{display:flex;align-items:center;gap:16px}
 .eu-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
@@ -142,6 +152,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   body{background:white}
   .card,.hero,.flexi-card{border:1px solid #ccc}
   .page{padding:0}
+  a.ref-link{color:var(--eu-blue);border-bottom:none}
 }
 @media(max-width:720px){
   .hero{grid-template-columns:1fr;text-align:center}
@@ -158,12 +169,21 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 </head>
 <body>
 
+<!-- Icône externe réutilisable en SVG symbol -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-ext" viewBox="0 0 24 24">
+    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+    <polyline points="15 3 21 3 21 9"/>
+    <line x1="10" y1="14" x2="21" y2="3"/>
+  </symbol>
+</svg>
+
 <div class="topbar">
   <div class="topbar-left">
-    <div class="eu-logo">
+    <a href="https://europass.eu/" target="_blank" rel="noopener" class="eu-logo" title="Europass — Union Européenne">
       <span class="eu-stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</span>
       <span class="eu-wordmark">Europass</span>
-    </div>
+    </a>
     <span class="topbar-name">Stevenson Laurent</span>
   </div>
   <div class="topbar-right" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -235,10 +255,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         elaurentsteve@gmail.com
       </a>
-      <span class="contact-chip">
+      <a href="https://maps.google.com/?q=Rue+Jules+Broeren+30,+1070+Bruxelles" target="_blank" rel="noopener" class="contact-chip">
         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Rue Jules Broeren 30 — 1070 Bruxelles
-      </span>
+      </a>
       <span class="contact-chip">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         <span class="t" data-fr="Né le 28/08/1987" data-en="Born 28/08/1987" data-nl="Geboren 28/08/1987">Né le 28/08/1987</span>
@@ -256,21 +276,35 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
     <span class="t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
   </div>
+
   <div class="job">
     <div class="job-row">
-      <span class="job-company">Mission Locale de Molenbeek ASBL</span>
+      <span class="job-company">
+        <a href="https://www.missionlocalemolenbeek.be/" target="_blank" rel="noopener" class="ref-link">
+          Mission Locale de Molenbeek ASBL
+          <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+        </a>
+      </span>
       <span class="job-date">Déc. 2024 – présent</span>
     </div>
     <div class="job-role t" data-fr="Comptable senior — Bruxelles" data-en="Senior Accountant — Brussels" data-nl="Senior Boekhouder — Brussel">Comptable senior — Bruxelles</div>
     <ul class="bullets">
       <li class="t" data-fr="Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds." data-en="Full-cycle accounting: purchase/sales invoicing, cash, bank (CODA), account reconciliation, debt collection, and audit documentation for funders." data-nl="Volledige boekhouding: factuurinvoer aankopen/verkopen, kas, bank (CODA), afsluiting van rekeningen, aanmaningen, auditdossiers voor subsidiënten.">Comptabilité complète : saisie factures ventes/achats, caisse, banque (CODA), apurement des comptes, relances, audit des justificatifs pour bailleurs de fonds.</li>
       <li class="t" data-fr="Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels." data-en="Budget and cash-flow monitoring; tax filings (VAT, corporate income tax, payroll tax) and annual accounts." data-nl="Budgetopvolging en liquiditeitsbeheer; btw-, VenB- en bedrijfsvoorheffingaangiften en jaarrekeningen.">Suivi budgétaire et trésorerie ; établissement des déclarations fiscales (TVA, IPM, TP) et comptes annuels.</li>
-      <li class="t" data-fr="Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative." data-en="IT project management (ESF timesheet tool) with direct and collaborative oversight." data-nl="IT-projectbeheer (ESF-tijdregistratietool) met directe en collaboratieve opvolging.">Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative.</li>
+      <li>
+        <span class="t" data-fr="Gestion de projet IT (FSE time-sheet) en supervision directe et collaborative — " data-en="IT project management (ESF timesheet tool) with direct and collaborative oversight — " data-nl="IT-projectbeheer (ESF-tijdregistratietool) met directe en collaboratieve opvolging — ">Gestion de projet IT (</span><a href="https://www.esf-vlaanderen.be/" target="_blank" rel="noopener" class="ref-link">FSE<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a> time-sheet) en supervision directe et collaborative.
+      </li>
     </ul>
   </div>
+
   <div class="job">
     <div class="job-row">
-      <span class="job-company">SIREAS / FAE / SASB ASBLs</span>
+      <span class="job-company">
+        <a href="https://www.sireas.be/" target="_blank" rel="noopener" class="ref-link">SIREAS<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+        &nbsp;/&nbsp;
+        <a href="https://www.fae.be/" target="_blank" rel="noopener" class="ref-link">FAE<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+        &nbsp;/&nbsp;SASB ASBLs
+      </span>
       <span class="job-date">Juil. 2023 – Déc. 2024</span>
     </div>
     <div class="job-role t" data-fr="Comptable (mi-temps) — Bruxelles" data-en="Accountant (part-time) — Brussels" data-nl="Boekhouder (deeltijds) — Brussel">Comptable (mi-temps) — Bruxelles</div>
@@ -280,9 +314,12 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <li class="t" data-fr="Gestion de projet IT et suivi budgétaire." data-en="IT project management and budget monitoring." data-nl="IT-projectbeheer en budgetopvolging.">Gestion de projet IT et suivi budgétaire.</li>
     </ul>
   </div>
+
   <div class="job">
     <div class="job-row">
-      <span class="job-company">Sodexo</span>
+      <span class="job-company">
+        <a href="https://www.sodexo.com/fr-be/" target="_blank" rel="noopener" class="ref-link">Sodexo<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      </span>
       <span class="job-date">Août – Sept. 2023</span>
     </div>
     <div class="job-role t" data-fr="Comptable analyste (étudiant) — Bruxelles" data-en="Analyst Accountant (student job) — Brussels" data-nl="Analytisch boekhouder (studentenjob) — Brussel">Comptable analyste (étudiant) — Bruxelles</div>
@@ -290,6 +327,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <li class="t" data-fr="Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances." data-en="Accounts receivable management: invoice entry, reconciliations, matching and follow-up." data-nl="Debiteurenbeheer: factuurinvoer, afstemmingen, aanpassingen en aanmaningen.">Gestion de comptes clients : saisie, rapprochements de factures, lettrage et relances.</li>
     </ul>
   </div>
+
   <div class="job">
     <div class="job-row">
       <span class="job-company">Reinbold Export Import</span>
@@ -297,11 +335,16 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div class="job-role t" data-fr="Comptable senior & assistant financier — Port-au-Prince" data-en="Senior Accountant & Financial Assistant — Port-au-Prince" data-nl="Senior Boekhouder & Financieel Assistent — Port-au-Prince">Comptable senior & assistant financier — Port-au-Prince</div>
     <ul class="bullets">
-      <li class="t" data-fr="Saisie des documents comptables selon les normes IFRS, classement et archivage." data-en="Accounting entries under IFRS standards, filing and archiving." data-nl="Boekhoudkundige invoer conform IFRS-normen, klassering en archivering.">Saisie des documents comptables selon les normes IFRS, classement et archivage.</li>
+      <li>
+        Saisie des documents comptables selon les normes
+        <a href="https://www.ifrs.org/" target="_blank" rel="noopener" class="ref-link">IFRS<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>,
+        classement et archivage.
+      </li>
       <li class="t" data-fr="Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques." data-en="Accounts payable: invoice processing, reconciliations, matching and telephone follow-up." data-nl="Leveranciersboekhouding: factuurverwerking, afstemmingen, aanpassingen en telefonische aanmaningen.">Comptabilité fournisseurs : saisie et rapprochements de factures, lettrage, relances téléphoniques.</li>
       <li class="t" data-fr="Établissement des déclarations fiscales dans le respect des procédures et délais." data-en="Preparation of tax returns in compliance with procedures and deadlines." data-nl="Opstellen van fiscale aangiften conform procedures en termijnen.">Établissement des déclarations fiscales dans le respect des procédures et délais.</li>
     </ul>
   </div>
+
   <div class="job">
     <div class="job-row">
       <span class="job-company">Kay Pam Entreprise & Paulna</span>
@@ -331,10 +374,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 
   <div class="flexi-info">
     <span class="t"
-      data-fr="Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (art. 340 Loi-programme 2015). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d'impôt</strong> jusqu'à 18 440 € par an. Période d'éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>."
-      data-en="Full-time employee eligible for the <strong>flexi-job</strong> scheme (Art. 340 Programme Law 2015). Available for supplementary assignments outside working hours. Flexi-salary income <strong>tax-exempt</strong> up to €18,440/year. Confirmed eligibility period: <strong>April 2026 – Sept. 2026</strong>."
-      data-nl="Voltijds werknemer die in aanmerking komt voor het <strong>flexi-job</strong>-regime (art. 340 Programmawet 2015). Beschikbaar voor aanvullende opdrachten buiten de werkuren. Flexi-salaris <strong>belastingvrij</strong> tot €18.440/jaar. Bevestigde periode: <strong>april 2026 – sept. 2026</strong>."
-    >Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (art. 340 Loi-programme 2015). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d'impôt</strong> jusqu'à 18 440 € par an. Période d'éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>.</div>
+      data-fr='Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (<a href="https://www.ejustice.just.fgov.be/eli/loi/2015/12/26/2015021479/justel" target="_blank" rel="noopener" class="ref-link" style="color:var(--flexi-green);border-color:var(--flexi-green)">art. 340 Loi-programme 2015<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d&apos;impôt</strong> jusqu&apos;à 18&nbsp;440&nbsp;€ par an. Période d&apos;éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>.'
+      data-en='Full-time employee eligible for the <strong>flexi-job</strong> scheme (<a href="https://www.ejustice.just.fgov.be/eli/loi/2015/12/26/2015021479/justel" target="_blank" rel="noopener" class="ref-link" style="color:var(--flexi-green);border-color:var(--flexi-green)">Art. 340 Programme Law 2015<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>). Available for supplementary assignments outside working hours. Flexi-salary income <strong>tax-exempt</strong> up to €18,440/year. Confirmed eligibility period: <strong>April 2026 – Sept. 2026</strong>.'
+      data-nl='Voltijds werknemer die in aanmerking komt voor het <strong>flexi-job</strong>-regime (<a href="https://www.ejustice.just.fgov.be/eli/loi/2015/12/26/2015021479/justel" target="_blank" rel="noopener" class="ref-link" style="color:var(--flexi-green);border-color:var(--flexi-green)">art. 340 Programmawet 2015<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>). Beschikbaar voor aanvullende opdrachten buiten de werkuren. Flexi-salaris <strong>belastingvrij</strong> tot €18.440/jaar. Bevestigde periode: <strong>april 2026 – sept. 2026</strong>.'
+    >Travailleur à temps plein éligible au régime <strong>flexi-job</strong> (<a href="https://www.ejustice.just.fgov.be/eli/loi/2015/12/26/2015021479/justel" target="_blank" rel="noopener" class="ref-link" style="color:var(--flexi-green);border-color:var(--flexi-green)">art. 340 Loi-programme 2015<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>). Disponible pour des missions complémentaires en dehors de mes heures de travail. Revenus flexi-salaire <strong>exonérés d'impôt</strong> jusqu'à 18 440 € par an. Période d'éligibilité confirmée : <strong>avril 2026 – sept. 2026</strong>.</div>
 
   <div class="flexi-roles">
     <div class="flexi-role">
@@ -387,11 +430,17 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Flexible & mobile Bruxelles" data-en="Flexible & mobile Brussels" data-nl="Flexibel & mobiel Brussel">Flexible & mobile Bruxelles</span></span>
     <span class="flexi-avantage-tag">✓ <span class="t" data-fr="Fiable & ponctuel" data-en="Reliable & punctual" data-nl="Betrouwbaar & punctueel">Fiable & ponctuel</span></span>
   </div>
-  <div class="flexi-period t"
-    data-fr="Source : mycareer.socialsecurity.be — Éligibilité vérifiée le 22/06/2026"
-    data-en="Source: mycareer.socialsecurity.be — Eligibility verified on 22/06/2026"
-    data-nl="Bron: mycareer.socialsecurity.be — Geschiktheid geverifieerd op 22/06/2026"
-  >Source : mycareer.socialsecurity.be — Éligibilité vérifiée le 22/06/2026</div>
+  <div class="flexi-period">
+    <a href="https://mycareer.socialsecurity.be/" target="_blank" rel="noopener" class="ref-link" style="color:var(--muted);border-color:var(--muted);font-style:normal">
+      mycareer.socialsecurity.be
+      <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+    </a>
+    <span class="t"
+      data-fr=" — Éligibilité vérifiée le 22/06/2026"
+      data-en=" — Eligibility verified on 22/06/2026"
+      data-nl=" — Geschiktheid geverifieerd op 22/06/2026"
+    > — Éligibilité vérifiée le 22/06/2026</span>
+  </div>
 </div>
 
 <!-- FORMATION CONTINUE -->
@@ -400,12 +449,36 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
     <span class="t" data-fr="Formation continue & activités" data-en="Continuing Education & Activities" data-nl="Permanente Vorming & Activiteiten">Formation continue & activités</span>
   </div>
-  <div class="cont-item"><span class="cont-year">2024 · Erasmus — Salzburg (AT)</span><span class="t" data-fr="The Heritage of Money and Coinage: From the Mine to the Mint" data-en="The Heritage of Money and Coinage: From the Mine to the Mint" data-nl="The Heritage of Money and Coinage: From the Mine to the Mint">The Heritage of Money and Coinage: From the Mine to the Mint</span></div>
-  <div class="cont-item"><span class="cont-year">2024 · ULB</span><span class="t" data-fr="Atelier de recherche — Humanités numériques" data-en="Research workshop — Digital Humanities" data-nl="Onderzoeksatelier — Digitale Geesteswetenschappen">Atelier de recherche — Humanités numériques</span></div>
-  <div class="cont-item"><span class="cont-year">2023 · Erasmus — Aix-en-Provence / Marseille (FR)</span><span class="t" data-fr="Entrepreneurship — How to create a legitimate business" data-en="Entrepreneurship — How to create a legitimate business" data-nl="Entrepreneurship — How to create a legitimate business">Entrepreneurship — How to create a legitimate business</span></div>
-  <div class="cont-item"><span class="cont-year">2022 · ULB engagée / Be-Pax</span><span class="t" data-fr="Projet MADP — Animateur / Volontaire" data-en="MADP Project — Facilitator / Volunteer" data-nl="MADP-project — Animator / Vrijwilliger">Projet MADP — Animateur / Volontaire</span></div>
-  <div class="cont-item"><span class="cont-year">2019–2020 · Toastmasters International</span><span class="t" data-fr="Président et VPE de club" data-en="Club President and VP Education" data-nl="Clubpresident en VPE">Président et VPE de club</span></div>
-  <div class="cont-item"><span class="cont-year">2015–2016 · BYU Idaho (USA)</span><span class="t" data-fr="Online Certificate — Pathway Program" data-en="Online Certificate — Pathway Program" data-nl="Online Certificate — Pathway Program">Online Certificate — Pathway Program</span></div>
+
+  <div class="cont-item">
+    <span class="cont-year">2024 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a> — Salzburg (AT)</span>
+    <span>The Heritage of Money and Coinage: From the Mine to the Mint</span>
+  </div>
+
+  <div class="cont-item">
+    <span class="cont-year">2024 · <a href="https://www.ulb.be/" target="_blank" rel="noopener" class="ref-link">ULB<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></span>
+    <span class="t" data-fr="Atelier de recherche — Humanités numériques" data-en="Research workshop — Digital Humanities" data-nl="Onderzoeksatelier — Digitale Geesteswetenschappen">Atelier de recherche — Humanités numériques</span>
+  </div>
+
+  <div class="cont-item">
+    <span class="cont-year">2023 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a> — Aix-en-Provence / Marseille (FR)</span>
+    <span>Entrepreneurship — How to create a legitimate business</span>
+  </div>
+
+  <div class="cont-item">
+    <span class="cont-year">2022 · <a href="https://www.ulb.be/fr/ulb-engagee" target="_blank" rel="noopener" class="ref-link">ULB engagée<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a> / <a href="https://www.be-pax.be/" target="_blank" rel="noopener" class="ref-link">Be-Pax<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></span>
+    <span class="t" data-fr="Projet MADP — Animateur / Volontaire" data-en="MADP Project — Facilitator / Volunteer" data-nl="MADP-project — Animator / Vrijwilliger">Projet MADP — Animateur / Volontaire</span>
+  </div>
+
+  <div class="cont-item">
+    <span class="cont-year">2019–2020 · <a href="https://www.toastmasters.org/" target="_blank" rel="noopener" class="ref-link">Toastmasters International<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></span>
+    <span class="t" data-fr="Président et VPE de club" data-en="Club President and VP Education" data-nl="Clubpresident en VPE">Président et VPE de club</span>
+  </div>
+
+  <div class="cont-item">
+    <span class="cont-year">2015–2016 · <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">BYU Idaho (USA)<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></span>
+    <span>Online Certificate — Pathway Program</span>
+  </div>
 </div>
 
 </div><!-- /main col -->
@@ -417,28 +490,62 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
     <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
   </div>
+
   <div class="edu-item">
-    <div class="edu-school">ICHEC Brussels Management School</div>
+    <div class="edu-school">
+      <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
+        ICHEC Brussels Management School
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
     <div class="edu-degree t" data-fr="Master en droit fiscal" data-en="Master in Tax Law" data-nl="Master in Fiscaal Recht">Master en droit fiscal</div>
     <div class="edu-date">Mai 2025 – 2027</div>
-    <div class="edu-note t" data-fr="Parcours professionnel ITAA" data-en="ITAA Professional Pathway" data-nl="ITAA Professioneel Traject">Parcours professionnel ITAA</div>
+    <div class="edu-note">
+      <a href="https://www.itaa.be/fr/devenez-professionnel/acces-a-la-profession/" target="_blank" rel="noopener" class="ref-link" style="font-size:11px">
+        Parcours professionnel ITAA
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
   </div>
+
   <div class="edu-item">
-    <div class="edu-school">Université Libre de Bruxelles</div>
+    <div class="edu-school">
+      <a href="https://www.ulb.be/fr/programme/ma-stic" target="_blank" rel="noopener" class="ref-link">
+        Université Libre de Bruxelles
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
     <div class="edu-degree t" data-fr="Master en sciences et technologies de l'information et de la communication" data-en="Master of Science in Information and Communication Technologies" data-nl="Master in Informatie- en Communicatietechnologie">Master STIC</div>
     <div class="edu-date">Sept. 2021 – Oct. 2023</div>
   </div>
+
   <div class="edu-item">
-    <div class="edu-school">Bruxelles Formation</div>
+    <div class="edu-school">
+      <a href="https://www.bruxellesformation.be/" target="_blank" rel="noopener" class="ref-link">
+        Bruxelles Formation
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
     <div class="edu-degree t" data-fr="Comptabilité à l'expertise comptable & Key User SAP" data-en="Accounting to Expert Level & SAP Key User" data-nl="Boekhouding tot expertiseboekhouding & SAP Key User">Comptabilité expertise & SAP Key User</div>
     <div class="edu-date">Mai 2022 – Oct. 2022</div>
-    <div class="edu-note t" data-fr="Certifié Europass" data-en="Europass Certified" data-nl="Europass Gecertificeerd">Certifié Europass</div>
+    <div class="edu-note">
+      <a href="https://europass.eu/fr/create-europass/cv" target="_blank" rel="noopener" class="ref-link" style="font-size:11px">
+        Certifié Europass
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
   </div>
+
   <div class="edu-item">
     <div class="edu-school">Institut des Hautes Études Commerciales et Économiques</div>
     <div class="edu-degree t" data-fr="Licence en sciences comptables" data-en="Bachelor in Accounting Sciences" data-nl="Bachelor in Boekhoudwetenschappen">Licence en sciences comptables</div>
     <div class="edu-date">2008 – 2012 · Port-au-Prince</div>
-    <div class="edu-note t" data-fr="Équivalence NARIC" data-en="NARIC Equivalence" data-nl="NARIC-equivalentie">Équivalence NARIC</div>
+    <div class="edu-note">
+      <a href="https://www.naric.be/" target="_blank" rel="noopener" class="ref-link" style="font-size:11px">
+        Équivalence NARIC
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -448,22 +555,34 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
   <div class="lang-item">
-    <div class="lang-row"><span class="lang-name t" data-fr="Français" data-en="French" data-nl="Frans">Français</span><span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span></div>
+    <div class="lang-row">
+      <span class="lang-name t" data-fr="Français" data-en="French" data-nl="Frans">Français</span>
+      <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
+    </div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
-    <div class="cefr">C2</div>
+    <div class="cefr"><a href="https://europass.eu/fr/common-european-framework-reference" target="_blank" rel="noopener" class="ref-link" style="font-size:10px;color:var(--muted);border-color:var(--muted)">C2 — CECRL<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></div>
   </div>
   <div class="lang-item">
-    <div class="lang-row"><span class="lang-name t" data-fr="Anglais" data-en="English" data-nl="Engels">Anglais</span><span class="lang-level t" data-fr="Courant" data-en="Fluent" data-nl="Vlot">Courant</span></div>
+    <div class="lang-row">
+      <span class="lang-name t" data-fr="Anglais" data-en="English" data-nl="Engels">Anglais</span>
+      <span class="lang-level t" data-fr="Courant" data-en="Fluent" data-nl="Vlot">Courant</span>
+    </div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot"></div></div>
-    <div class="cefr">B2–C1</div>
+    <div class="cefr"><a href="https://europass.eu/fr/common-european-framework-reference" target="_blank" rel="noopener" class="ref-link" style="font-size:10px;color:var(--muted);border-color:var(--muted)">B2–C1 — CECRL<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></div>
   </div>
   <div class="lang-item">
-    <div class="lang-row"><span class="lang-name t" data-fr="Néerlandais" data-en="Dutch" data-nl="Nederlands">Néerlandais</span><span class="lang-level t" data-fr="Notions" data-en="Basic" data-nl="Basis">Notions</span></div>
+    <div class="lang-row">
+      <span class="lang-name t" data-fr="Néerlandais" data-en="Dutch" data-nl="Nederlands">Néerlandais</span>
+      <span class="lang-level t" data-fr="Notions" data-en="Basic" data-nl="Basis">Notions</span>
+    </div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div></div>
-    <div class="cefr">A1–A2</div>
+    <div class="cefr"><a href="https://europass.eu/fr/common-european-framework-reference" target="_blank" rel="noopener" class="ref-link" style="font-size:10px;color:var(--muted);border-color:var(--muted)">A1–A2 — CECRL<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a></div>
   </div>
   <div class="lang-item">
-    <div class="lang-row"><span class="lang-name t" data-fr="Créole haïtien" data-en="Haitian Creole" data-nl="Haïtiaans Creools">Créole haïtien</span><span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span></div>
+    <div class="lang-row">
+      <span class="lang-name t" data-fr="Créole haïtien" data-en="Haitian Creole" data-nl="Haïtiaans Creools">Créole haïtien</span>
+      <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
+    </div>
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
@@ -479,7 +598,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="skill-tags">
       <span class="skill-tag t" data-fr="Comptabilité générale" data-en="General accounting" data-nl="Algemene boekhouding">Comptabilité générale</span>
       <span class="skill-tag t" data-fr="Comptabilité analytique" data-en="Cost accounting" data-nl="Analytische boekhouding">Comptabilité analytique</span>
-      <span class="skill-tag">IFRS</span>
+      <a href="https://www.ifrs.org/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">IFRS <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
       <span class="skill-tag t" data-fr="Comptes annuels" data-en="Annual accounts" data-nl="Jaarrekeningen">Comptes annuels</span>
       <span class="skill-tag t" data-fr="Trésorerie" data-en="Cash management" data-nl="Liquiditeitsbeheer">Trésorerie</span>
     </div>
@@ -487,7 +606,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   <div class="skill-group">
     <div class="skill-group-title t" data-fr="Fiscalité" data-en="Taxation" data-nl="Fiscaliteit">Fiscalité</div>
     <div class="skill-tags">
-      <span class="skill-tag">TVA / VAT / BTW</span>
+      <a href="https://finances.belgium.be/fr/entreprises/tva" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">TVA / VAT / BTW <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
       <span class="skill-tag">IPM / VenB / ISOC</span>
       <span class="skill-tag">IPP / PB</span>
       <span class="skill-tag">TP / BV</span>
@@ -496,17 +615,22 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   <div class="skill-group">
     <div class="skill-group-title">ERP & Logiciels</div>
     <div class="skill-tags">
-      <span class="skill-tag">SAP</span><span class="skill-tag">Odoo</span>
-      <span class="skill-tag">Winbooks</span><span class="skill-tag">Adfinity</span>
-      <span class="skill-tag">Octopus</span><span class="skill-tag">Excel avancé</span>
+      <a href="https://www.sap.com/belgium/index.html" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">SAP <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://www.odoo.com/fr_BE" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">Odoo <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://www.winbooks.be/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">Winbooks <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://www.adfinity.com/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">Adfinity <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://www.octopus.be/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">Octopus <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <span class="skill-tag">Excel avancé</span>
     </div>
   </div>
   <div class="skill-group">
     <div class="skill-group-title">IT & Digital</div>
     <div class="skill-tags">
-      <span class="skill-tag">SQL</span><span class="skill-tag">PHP</span>
-      <span class="skill-tag">BPMN</span><span class="skill-tag">CODA</span>
-      <span class="skill-tag">FSE/ESF Tools</span>
+      <span class="skill-tag">SQL</span>
+      <span class="skill-tag">PHP</span>
+      <a href="https://www.omg.org/bpmn/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">BPMN <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://febelfin.be/fr/paiements/coda" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">CODA <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      <a href="https://www.esf-vlaanderen.be/" target="_blank" rel="noopener" class="skill-tag" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px">FSE/ESF Tools <svg style="width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
     </div>
   </div>
   <div class="skill-group">
@@ -525,9 +649,29 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
     <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
-  <div class="cert-item"><span class="cert-name">SAP Key User — Europass</span><span class="cert-year">2022</span></div>
-  <div class="cert-item"><span class="cert-name t" data-fr="Expertise Comptable — Bruxelles Formation" data-en="Expert Accounting — Bruxelles Formation" data-nl="Expertise Boekhouding — Bruxelles Formation">Expertise Comptable — Bruxelles Formation</span><span class="cert-year">2022</span></div>
-  <div class="cert-item"><span class="cert-name">Pathway Program — BYU Idaho (USA)</span><span class="cert-year">2016</span></div>
+  <div class="cert-item">
+    <span class="cert-name">
+      <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+      &nbsp;—&nbsp;
+      <a href="https://europass.eu/fr" target="_blank" rel="noopener" class="ref-link">Europass<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+    </span>
+    <span class="cert-year">2022</span>
+  </div>
+  <div class="cert-item">
+    <span class="cert-name">
+      <a href="https://www.bruxellesformation.be/" target="_blank" rel="noopener" class="ref-link">
+        <span class="t" data-fr="Expertise Comptable — Bruxelles Formation" data-en="Expert Accounting — Bruxelles Formation" data-nl="Expertise Boekhouding — Bruxelles Formation">Expertise Comptable — Bruxelles Formation</span>
+        <svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg>
+      </a>
+    </span>
+    <span class="cert-year">2022</span>
+  </div>
+  <div class="cert-item">
+    <span class="cert-name">
+      <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">Pathway Program — BYU Idaho (USA)<svg class="ext-icon" viewBox="0 0 24 24"><use href="#icon-ext"/></svg></a>
+    </span>
+    <span class="cert-year">2016</span>
+  </div>
 </div>
 
 </div><!-- /sidebar -->
@@ -536,10 +680,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 <footer>
   <div class="ep-footer">
     <span class="ep-footer-stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</span>
-    <span style="color:#999;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">Europass</span>
+    <a href="https://europass.eu/" target="_blank" rel="noopener" style="color:#999;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none">Europass</a>
     <span class="ep-footer-stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</span>
   </div>
-  <p>© 2026 Stevenson Laurent · +32 471 69 20 67 · elaurentsteve@gmail.com · 1070 Bruxelles</p>
+  <p>© 2026 Stevenson Laurent · +32 471 69 20 67 · <a href="mailto:elaurentsteve@gmail.com" style="color:#bbb">elaurentsteve@gmail.com</a> · 1070 Bruxelles</p>
 </footer>
 
 </div><!-- /page -->
