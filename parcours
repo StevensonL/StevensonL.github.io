@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Parcours professionnel Stevenson Laurent — Diagramme BPMN interactif avec légendes Data Scientist & Comptable"/>
+<title>Parcours Professionnel — BPMN | Stevenson Laurent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --eu-blue:#003399;--eu-yellow:#FFCC00;--eu-blue-mid:#336699;
+  --eu-blue-light:#E8EEF8;--eu-blue-pale:#F0F4FA;--text:#1C1C1C;
+  --muted:#5C6470;--border:#D4D8DF;--bg:#FFFFFF;--surface:#F5F7FA;
+  --radius:6px;--accent:#003399;
+  --ds-purple:#7C3AED;--ds-purple-light:#EDE9FE;--ds-purple-pale:#F5F3FF;
+  --compte-green:#059669;--compte-green-light:#D1FAE5;--compte-green-pale:#ECFDF5;
+  --shadow:0 4px 16px rgba(0,0,0,0.08);--shadow-hover:0 8px 32px rgba(0,0,0,0.12);
+  --transition:0.25s cubic-bezier(0.4,0,0.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--surface);font-size:14px;line-height:1.55;overflow-x:hidden}
+
+/* ── DARK MODE ── */
+body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--surface-alt:#334155;--border:#334155;--eu-blue-light:#1E3A5F;--eu-blue-pale:#1E293B;--shadow:0 4px 16px rgba(0,0,0,0.3);--shadow-hover:0 8px 32px rgba(0,0,0,0.4);--ds-purple-light:#4C1D95;--ds-purple-pale:#1E1B4B;--compte-green-light:#064E3B;--compte-green-pale:#064E3B}
+body.dark-mode .card,body.dark-mode .hero,body.dark-mode .bpmn-pool{background:var(--surface);border-color:#334155}
+body.dark-mode .legend-card{background:#1E293B;border-color:#475569}
+body.dark-mode .bpmn-lane{background:#1E293B}
+body.dark-mode .bpmn-task{background:#334155;border-color:#475569;color:#F1F5F9}
+body.dark-mode .bpmn-event-start{background:#1E293B;border-color:#475569}
+body.dark-mode .bpmn-event-end{background:#1E293B;border-color:#EF4444}
+body.dark-mode .bpmn-gateway{background:#1E293B;border-color:#475569}
+body.dark-mode .bpmn-flow-line{background:#475569}
+body.dark-mode .bpmn-annotation{background:#1E293B;border-color:#475569;color:#94A3B8}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--eu-blue);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;position:fixed;top:0;left:0;right:0;z-index:200;gap:1rem}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.eu-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.eu-stars{font-size:10px;letter-spacing:1px;color:var(--eu-yellow)}
+.eu-wordmark{font-size:11px;font-weight:700;color:white;letter-spacing:0.08em;text-transform:uppercase}
+.topbar-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);border-left:1px solid rgba(255,255,255,0.25);padding-left:16px}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.back-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:3px;padding:3px 10px;cursor:pointer;font-family:'Source Sans 3',sans-serif;text-decoration:none;transition:all var(--transition)}
+.back-btn:hover{border-color:var(--eu-yellow);color:var(--eu-yellow)}
+.icon-btn{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition);color:rgba(255,255,255,0.8);margin-left:4px}
+.icon-btn:hover{background:rgba(255,204,0,0.15);border-color:var(--eu-yellow);color:var(--eu-yellow)}
+.icon-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.page{max-width:1200px;margin:0 auto;padding:72px 1.5rem 4rem}
+
+/* ── HERO ── */
+.hero{background:var(--bg);border:1px solid var(--border);border-top:4px solid var(--eu-blue);padding:2rem;margin-bottom:1.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--eu-blue),var(--eu-yellow));opacity:0;transition:opacity var(--transition)}
+.hero:hover::before{opacity:1}
+.hero h1{font-family:'Source Serif 4',serif;font-size:32px;font-weight:700;color:var(--eu-blue);margin-bottom:8px}
+.hero-subtitle{font-size:14px;color:var(--muted);max-width:600px;margin:0 auto 16px}
+.hero-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px;border:2px solid transparent;transition:all var(--transition)}
+.hero-badge.ds{background:var(--ds-purple-light);color:var(--ds-purple);border-color:var(--ds-purple-light)}
+.hero-badge.ds:hover{background:var(--ds-purple);color:white}
+.hero-badge.compte{background:var(--compte-green-light);color:var(--compte-green);border-color:var(--compte-green-light)}
+.hero-badge.compte:hover{background:var(--compte-green);color:white}
+.hero-badge.eu{background:var(--eu-blue-light);color:var(--eu-blue);border-color:var(--eu-blue-light)}
+.hero-badge.eu:hover{background:var(--eu-blue);color:white}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:2rem}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.section-title{font-family:'Source Serif 4',serif;font-size:20px;font-weight:700;color:var(--text)}
+.section-line{flex:1;height:2px;background:linear-gradient(90deg,var(--eu-blue),transparent);border-radius:1px}
+
+/* ── BPMN DIAGRAM ── */
+.bpmn-container{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;overflow-x:auto;margin-bottom:1.5rem;position:relative}
+.bpmn-container:hover{box-shadow:var(--shadow)}
+.bpmn-pool{border:2px solid var(--eu-blue);border-radius:var(--radius);min-width:900px;position:relative;background:var(--bg)}
+.bpmn-pool-header{background:var(--eu-blue);color:white;padding:8px 16px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.bpmn-pool-header svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.bpmn-lanes{display:flex;flex-direction:column}
+.bpmn-lane{border-bottom:1px dashed var(--border);padding:16px;position:relative;min-height:120px}
+.bpmn-lane:last-child{border-bottom:none}
+.bpmn-lane-header{position:absolute;left:0;top:0;bottom:0;width:40px;background:var(--eu-blue-light);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:mixed;font-size:10px;font-weight:700;color:var(--eu-blue);letter-spacing:0.1em;text-transform:uppercase;border-right:1px solid var(--border)}
+.bpmn-lane-content{margin-left:48px;position:relative;min-height:80px}
+
+/* ── BPMN ELEMENTS ── */
+.bpmn-element{position:absolute;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;text-align:center;cursor:pointer;transition:all var(--transition);z-index:2}
+.bpmn-element:hover{transform:scale(1.08);z-index:10}
+.bpmn-element:hover .bpmn-tooltip{opacity:1;visibility:visible;transform:translateY(0)}
+
+/* Start Event */
+.bpmn-event-start{width:36px;height:36px;border-radius:50%;border:3px solid var(--compte-green);background:white;display:flex;align-items:center;justify-content:center}
+.bpmn-event-start::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--compte-green)}
+
+/* End Event */
+.bpmn-event-end{width:36px;height:36px;border-radius:50%;border:3px solid #EF4444;background:white;display:flex;align-items:center;justify-content:center}
+.bpmn-event-end::after{content:'';width:16px;height:16px;border-radius:50%;background:#EF4444}
+
+/* Task */
+.bpmn-task{width:140px;height:50px;border-radius:var(--radius);border:2px solid var(--eu-blue);background:var(--eu-blue-pale);color:var(--eu-blue);display:flex;align-items:center;justify-content:center;padding:4px 8px;line-height:1.3}
+.bpmn-task.ds{border-color:var(--ds-purple);background:var(--ds-purple-pale);color:var(--ds-purple)}
+.bpmn-task.compte{border-color:var(--compte-green);background:var(--compte-green-pale);color:var(--compte-green)}
+.bpmn-task:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+
+/* Gateway */
+.bpmn-gateway{width:40px;height:40px;background:white;border:2px solid var(--eu-blue);transform:rotate(45deg);display:flex;align-items:center;justify-content:center}
+.bpmn-gateway span{transform:rotate(-45deg);font-size:16px;font-weight:700;color:var(--eu-blue)}
+.bpmn-gateway:hover{box-shadow:var(--shadow)}
+
+/* Sub-process */
+.bpmn-subprocess{width:160px;height:60px;border-radius:var(--radius);border:2px solid var(--eu-blue);background:var(--eu-blue-pale);display:flex;align-items:center;justify-content:center;position:relative}
+.bpmn-subprocess::before{content:'';position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:1px dashed var(--eu-blue);border-radius:3px;opacity:0.3}
+.bpmn-subprocess.ds{border-color:var(--ds-purple);background:var(--ds-purple-pale)}
+.bpmn-subprocess.ds::before{border-color:var(--ds-purple)}
+.bpmn-subprocess.compte{border-color:var(--compte-green);background:var(--compte-green-pale)}
+.bpmn-subprocess.compte::before{border-color:var(--compte-green)}
+
+/* Data Object */
+.bpmn-data{width:30px;height:40px;border:2px solid var(--eu-blue);background:white;border-radius:3px 3px 0 0;position:relative;transform:skewX(-10deg)}
+.bpmn-data::after{content:'';position:absolute;bottom:-6px;left:4px;right:4px;height:6px;border:2px solid var(--eu-blue);border-top:none;border-radius:0 0 3px 3px;background:white}
+
+/* Annotation */
+.bpmn-annotation{background:#FEF3C7;border:1px solid #FCD34D;border-radius:3px;padding:6px 10px;font-size:10px;color:#92400E;max-width:180px;line-height:1.4;position:absolute}
+.bpmn-annotation::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:8px solid #FCD34D}
+
+/* Flow Lines */
+.bpmn-flow-line{position:absolute;height:2px;background:var(--border);z-index:1;transition:all var(--transition)}
+.bpmn-flow-line:hover{background:var(--eu-blue)}
+.bpmn-flow-arrow{position:absolute;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--border);right:-6px;top:50%;transform:translateY(-50%)}
+.bpmn-flow-line:hover .bpmn-flow-arrow{border-left-color:var(--eu-blue)}
+.bpmn-flow-dashed{background:repeating-linear-gradient(90deg,var(--border),var(--border) 6px,transparent 6px,transparent 12px)}
+.bpmn-flow-dashed .bpmn-flow-arrow{border-left-color:var(--border)}
+
+/* Tooltip */
+.bpmn-tooltip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--text);color:white;padding:8px 12px;border-radius:var(--radius);font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;transition:all var(--transition);z-index:100;box-shadow:var(--shadow-hover);pointer-events:none}
+.bpmn-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--text)}
+
+/* ── LEGENDS ── */
+.legends-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin-bottom:2rem}
+.legend-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all var(--transition)}
+.legend-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.legend-card.ds{border-top:4px solid var(--ds-purple)}
+.legend-card.compte{border-top:4px solid var(--compte-green)}
+.legend-card.eu{border-top:4px solid var(--eu-blue)}
+.legend-title{font-family:'Source Serif 4',serif;font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.legend-title.ds{color:var(--ds-purple)}
+.legend-title.compte{color:var(--compte-green)}
+.legend-title.eu{color:var(--eu-blue)}
+.legend-table{width:100%;border-collapse:collapse;font-size:12px}
+.legend-table th{text-align:left;padding:6px 8px;background:var(--surface);font-weight:700;color:var(--muted);font-size:10px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:2px solid var(--border)}
+.legend-table td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top}
+.legend-table tr:hover td{background:var(--surface)}
+.legend-symbol{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.legend-symbol svg{width:20px;height:20px}
+.legend-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.legend-example{font-size:10px;color:var(--eu-blue);font-style:italic;margin-top:2px}
+
+/* ── TIMELINE MINI ── */
+.mini-timeline{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;overflow-x:auto;padding:8px 0}
+.mini-step{flex:1;min-width:100px;text-align:center;position:relative;padding-top:20px}
+.mini-step::before{content:'';position:absolute;top:6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--border);border:2px solid var(--border);transform:translateX(-50%);transition:all var(--transition)}
+.mini-step.active::before{background:var(--eu-blue);border-color:var(--eu-blue)}
+.mini-step.ds::before{background:var(--ds-purple);border-color:var(--ds-purple)}
+.mini-step.compte::before{background:var(--compte-green);border-color:var(--compte-green)}
+.mini-step::after{content:'';position:absolute;top:11px;left:calc(50% + 8px);right:calc(-50% + 8px);height:2px;background:var(--border);z-index:-1}
+.mini-step:last-child::after{display:none}
+.mini-year{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.mini-label{font-size:11px;font-weight:600;color:var(--text);line-height:1.3}
+.mini-step:hover .mini-year{color:var(--eu-blue)}
+.mini-step:hover::before{transform:translateX(-50%) scale(1.3)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .bpmn-container{overflow-x:scroll}
+  .legends-grid{grid-template-columns:1fr}
+  .topbar{flex-wrap:wrap;height:auto;padding:8px 1rem}
+  .topbar-name{display:none}
+}
+@media print{
+  .topbar,.icon-btn{display:none!important}
+  body{background:white}
+  .bpmn-container{overflow:visible}
+  .bpmn-pool{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Symbols -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></symbol>
+  <symbol id="icon-graduation" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="icon-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="icon-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="icon-calculator" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="16" y1="18" x2="16" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="8" y1="18" x2="8" y2="18"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+</svg>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="back-btn">
+      <svg width="12" height="12"><use href="#icon-arrow-left"/></svg>
+      Retour au CV
+    </a>
+    <span class="topbar-name">Parcours Professionnel — BPMN</span>
+  </div>
+  <div class="topbar-right">
+    <button class="icon-btn" onclick="toggleDarkMode()" title="Mode sombre">
+      <svg id="themeIcon"><use href="#icon-moon"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Parcours Professionnel</h1>
+  <p class="hero-subtitle">Diagramme BPMN interactif du parcours de Stevenson Laurent — de la comptabilité opérationnelle à la fiscalité stratégique, avec l'empreinte Data & IT</p>
+  <div class="hero-badges">
+    <span class="hero-badge ds">🟣 Data Science & IT</span>
+    <span class="hero-badge compte">🟢 Comptabilité & Finance</span>
+    <span class="hero-badge eu">🔵 Europass</span>
+  </div>
+</div>
+
+<!-- MINI TIMELINE -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Chronologie</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="mini-timeline">
+    <div class="mini-step compte">
+      <div class="mini-year">2008</div>
+      <div class="mini-label">Licence<br>Comptable</div>
+    </div>
+    <div class="mini-step compte">
+      <div class="mini-year">2012</div>
+      <div class="mini-label">Comptable<br>Senior</div>
+    </div>
+    <div class="mini-step ds">
+      <div class="mini-year">2016</div>
+      <div class="mini-label">Pathway<br>BYU</div>
+    </div>
+    <div class="mini-step ds">
+      <div class="mini-year">2021</div>
+      <div class="mini-label">Master<br>STIC</div>
+    </div>
+    <div class="mini-step compte">
+      <div class="mini-year">2022</div>
+      <div class="mini-label">SAP Key<br>User</div>
+    </div>
+    <div class="mini-step compte">
+      <div class="mini-year">2024</div>
+      <div class="mini-label">Comptable<br>Senior</div>
+    </div>
+    <div class="mini-step active">
+      <div class="mini-year">2025</div>
+      <div class="mini-label">Master<br>Fiscal</div>
+    </div>
+  </div>
+</div>
+
+<!-- BPMN DIAGRAM -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Diagramme BPMN du Parcours</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="bpmn-container">
+    <div class="bpmn-pool">
+      <div class="bpmn-pool-header">
+        <svg><use href="#icon-user"/></svg>
+        Pool : Stevenson Laurent — Parcours Professionnel (2008-2027)
+      </div>
+      <div class="bpmn-lanes">
+
+        <!-- LANE 1: Formation & Data -->
+        <div class="bpmn-lane">
+          <div class="bpmn-lane-header">Formation & Data</div>
+          <div class="bpmn-lane-content" style="min-height:140px">
+            <!-- Start -->
+            <div class="bpmn-element bpmn-event-start" style="left:20px;top:50px" title="Début du parcours">
+              <div class="bpmn-tooltip">Début · 2008 · Haïti</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:56px;top:68px;width:60px"></div>
+            <!-- Task: Licence -->
+            <div class="bpmn-element bpmn-task compte" style="left:120px;top:35px">
+              Licence Sciences Comptables
+              <div class="bpmn-tooltip">IHECE · 2008-2012 · Port-au-Prince</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:264px;top:68px;width:50px"></div>
+            <!-- Gateway -->
+            <div class="bpmn-element bpmn-gateway" style="left:320px;top:48px">
+              <span>✕</span>
+              <div class="bpmn-tooltip">Choix de carrière · 2012</div>
+            </div>
+            <!-- Flow down -->
+            <div class="bpmn-flow-line bpmn-flow-dashed" style="left:340px;top:88px;width:2px;height:40px;transform:rotate(90deg);transform-origin:top"></div>
+            <!-- Task: BYU -->
+            <div class="bpmn-element bpmn-task ds" style="left:270px;top:130px">
+              Pathway BYU Idaho
+              <div class="bpmn-tooltip">Certificat online · 2015-2016 · USA</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:414px;top:68px;width:50px"></div>
+            <!-- Task: Master STIC -->
+            <div class="bpmn-element bpmn-task ds" style="left:470px;top:35px">
+              Master STIC (IT)
+              <div class="bpmn-tooltip">ULB · 2021-2023 · Bruxelles</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:614px;top:68px;width:50px"></div>
+            <!-- Task: Bruxelles Formation -->
+            <div class="bpmn-element bpmn-task compte" style="left:670px;top:35px">
+              Comptabilité Expertise
+              <div class="bpmn-tooltip">Bruxelles Formation · SAP Key User · 2022</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:814px;top:68px;width:50px"></div>
+            <!-- Task: Master Fiscal -->
+            <div class="bpmn-element bpmn-task compte" style="left:870px;top:35px">
+              Master Droit Fiscal
+              <div class="bpmn-tooltip">ICHEC · ITAA · 2025-2027</div>
+            </div>
+            <!-- Annotation -->
+            <div class="bpmn-annotation" style="left:480px;top:100px">
+              <strong>Double compétence</strong><br>Finance + IT (MSc STIC)
+            </div>
+          </div>
+        </div>
+
+        <!-- LANE 2: Expérience Comptable -->
+        <div class="bpmn-lane">
+          <div class="bpmn-lane-header">Comptabilité</div>
+          <div class="bpmn-lane-content" style="min-height:180px">
+            <!-- Flow from gateway -->
+            <div class="bpmn-flow-line" style="left:340px;top:20px;width:2px;height:30px;transform:rotate(90deg);transform-origin:top"></div>
+            <!-- Task: Reinbold -->
+            <div class="bpmn-element bpmn-task compte" style="left:320px;top:50px">
+              Comptable Senior
+              <div class="bpmn-tooltip">Reinbold Export Import · 2012-2021 · 9 ans · IFRS</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:464px;top:75px;width:40px"></div>
+            <!-- Task: Kay Pam -->
+            <div class="bpmn-element bpmn-task compte" style="left:510px;top:50px">
+              Consultant Comptable
+              <div class="bpmn-tooltip">Kay Pam & Paulna · 2016-2018 · Analyse chaîne valeur</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:654px;top:75px;width:40px"></div>
+            <!-- Sub-process: SIREAS/FAE/SASB -->
+            <div class="bpmn-element bpmn-subprocess compte" style="left:700px;top:40px">
+              Comptable ASBLs
+              <div class="bpmn-tooltip">SIREAS/FAE/SASB · 2023-2024 · Mi-temps · Subventions</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:864px;top:75px;width:40px"></div>
+            <!-- Task: Mission Locale -->
+            <div class="bpmn-element bpmn-task compte" style="left:910px;top:50px">
+              Comptable Senior
+              <div class="bpmn-tooltip">Mission Locale Molenbeek · 2024-présent · Full cycle</div>
+            </div>
+            <!-- Data Object -->
+            <div class="bpmn-element bpmn-data" style="left:950px;top:120px" title="Comptes annuels">
+              <div class="bpmn-tooltip">Comptes annuels · TVA · IPM</div>
+            </div>
+            <!-- Annotation -->
+            <div class="bpmn-annotation" style="left:330px;top:120px">
+              <strong>13 ans d'expérience</strong><br>comptabilité générale & analytique
+            </div>
+          </div>
+        </div>
+
+        <!-- LANE 3: IT & Data -->
+        <div class="bpmn-lane">
+          <div class="bpmn-lane-header">IT & Data</div>
+          <div class="bpmn-lane-content" style="min-height:140px">
+            <!-- Flow from Master STIC -->
+            <div class="bpmn-flow-line bpmn-flow-dashed" style="left:540px;top:20px;width:2px;height:30px;transform:rotate(90deg);transform-origin:top"></div>
+            <!-- Task: ERP -->
+            <div class="bpmn-element bpmn-task ds" style="left:470px;top:50px">
+              ERP & Systèmes
+              <div class="bpmn-tooltip">SAP · Odoo · Winbooks · Adfinity · Octopus</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:614px;top:75px;width:40px"></div>
+            <!-- Task: FSE Tool -->
+            <div class="bpmn-element bpmn-task ds" style="left:660px;top:50px">
+              Gestion Projet IT
+              <div class="bpmn-tooltip">FSE Time-sheet · Supervision collaborative · 2024</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:804px;top:75px;width:40px"></div>
+            <!-- Task: BPMN/SQL -->
+            <div class="bpmn-element bpmn-task ds" style="left:850px;top:50px">
+              BPMN · SQL · PHP
+              <div class="bpmn-tooltip">Modélisation processus · Bases de données · Développement</div>
+            </div>
+            <!-- Annotation -->
+            <div class="bpmn-annotation" style="left:480px;top:120px">
+              <strong>Bridge Finance-IT</strong><br>Connecte métiers & technique
+            </div>
+          </div>
+        </div>
+
+        <!-- LANE 4: Fiscalité -->
+        <div class="bpmn-lane">
+          <div class="bpmn-lane-header">Fiscalité</div>
+          <div class="bpmn-lane-content" style="min-height:120px">
+            <!-- Flow from Master Fiscal -->
+            <div class="bpmn-flow-line bpmn-flow-dashed" style="left:940px;top:20px;width:2px;height:30px;transform:rotate(90deg);transform-origin:top"></div>
+            <!-- Task: TVA -->
+            <div class="bpmn-element bpmn-task compte" style="left:870px;top:50px">
+              TVA · IPM · ISOC
+              <div class="bpmn-tooltip">Déclarations fiscales · Belgique · 2024-présent</div>
+            </div>
+            <!-- Flow -->
+            <div class="bpmn-flow-line" style="left:1014px;top:75px;width:30px"></div>
+            <!-- End Event -->
+            <div class="bpmn-element bpmn-event-end" style="left:1050px;top:57px" title="Objectif : Fiscaliste ITAA">
+              <div class="bpmn-tooltip">Objectif 2027 · Fiscaliste ITAA · Cabinet/Direction Financière</div>
+            </div>
+            <!-- Annotation -->
+            <div class="bpmn-annotation" style="left:860px;top:110px">
+              <strong>Transition</strong><br>vers fiscalité stratégique
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGENDS -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Légendes BPMN & Métiers</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="legends-grid">
+
+    <!-- Legend 1: BPMN Symbols -->
+    <div class="legend-card eu">
+      <div class="legend-title eu">
+        <svg width="20" height="20"><use href="#icon-file"/></svg>
+        Symboles BPMN Standard (OMG)
+      </div>
+      <table class="legend-table">
+        <tr>
+          <th>Symbole</th>
+          <th>Nom</th>
+          <th>Signification</th>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--compte-green);background:white"></div></div></td>
+          <td><strong>Événement de début</strong></td>
+          <td class="legend-desc">Déclencheur du processus. Ici : début du parcours professionnel en 2008.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:20px;height:20px;border-radius:50%;border:2px solid #EF4444;background:white;display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;border-radius:50%;background:#EF4444"></div></div></div></td>
+          <td><strong>Événement de fin</strong></td>
+          <td class="legend-desc">Terminaison du processus. Ici : objectif fiscaliste ITAA 2027.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:28px;height:16px;border-radius:3px;border:2px solid var(--eu-blue);background:var(--eu-blue-pale)"></div></div></td>
+          <td><strong>Tâche (Task)</strong></td>
+          <td class="legend-desc">Unité de travail. Les tâches colorées indiquent le domaine : <span style="color:var(--compte-green)">🟢 Comptabilité</span> · <span style="color:var(--ds-purple)">🟣 Data/IT</span></td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:20px;height:20px;border:2px solid var(--eu-blue);transform:rotate(45deg);display:flex;align-items:center;justify-content:center"><span style="transform:rotate(-45deg);font-size:10px;font-weight:700;color:var(--eu-blue)">✕</span></div></div></td>
+          <td><strong>Passerelle exclusive</strong></td>
+          <td class="legend-desc">Point de décision. Un seul chemin possible. Ici : choix carrière comptable vs IT.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:24px;height:18px;border:2px solid var(--eu-blue);border-radius:3px;position:relative"><div style="position:absolute;top:2px;left:2px;right:2px;bottom:2px;border:1px dashed var(--eu-blue);border-radius:2px;opacity:0.4"></div></div></div></td>
+          <td><strong>Sous-processus</strong></td>
+          <td class="legend-desc">Processus complexe décomposé. Ici : période multi-employeurs ASBLs.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:14px;height:18px;border:2px solid var(--eu-blue);background:white;border-radius:2px 2px 0 0;position:relative;transform:skewX(-8deg)"><div style="position:absolute;bottom:-4px;left:2px;right:2px;height:4px;border:2px solid var(--eu-blue);border-top:none;border-radius:0 0 2px 2px;background:white"></div></div></div></td>
+          <td><strong>Objet de données</strong></td>
+          <td class="legend-desc">Information produite/consommée. Ici : comptes annuels, déclarations fiscales.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:24px;height:14px;background:#FEF3C7;border:1px solid #FCD34D;border-radius:2px;padding:2px 4px;font-size:8px;color:#92400E">Note</div></div></td>
+          <td><strong>Annotation</strong></td>
+          <td class="legend-desc">Commentaire explicatif sur le processus.</td>
+        </tr>
+        <tr>
+          <td><div class="legend-symbol"><div style="width:30px;height:2px;background:var(--border);position:relative"><div style="position:absolute;right:-4px;top:-3px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--border)"></div></div></div></td>
+          <td><strong>Flux de séquence</strong></td>
+          <td class="legend-desc">Ordre d'exécution. Trait plein = obligatoire, traitillé = optionnel/parallèle.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Legend 2: Data Scientist -->
+    <div class="legend-card ds">
+      <div class="legend-title ds">
+        <svg width="20" height="20"><use href="#icon-database"/></svg>
+        Légende Data Scientist
+      </div>
+      <table class="legend-table">
+        <tr>
+          <th>Compétence</th>
+          <th>Application dans le parcours</th>
+        </tr>
+        <tr>
+          <td><strong>🔍 Data Collection</strong><br><span class="legend-desc">Collecte et structuration des données</span></td>
+          <td class="legend-desc">Saisie et traitement analytique des documents comptables. Classement et archivage structuré chez <em>SIREAS/FAE/SASB</em> et <em>Mission Locale</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>📊 Data Analysis</strong><br><span class="legend-desc">Analyse et interprétation</span></td>
+          <td class="legend-desc">Rapprochements bancaires (CODA), lettrage, analyse des écarts budgétaires. Suivi de trésorerie et reporting aux bailleurs de fonds.</td>
+        </tr>
+        <tr>
+          <td><strong>🤖 Process Automation</strong><br><span class="legend-desc">Automatisation des workflows</span></td>
+          <td class="legend-desc">Gestion de projet IT pour l'outil FSE time-sheet. Modélisation BPMN des processus financiers. Maîtrise des ERP (SAP, Odoo, Winbooks).</td>
+        </tr>
+        <tr>
+          <td><strong>💻 Programming</strong><br><span class="legend-desc">SQL, PHP, scripts</span></td>
+          <td class="legend-desc">Master STIC (ULB) : SQL pour requêtes bases de données, PHP pour outils internes, BPMN pour cartographie des processus.</td>
+        </tr>
+        <tr>
+          <td><strong>📈 Visualization</strong><br><span class="legend-desc">Tableaux de bord, reporting</span></td>
+          <td class="legend-desc">Excel avancé, suivi budgétaire, reporting subventionnaire pour les ASBLs. Présentation des données aux directions et bailleurs de fonds.</td>
+        </tr>
+        <tr>
+          <td><strong>🔐 Data Integrity</strong><br><span class="legend-desc">Qualité et traçabilité</span></td>
+          <td class="legend-desc">Audit des justificatifs, conformité IFRS, preuve blockchain du certificat Bruxelles Formation (Merkle tree, ancre Bitcoin).</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Legend 3: Comptable -->
+    <div class="legend-card compte">
+      <div class="legend-title compte">
+        <svg width="20" height="20"><use href="#icon-calculator"/></svg>
+        Légende Comptable & Finance
+      </div>
+      <table class="legend-table">
+        <tr>
+          <th>Processus</th>
+          <th>Description & Outils</th>
+        </tr>
+        <tr>
+          <td><strong>📝 Saisie comptable</strong><br><span class="legend-desc">Data entry & codification</span></td>
+          <td class="legend-desc">Saisie factures achats/ventes, notes de frais, journaux. Outils : <em>Winbooks, Adfinity, Odoo, SAP</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>🏦 Banque & Rapprochement</strong><br><span class="legend-desc">Reconciliation bancaire</span></td>
+          <td class="legend-desc">Traitement CODA (Belgique), rapprochements bancaires automatiques, lettrage des comptes. Outils : <em>CODA, Excel avancé</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>📋 Déclarations fiscales</strong><br><span class="legend-desc">Tax compliance</span></td>
+          <td class="legend-desc">TVA mensuelle/trimestrielle, IPM (ISOC), IPP (PB), TP (BV). Connaissance des délais et procédures fiscales belges.</td>
+        </tr>
+        <tr>
+          <td><strong>📊 Comptes annuels</strong><br><span class="legend-desc">Annual closing</span></td>
+          <td class="legend-desc">Apurement des comptes, provisions, amortissements, bilan, compte de résultats. Normes <em>IFRS</em> et plan comptable belge.</td>
+        </tr>
+        <tr>
+          <td><strong>💰 Trésorerie</strong><br><span class="legend-desc">Cash management</span></td>
+          <td class="legend-desc">Suivi des encaissements/décaissements, prévisions de trésorerie, gestion des relances clients et fournisseurs.</td>
+        </tr>
+        <tr>
+          <td><strong>🏛️ Subventions & ASBL</strong><br><span class="legend-desc">Non-profit accounting</span></td>
+          <td class="legend-desc">Comptabilité analytique par projet, audit des justificatifs pour bailleurs de fonds (FSE, Europe, Région). Reporting spécifique.</td>
+        </tr>
+        <tr>
+          <td><strong>🎯 Fiscalité avancée</strong><br><span class="legend-desc">Tax strategy</span></td>
+          <td class="legend-desc">Parcours ITAA en cours (Master Droit Fiscal ICHEC). Objectif : optimisation fiscale et pilotage financier stratégique.</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Legend 4: Intersection -->
+    <div class="legend-card eu">
+      <div class="legend-title eu">
+        <svg width="20" height="20"><use href="#icon-chart"/></svg>
+        Intersection Data Science × Comptabilité
+      </div>
+      <table class="legend-table">
+        <tr>
+          <th>Compétence croisée</th>
+          <th>Valeur ajoutée</th>
+        </tr>
+        <tr>
+          <td><strong>📊 Analytics financière</strong></td>
+          <td class="legend-desc">Utilisation de techniques data science pour l'analyse prédictive de la trésorerie, détection d'anomalies comptables, forecasting.</td>
+        </tr>
+        <tr>
+          <td><strong>🔄 Process Mining</strong></td>
+          <td class="legend-desc">Modélisation BPMN des processus comptables pour identifier les goulots d'étranglement et optimiser les workflows (expérience Kay Pam).</td>
+        </tr>
+        <tr>
+          <td><strong>🔐 Blockchain & Audit</strong></td>
+          <td class="legend-desc">Compréhension technique des preuves cryptographiques (Merkle tree, hash SHA256) pour la traçabilité et l'audit digital.</td>
+        </tr>
+        <tr>
+          <td><strong>🤖 RPA & Automation</strong></td>
+          <td class="legend-desc">Automatisation des tâches répétitives (saisie, rapprochements) via scripts et outils IT. Réduction des erreurs humaines.</td>
+        </tr>
+        <tr>
+          <td><strong>🌐 Digital Transformation</strong></td>
+          <td class="legend-desc">Chef de projet outillage IT : connecte les besoins métier comptables avec les solutions techniques (ERP, BPMN, SQL).</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="text-align:center;padding:2rem 0 0;font-size:11px;color:#bbb">
+  <p>© 2026 Stevenson Laurent · Diagramme BPMN conforme OMG BPMN 2.0 · <a href="index.html" style="color:var(--eu-blue)">Retour au CV Europass</a></p>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+// Dark mode
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const icon = document.getElementById('themeIcon');
+  if (document.body.classList.contains('dark-mode')) {
+    icon.innerHTML = '<use href="#icon-sun"/>';
+    localStorage.setItem('darkMode', 'true');
+  } else {
+    icon.innerHTML = '<use href="#icon-moon"/>';
+    localStorage.setItem('darkMode', 'false');
+  }
+}
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark-mode');
+  document.getElementById('themeIcon').innerHTML = '<use href="#icon-sun"/>';
+}
+</script>
+
+</body>
+</html>
