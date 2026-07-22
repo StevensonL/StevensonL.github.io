@@ -330,6 +330,112 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   a.ref-link{color:var(--eu-blue);border-bottom:none}
   .animate-on-scroll{opacity:1;transform:none}
 }
+
+/* ── ACCORDÉON HOVER ── */
+.card.accordion, .flexi-card.accordion {
+  padding: 0 !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card.accordion .accordion-header,
+.flexi-card.accordion .accordion-header {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+.card.accordion .accordion-header:hover,
+.flexi-card.accordion .accordion-header:hover {
+  background: var(--eu-blue-light);
+}
+.card.accordion .accordion-header .section-label,
+.flexi-card.accordion .accordion-header .section-label {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  flex: 1;
+}
+.card.accordion .accordion-chevron,
+.flexi-card.accordion .accordion-chevron {
+  width: 20px;
+  height: 20px;
+  stroke: var(--eu-blue);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.card.accordion.expanded .accordion-chevron,
+.flexi-card.accordion.expanded .accordion-chevron {
+  transform: rotate(180deg);
+}
+.card.accordion .accordion-body,
+.flexi-card.accordion .accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
+  padding: 0 1.5rem;
+}
+.card.accordion.expanded .accordion-body,
+.flexi-card.accordion.expanded .accordion-body {
+  max-height: 5000px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Hover expand pour desktop */
+@media (min-width: 901px) {
+  .card.accordion:hover .accordion-body,
+  .flexi-card.accordion:hover .accordion-body {
+    max-height: 5000px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+  .card.accordion:hover .accordion-chevron,
+  .flexi-card.accordion:hover .accordion-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+/* Mobile: click only */
+@media (max-width: 900px) {
+  .card.accordion .accordion-header,
+  .flexi-card.accordion .accordion-header {
+    padding: 1rem;
+  }
+  .card.accordion .accordion-body,
+  .flexi-card.accordion .accordion-body {
+    padding: 0 1rem;
+  }
+  .card.accordion.expanded .accordion-body,
+  .flexi-card.accordion.expanded .accordion-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+/* Dark mode accordéon */
+body.dark-mode .card.accordion .accordion-header:hover,
+body.dark-mode .flexi-card.accordion .accordion-header:hover {
+  background: #334155;
+}
+
+/* Fix radar chart container */
+#radarChart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+
+/* Fix animation keyframes conflict */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
 </style>
 </head>
 <body>
@@ -482,9 +588,13 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 <div class="main-grid">
 <div>
 <!-- EXPERIENCE -->
-<div class="card animate-on-scroll" id="experience">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="experience">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
   </div>
 
@@ -586,13 +696,18 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       </div>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- FLEXI-JOB -->
 <!-- WIDGET INTERACTIF -->
-<div class="card animate-on-scroll" id="widget-interactif" style="margin-bottom:1.25rem">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="widget-interactif" style="margin-bottom:1.25rem">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Espace interactif" data-en="Interactive Space" data-nl="Interactieve Ruimte">Espace interactif</span>
   </div>
 
@@ -604,12 +719,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:240px">
-        <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto">
-          <g id="grid"></g>
-          <polygon id="dataArea" fill="rgba(0,51,153,0.12)" stroke="#003399" stroke-width="2"/>
-          <g id="dataPoints"></g>
-          <g id="labels"></g>
-        </svg>
+        <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:300px;display:block;margin:0 auto"></svg>
       </div>
       <div style="flex:1;min-width:180px">
         <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Maîtrise ERP</div>
@@ -671,6 +781,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <button onclick="sendChat()" style="padding:8px 14px;background:var(--eu-blue);color:#fff;border:none;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit">Envoyer</button>
     </div>
   </div>
+  </div>
 </div>
 
 <style>
@@ -689,132 +800,283 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 .erp-track{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
 .erp-fill{height:100%;background:linear-gradient(90deg,var(--eu-blue),var(--eu-blue-mid));border-radius:100px;transition:width 1s ease}
 .erp-pct{font-size:10px;font-weight:700;color:var(--eu-blue);min-width:28px;text-align:right}
+
+/* ── ACCORDÉON HOVER ── */
+.card.accordion, .flexi-card.accordion {
+  padding: 0 !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card.accordion .accordion-header,
+.flexi-card.accordion .accordion-header {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+.card.accordion .accordion-header:hover,
+.flexi-card.accordion .accordion-header:hover {
+  background: var(--eu-blue-light);
+}
+.card.accordion .accordion-header .section-label,
+.flexi-card.accordion .accordion-header .section-label {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  flex: 1;
+}
+.card.accordion .accordion-chevron,
+.flexi-card.accordion .accordion-chevron {
+  width: 20px;
+  height: 20px;
+  stroke: var(--eu-blue);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.card.accordion.expanded .accordion-chevron,
+.flexi-card.accordion.expanded .accordion-chevron {
+  transform: rotate(180deg);
+}
+.card.accordion .accordion-body,
+.flexi-card.accordion .accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
+  padding: 0 1.5rem;
+}
+.card.accordion.expanded .accordion-body,
+.flexi-card.accordion.expanded .accordion-body {
+  max-height: 5000px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Hover expand pour desktop */
+@media (min-width: 901px) {
+  .card.accordion:hover .accordion-body,
+  .flexi-card.accordion:hover .accordion-body {
+    max-height: 5000px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+  .card.accordion:hover .accordion-chevron,
+  .flexi-card.accordion:hover .accordion-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+/* Mobile: click only */
+@media (max-width: 900px) {
+  .card.accordion .accordion-header,
+  .flexi-card.accordion .accordion-header {
+    padding: 1rem;
+  }
+  .card.accordion .accordion-body,
+  .flexi-card.accordion .accordion-body {
+    padding: 0 1rem;
+  }
+  .card.accordion.expanded .accordion-body,
+  .flexi-card.accordion.expanded .accordion-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+/* Dark mode accordéon */
+body.dark-mode .card.accordion .accordion-header:hover,
+body.dark-mode .flexi-card.accordion .accordion-header:hover {
+  background: #334155;
+}
+
+/* Fix radar chart container */
+#radarChart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+
+/* Fix animation keyframes conflict */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
 </style>
 
 <script>
 // ===== RADAR CHART =====
 (function(){
-const skills = [
-  {name:'Comptabilité', value:95, color:'#003399'},
-  {name:'Fiscalité', value:75, color:'#059669'},
-  {name:'ERP/Systèmes', value:90, color:'#7C3AED'},
-  {name:'IT/Dév.', value:70, color:'#FF6B35'},
-  {name:'Gestion Proj.', value:80, color:'#0891B2'},
-  {name:'Langues', value:85, color:'#DC2626'}
-];
-const erps = [
-  {name:'Winbooks', value:95},
-  {name:'SAP', value:85},
-  {name:'Odoo', value:90},
-  {name:'Adfinity', value:88},
-  {name:'Octopus', value:80},
-  {name:'Excel', value:92}
-];
+  'use strict';
 
-// Draw radar chart
-const svg = document.getElementById('radarChart');
-if(!svg){console.error('radarChart SVG not found'); return;}
+  const skills = [
+    {name:'Comptabilité', value:95, color:'#003399', desc:'13 ans — cycle complet, IFRS, comptes annuels.'},
+    {name:'Fiscalité', value:75, color:'#059669', desc:'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.'},
+    {name:'ERP/Systèmes', value:90, color:'#7C3AED', desc:'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.'},
+    {name:'IT/Dév.', value:70, color:'#FF6B35', desc:'Master STIC ULB — SQL, PHP, BPMN, projet IT.'},
+    {name:'Gestion Proj.', value:80, color:'#0891B2', desc:'Supervision FSE, animation Toastmasters.'},
+    {name:'Langues', value:85, color:'#DC2626', desc:'FR natif, EN courant (B2-C1), NL notions, Créole natif.'}
+  ];
 
-const cx=130, cy=110, r=85;
-const n = skills.length;
-const grid = document.getElementById('grid');
-const dataArea = document.getElementById('dataArea');
-const points = document.getElementById('dataPoints');
-const labels = document.getElementById('labels');
+  const erps = [
+    {name:'Winbooks', value:95},
+    {name:'SAP', value:85},
+    {name:'Odoo', value:90},
+    {name:'Adfinity', value:88},
+    {name:'Octopus', value:80},
+    {name:'Excel', value:92}
+  ];
 
-if(!grid || !dataArea || !points || !labels){console.error('Radar elements not found'); return;}
+  // Attendre que le DOM soit prêt
+  function initRadar() {
+    const svg = document.getElementById('radarChart');
+    if(!svg) { console.error('radarChart SVG not found'); return; }
 
-// Draw grid circles
-for(let level=1; level<=5; level++){
-  const pts=[];
-  for(let i=0; i<n; i++){
-    const angle=(Math.PI*2*i/n)-Math.PI/2;
-    const rad=(r*level/5);
-    pts.push((cx+rad*Math.cos(angle))+','+(cy+rad*Math.sin(angle)));
+    // Vider le SVG
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    const cx = 130, cy = 110, r = 85;
+    const n = skills.length;
+
+    // Créer les groupes
+    const grid = document.createElementNS('http://www.w3.org/2000/svg','g');
+    const dataArea = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    const points = document.createElementNS('http://www.w3.org/2000/svg','g');
+    const labels = document.createElementNS('http://www.w3.org/2000/svg','g');
+
+    svg.appendChild(grid);
+    svg.appendChild(dataArea);
+    svg.appendChild(points);
+    svg.appendChild(labels);
+
+    // Grille circulaire
+    for(let level=1; level<=5; level++){
+      const pts = [];
+      for(let i=0; i<n; i++){
+        const angle = (Math.PI*2*i/n) - Math.PI/2;
+        const rad = r * level / 5;
+        pts.push((cx + rad * Math.cos(angle)) + ',' + (cy + rad * Math.sin(angle)));
+      }
+      const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+      poly.setAttribute('points', pts.join(' '));
+      poly.setAttribute('fill', 'none');
+      poly.setAttribute('stroke', level===5 ? '#D4D8DF' : '#E5E7EB');
+      poly.setAttribute('stroke-width', '1');
+      grid.appendChild(poly);
+    }
+
+    // Axes
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI*2*i/n) - Math.PI/2;
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+      line.setAttribute('x2', cx + r * Math.cos(angle)); 
+      line.setAttribute('y2', cy + r * Math.sin(angle));
+      line.setAttribute('stroke', '#E5E7EB');
+      line.setAttribute('stroke-width', '1');
+      grid.appendChild(line);
+    }
+
+    // Données
+    const dataPts = [];
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI*2*i/n) - Math.PI/2;
+      const rad = (skills[i].value / 100) * r;
+      const x = cx + rad * Math.cos(angle);
+      const y = cy + rad * Math.sin(angle);
+      dataPts.push(x + ',' + y);
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', x); 
+      circle.setAttribute('cy', y);
+      circle.setAttribute('r', '6');
+      circle.setAttribute('fill', skills[i].color);
+      circle.setAttribute('stroke', 'white');
+      circle.setAttribute('stroke-width', '2');
+      circle.style.cursor = 'pointer';
+      circle.style.transition = 'r 0.2s ease';
+
+      // Events
+      circle.addEventListener('mouseenter', function() {
+        this.setAttribute('r', '9');
+        const s = skills[i];
+        const insight = document.getElementById('radarInsight');
+        if(insight) {
+          insight.innerHTML = '<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+s.desc+'</span>';
+        }
+      });
+
+      circle.addEventListener('mouseleave', function() {
+        this.setAttribute('r', '6');
+        const insight = document.getElementById('radarInsight');
+        if(insight) {
+          insight.innerHTML = 'Survolez le graphique pour les détails.';
+        }
+      });
+
+      points.appendChild(circle);
+    }
+
+    dataArea.setAttribute('points', dataPts.join(' '));
+    dataArea.setAttribute('fill', 'rgba(0,51,153,0.15)');
+    dataArea.setAttribute('stroke', '#003399');
+    dataArea.setAttribute('stroke-width', '2.5');
+    dataArea.setAttribute('stroke-linejoin', 'round');
+
+    // Labels
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI*2*i/n) - Math.PI/2;
+      const lx = cx + (r + 22) * Math.cos(angle);
+      const ly = cy + (r + 22) * Math.sin(angle);
+      const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x', lx); 
+      text.setAttribute('y', ly);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('font-size', '9');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('fill', '#5C6470');
+      text.textContent = skills[i].name;
+      labels.appendChild(text);
+    }
+
+    // Animation d'entrée
+    dataArea.style.opacity = '0';
+    setTimeout(() => { dataArea.style.transition = 'opacity 1s ease'; dataArea.style.opacity = '1'; }, 100);
   }
-  const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
-  poly.setAttribute('points',pts.join(' '));
-  poly.setAttribute('fill','none');
-  poly.setAttribute('stroke',level===5?'#D4D8DF':'#E5E7EB');
-  poly.setAttribute('stroke-width','1');
-  grid.appendChild(poly);
-}
 
-// Draw axes
-for(let i=0; i<n; i++){
-  const angle=(Math.PI*2*i/n)-Math.PI/2;
-  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-  line.setAttribute('x1',cx); line.setAttribute('y1',cy);
-  line.setAttribute('x2',cx+r*Math.cos(angle)); line.setAttribute('y2',cy+r*Math.sin(angle));
-  line.setAttribute('stroke','#E5E7EB');
-  line.setAttribute('stroke-width','1');
-  grid.appendChild(line);
-}
+  // ERP Bars
+  function initERPBars() {
+    const erpContainer = document.getElementById('erpBars');
+    if(!erpContainer) return;
+    erpContainer.innerHTML = '';
 
-// Draw data polygon
-const dataPts=[];
-for(let i=0; i<n; i++){
-  const angle=(Math.PI*2*i/n)-Math.PI/2;
-  const rad=(skills[i].value/100)*r;
-  const x=cx+rad*Math.cos(angle);
-  const y=cy+rad*Math.sin(angle);
-  dataPts.push(x+','+y);
+    erps.forEach(function(erp, i){
+      const div = document.createElement('div');
+      div.className = 'erp-bar';
+      div.innerHTML = '<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
+      erpContainer.appendChild(div);
+      setTimeout(function(){
+        const fill = div.querySelector('.erp-fill');
+        if(fill) fill.style.width = erp.value + '%';
+      }, 300 + i * 100);
+    });
+  }
 
-  const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  circle.setAttribute('cx',x); circle.setAttribute('cy',y);
-  circle.setAttribute('r','5');
-  circle.setAttribute('fill',skills[i].color);
-  circle.setAttribute('stroke','white');
-  circle.setAttribute('stroke-width','2');
-  circle.style.cursor='pointer';
-  circle.addEventListener('mouseenter',(function(idx){return function(){
-    const s=skills[idx];
-    const texts={
-      'Comptabilité':'13 ans — cycle complet, IFRS, comptes annuels.',
-      'Fiscalité':'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.',
-      'ERP/Systèmes':'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.',
-      'IT/Dév.':'Master STIC ULB — SQL, PHP, BPMN, projet IT.',
-      'Gestion Proj.':'Supervision FSE, animation Toastmasters.',
-      'Langues':'FR natif, EN courant (B2-C1), NL notions, Créole natif.'
-    };
-    const insight=document.getElementById('radarInsight');
-    if(insight) insight.innerHTML='<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+texts[s.name]+'</span>';
-  };})(i));
-  circle.addEventListener('mouseleave',function(){
-    const insight=document.getElementById('radarInsight');
-    if(insight) insight.innerHTML='Survolez le graphique pour les détails.';
-  });
-  points.appendChild(circle);
-}
-dataArea.setAttribute('points', dataPts.join(' '));
-
-// Labels
-for(let i=0; i<n; i++){
-  const angle=(Math.PI*2*i/n)-Math.PI/2;
-  const lx=cx+(r+20)*Math.cos(angle);
-  const ly=cy+(r+20)*Math.sin(angle);
-  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
-  text.setAttribute('x',lx); text.setAttribute('y',ly);
-  text.setAttribute('text-anchor','middle');
-  text.setAttribute('dominant-baseline','middle');
-  text.setAttribute('font-size','9');
-  text.setAttribute('font-weight','600');
-  text.setAttribute('fill','#5C6470');
-  text.textContent=skills[i].name;
-  labels.appendChild(text);
-}
-
-// ERP Bars
-const erpContainer=document.getElementById('erpBars');
-if(erpContainer){
-  erps.forEach(function(erp,i){
-    const div=document.createElement('div');
-    div.className='erp-bar';
-    div.innerHTML='<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
-    erpContainer.appendChild(div);
-    setTimeout(function(){div.querySelector('.erp-fill').style.width=erp.value+'%';},200+i*80);
-  });
-}
+  // Initialiser quand le DOM est prêt
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initRadar();
+      initERPBars();
+    });
+  } else {
+    initRadar();
+    initERPBars();
+  }
 })();
 // ===== BADGES =====
 (function(){
@@ -893,9 +1155,13 @@ function addChat(html,sender){
 
 
 <!-- ANIMATION IT + DATA INTEGRITY + ITAA -->
-<div class="card animate-on-scroll" id="anim-integrity" style="margin-bottom:1.25rem;overflow:hidden">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="anim-integrity" style="margin-bottom:1.25rem;overflow:hidden">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Chaîne de confiance IT & ITAA" data-en="IT Trust Chain & ITAA" data-nl="IT Vertrouwensketen & ITAA">Chaîne de confiance IT & ITAA</span>
   </div>
 
@@ -1009,6 +1275,7 @@ function addChat(html,sender){
       <div style="font-size:10px;color:var(--muted);margin-top:2px">SHA256 · Woleet · Chainpoint</div>
     </div>
   </div>
+  </div>
 </div>
 
 <style>
@@ -1017,6 +1284,112 @@ function addChat(html,sender){
 @keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── ACCORDÉON HOVER ── */
+.card.accordion, .flexi-card.accordion {
+  padding: 0 !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card.accordion .accordion-header,
+.flexi-card.accordion .accordion-header {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+.card.accordion .accordion-header:hover,
+.flexi-card.accordion .accordion-header:hover {
+  background: var(--eu-blue-light);
+}
+.card.accordion .accordion-header .section-label,
+.flexi-card.accordion .accordion-header .section-label {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  flex: 1;
+}
+.card.accordion .accordion-chevron,
+.flexi-card.accordion .accordion-chevron {
+  width: 20px;
+  height: 20px;
+  stroke: var(--eu-blue);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.card.accordion.expanded .accordion-chevron,
+.flexi-card.accordion.expanded .accordion-chevron {
+  transform: rotate(180deg);
+}
+.card.accordion .accordion-body,
+.flexi-card.accordion .accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
+  padding: 0 1.5rem;
+}
+.card.accordion.expanded .accordion-body,
+.flexi-card.accordion.expanded .accordion-body {
+  max-height: 5000px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Hover expand pour desktop */
+@media (min-width: 901px) {
+  .card.accordion:hover .accordion-body,
+  .flexi-card.accordion:hover .accordion-body {
+    max-height: 5000px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+  .card.accordion:hover .accordion-chevron,
+  .flexi-card.accordion:hover .accordion-chevron {
+    transform: rotate(180deg);
+  }
+}
+
+/* Mobile: click only */
+@media (max-width: 900px) {
+  .card.accordion .accordion-header,
+  .flexi-card.accordion .accordion-header {
+    padding: 1rem;
+  }
+  .card.accordion .accordion-body,
+  .flexi-card.accordion .accordion-body {
+    padding: 0 1rem;
+  }
+  .card.accordion.expanded .accordion-body,
+  .flexi-card.accordion.expanded .accordion-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+/* Dark mode accordéon */
+body.dark-mode .card.accordion .accordion-header:hover,
+body.dark-mode .flexi-card.accordion .accordion-header:hover {
+  background: #334155;
+}
+
+/* Fix radar chart container */
+#radarChart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+
+/* Fix animation keyframes conflict */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
 </style>
 
 <script>
@@ -1073,8 +1446,16 @@ function closeNodeDetail(){
 </script>
 
 
-<div class="flexi-card animate-on-scroll">
-  <div class="flexi-header">
+<div class="flexi-card animate-on-scroll accordion">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+      <span>Section</span>
+    </div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
+    <div class="flexi-header">
     <div class="flexi-badge-eligible">
       <div class="flexi-dot"></div>
       <span class="t" data-fr="Disponible en Flexi-Job" data-en="Available for Flexi-Job" data-nl="Beschikbaar Flexi-Job">Disponible en Flexi-Job</span>
@@ -1118,12 +1499,17 @@ function closeNodeDetail(){
     <span class="flexi-avantage-tag">✅ Horaires flexibles</span>
     <span class="flexi-avantage-tag">✅ Complément de revenus</span>
   </div>
+  </div>
 </div>
 
 <!-- FORMATION CONTINUE -->
-<div class="card animate-on-scroll">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Formation continue & activités" data-en="Continuing Education & Activities" data-nl="Permanente Vorming & Activiteiten">Formation continue & activités</span>
   </div>
 
@@ -1151,6 +1537,7 @@ function closeNodeDetail(){
     <span class="cont-year">2015–2016 · <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">BYU Idaho (USA)<svg class="ext-icon"><use href="#icon-ext"/></svg></a></span>
     <span>Online Certificate — Pathway Program</span>
   </div>
+  </div>
 </div>
 
 </div><!-- /main col -->
@@ -1158,9 +1545,13 @@ function closeNodeDetail(){
 <!-- SIDEBAR -->
 <div>
 <!-- FORMATION -->
-<div class="card animate-on-scroll" id="formation">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="formation">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
   </div>
 
@@ -1311,12 +1702,17 @@ function closeNodeDetail(){
       </a>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- LANGUES -->
-<div class="card animate-on-scroll" id="langues">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="langues">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
   <div class="lang-item">
@@ -1351,12 +1747,17 @@ function closeNodeDetail(){
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
+  </div>
 </div>
 
 <!-- COMPETENCES -->
-<div class="card animate-on-scroll" id="competences">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="competences">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
   </div>
   <div class="skill-group">
@@ -1410,12 +1811,17 @@ function closeNodeDetail(){
       <span class="skill-tag t" data-fr="Esprit d'analyse" data-en="Analytical thinking" data-nl="Analytisch denken">Esprit d'analyse</span>
     </div>
   </div>
+  </div>
 </div>
 
 <!-- CERTIFICATIONS -->
-<div class="card animate-on-scroll" id="certifications">
-  <div class="section-label">
+<div class="card animate-on-scroll accordion" id="certifications">
+  <div class="accordion-header" onclick="toggleAccordion(this)">
+    <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
+    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body">
     <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
   <div class="cert-item">
@@ -1440,6 +1846,7 @@ function closeNodeDetail(){
       <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">Pathway Program — BYU Idaho (USA)<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
     </span>
     <span class="cert-year">2016</span>
+  </div>
   </div>
 </div>
 
@@ -1508,6 +1915,33 @@ if (localStorage.getItem('darkMode') === 'true') {
   document.body.classList.add('dark-mode');
   document.getElementById('themeIcon').innerHTML = '<use href="#icon-sun"/>';
 }
+
+
+// ── ACCORDÉON ──
+function toggleAccordion(header) {
+  const card = header.closest('.accordion');
+  if (!card) return;
+
+  // Sur mobile, on toggle. Sur desktop, le hover gère tout.
+  if (window.innerWidth <= 900) {
+    card.classList.toggle('expanded');
+  }
+}
+
+// Sur desktop, les accordéons sont dépliés par défaut au chargement
+// pour que le contenu soit visible, mais se replient au hover
+function initAccordions() {
+  const accordions = document.querySelectorAll('.card.accordion, .flexi-card.accordion');
+  accordions.forEach(function(acc) {
+    // Sur desktop (>900px), on laisse le hover gérer
+    // Sur mobile, on commence replié
+    if (window.innerWidth <= 900) {
+      acc.classList.remove('expanded');
+    }
+  });
+}
+
+window.addEventListener('resize', initAccordions);
 
 // ── PROFILE SWITCHER ──
 let currentProfile = 'comptable';
