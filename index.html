@@ -323,19 +323,27 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .timeline-line{left:5px}
 }
 
-/* ════════════════════════════════════════
-   ACCORDÉONS À COMMANDE (CLIC)
-   Sidebar fixe
-   ════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   CV EUROPASS — DISPOSITION 2 COLONNES
+   Accordéons à commande (clic)
+   ═══════════════════════════════════════════════════════ */
 
-/* ── SIDEBAR FIXE ── */
-.sidebar-fixed {
+/* ── MAIN GRID EUROPASS ── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Sidebar sticky */
+.sidebar-col {
   position: sticky;
-  top: 60px;
+  top: 64px;
   align-self: start;
 }
 
-/* ── ACCORDÉON COMMANDÉ ── */
+/* ── ACCORDÉONS À COMMANDE ── */
 .accordion-cmd {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -344,7 +352,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow);
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .accordion-cmd::before {
   content: '';
@@ -353,7 +361,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
   opacity: 0;
   transition: opacity 0.3s;
-  z-index: 5;
 }
 .accordion-cmd:hover::before,
 .accordion-cmd.open::before {
@@ -369,7 +376,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   border-color: var(--eu-blue);
 }
 
-/* Header cliquable */
+/* Header */
 .accordion-header-cmd {
   display: flex;
   align-items: center;
@@ -463,7 +470,7 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   border-radius: 2px;
 }
 
-/* Masquer le section-label dans le body (déjà dans header) */
+/* Masquer le section-label dans le body */
 .accordion-body-cmd > .section-label:first-child {
   display: none;
 }
@@ -690,6 +697,16 @@ body.dark-mode .blockchain-proof:hover {
 }
 
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-col {
+    position: static;
+  }
+}
 
 @media print{
   .topbar,.scroll-progress,.scroll-top,.icon-btn{display:none!important}
@@ -1236,15 +1253,15 @@ body.dark-mode .blockchain-proof:hover {
   </div>
 </div>
 </div><!-- /main col -->
-<div class="sidebar-fixed">
-<!-- FORMATION -->
-<div class="card animate-on-scroll" id="formation">
-  <div class="section-label">
+<div class="sidebar-col">
+<div class="accordion-cmd" id="formation">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-    <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
+    <div class="cmd-title">Formation</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-
-  <div class="edu-item">
+  <div class="accordion-body-cmd">
+<div class="edu-item">
     <div class="edu-school">
       <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
         ICHEC Brussels Management School
@@ -1391,15 +1408,16 @@ body.dark-mode .blockchain-proof:hover {
       </a>
     </div>
   </div>
-</div>
-
-<!-- LANGUES -->
-<div class="card animate-on-scroll" id="langues">
-  <div class="section-label">
-    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
-  <div class="lang-item">
+</div>
+<div class="accordion-cmd" id="langues">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+    <div class="cmd-title">Langues</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body-cmd">
+<div class="lang-item">
     <div class="lang-row">
       <span class="lang-name">Français</span>
       <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
@@ -1431,15 +1449,16 @@ body.dark-mode .blockchain-proof:hover {
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
-</div>
-
-<!-- COMPETENCES -->
-<div class="card animate-on-scroll" id="competences">
-  <div class="section-label">
-    <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
   </div>
-  <div class="skill-group">
+</div>
+<div class="accordion-cmd" id="competences">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    <div class="cmd-title">Compétences</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body-cmd">
+<div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
       <span class="skill-tag t" data-fr="Comptabilité générale" data-en="General accounting" data-nl="Algemene boekhouding">Comptabilité générale</span>
@@ -1490,15 +1509,16 @@ body.dark-mode .blockchain-proof:hover {
       <span class="skill-tag t" data-fr="Esprit d'analyse" data-en="Analytical thinking" data-nl="Analytisch denken">Esprit d'analyse</span>
     </div>
   </div>
-</div>
-
-<!-- CERTIFICATIONS -->
-<div class="card animate-on-scroll" id="certifications">
-  <div class="section-label">
-    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-    <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
-  <div class="cert-item">
+</div>
+<div class="accordion-cmd" id="certifications">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
+    <div class="cmd-title">Certifications</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="accordion-body-cmd">
+<div class="cert-item">
     <span class="cert-name">
       <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
       &nbsp;—&nbsp;
@@ -1520,6 +1540,7 @@ body.dark-mode .blockchain-proof:hover {
       <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">Pathway Program — BYU Idaho (USA)<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
     </span>
     <span class="cert-year">2016</span>
+  </div>
   </div>
 </div>
 </div><!-- /sidebar -->
