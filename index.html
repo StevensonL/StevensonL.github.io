@@ -324,19 +324,19 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 }
 
 /* ════════════════════════════════════════
-   ACCORDÉONS VERTICAUX — DESIGN HARMONISÉ
+   ACCORDÉONS À COMMANDE (CLIC)
+   Sidebar fixe
    ════════════════════════════════════════ */
 
-/* Wrapper principal */
-.accordion-wrapper-v {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
+/* ── SIDEBAR FIXE ── */
+.sidebar-fixed {
+  position: sticky;
+  top: 60px;
+  align-self: start;
 }
 
-/* Panneau individuel */
-.accordion-panel-v {
+/* ── ACCORDÉON COMMANDÉ ── */
+.accordion-cmd {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -344,47 +344,51 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow);
   position: relative;
+  margin-bottom: 10px;
 }
-.accordion-panel-v::before {
+.accordion-cmd::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
   opacity: 0;
   transition: opacity 0.3s;
+  z-index: 5;
 }
-.accordion-panel-v:hover::before,
-.accordion-panel-v.expanded::before {
+.accordion-cmd:hover::before,
+.accordion-cmd.open::before {
   opacity: 1;
 }
-.accordion-panel-v:hover {
+.accordion-cmd:hover {
   box-shadow: var(--shadow-hover);
   border-color: var(--eu-blue-light);
   transform: translateY(-1px);
 }
+.accordion-cmd.open {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--eu-blue);
+}
 
-/* Header horizontal */
-.accordion-header-h {
+/* Header cliquable */
+.accordion-header-cmd {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
   cursor: pointer;
   background: linear-gradient(135deg, var(--eu-blue-pale) 0%, var(--eu-blue-light) 100%);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
   gap: 12px;
+  user-select: none;
 }
-.accordion-panel-v:hover .accordion-header-h,
-.accordion-panel-v.expanded .accordion-header-h {
+.accordion-cmd.open .accordion-header-cmd {
   background: linear-gradient(135deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
   border-bottom-color: var(--eu-blue);
 }
-
-/* Icône dans le header */
-.accordion-header-h .sl-icon {
+.accordion-header-cmd .sl-icon {
   width: 32px; height: 32px;
   background: var(--eu-blue);
   border-radius: 6px;
@@ -394,11 +398,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   flex-shrink: 0;
   transition: all 0.3s;
 }
-.accordion-panel-v:hover .accordion-header-h .sl-icon,
-.accordion-panel-v.expanded .accordion-header-h .sl-icon {
+.accordion-cmd.open .accordion-header-cmd .sl-icon {
   background: var(--eu-yellow);
 }
-.accordion-header-h .sl-icon svg {
+.accordion-header-cmd .sl-icon svg {
   width: 16px; height: 16px;
   stroke: white; fill: none;
   stroke-width: 2.5;
@@ -406,13 +409,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   stroke-linejoin: round;
   transition: stroke 0.3s;
 }
-.accordion-panel-v:hover .accordion-header-h .sl-icon svg,
-.accordion-panel-v.expanded .accordion-header-h .sl-icon svg {
+.accordion-cmd.open .accordion-header-cmd .sl-icon svg {
   stroke: var(--eu-blue);
 }
-
-/* Titre */
-.accordion-header-h .h-title {
+.accordion-header-cmd .cmd-title {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -421,13 +421,10 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   flex: 1;
   transition: color 0.3s;
 }
-.accordion-panel-v:hover .accordion-header-h .h-title,
-.accordion-panel-v.expanded .accordion-header-h .h-title {
+.accordion-cmd.open .accordion-header-cmd .cmd-title {
   color: white;
 }
-
-/* Chevron */
-.accordion-header-h .h-chevron {
+.accordion-header-cmd .cmd-chevron {
   width: 20px; height: 20px;
   stroke: var(--eu-blue);
   fill: none;
@@ -437,136 +434,89 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
 }
-.accordion-panel-v:hover .accordion-header-h .h-chevron,
-.accordion-panel-v.expanded .accordion-header-h .h-chevron {
+.accordion-cmd.open .accordion-header-cmd .cmd-chevron {
   stroke: white;
   transform: rotate(180deg);
 }
 
 /* Body */
-.accordion-body-v {
+.accordion-body-cmd {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.35s ease 0.1s,
+              opacity 0.3s ease,
               padding 0.3s ease;
   padding: 0 18px;
   background: var(--bg);
 }
-.accordion-panel-v:hover .accordion-body-v,
-.accordion-panel-v.expanded .accordion-body-v {
+.accordion-cmd.open .accordion-body-cmd {
   max-height: 5000px;
   opacity: 1;
   padding: 18px;
 }
-.accordion-body-v::-webkit-scrollbar {
+.accordion-body-cmd::-webkit-scrollbar {
   width: 4px;
 }
-.accordion-body-v::-webkit-scrollbar-thumb {
+.accordion-body-cmd::-webkit-scrollbar-thumb {
   background: var(--eu-blue-light);
   border-radius: 2px;
 }
 
-/* Section label dans le body (masqué car déjà dans header) */
-.accordion-body-v .section-label {
+/* Masquer le section-label dans le body (déjà dans header) */
+.accordion-body-cmd > .section-label:first-child {
   display: none;
 }
 
-/* ── HARMONISATION DES COULEURS ── */
-
-/* Timeline dots harmonisés */
-.timeline-dot {
-  background: var(--bg);
-  border-color: var(--eu-blue-light);
-  transition: all 0.3s;
-}
+/* ── HARMONISATION COULEURS ── */
+.timeline-dot { transition: all 0.3s; }
 .timeline-item:hover .timeline-dot {
   border-color: var(--eu-blue);
   background: var(--eu-blue);
-  box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.15);
+  box-shadow: 0 0 0 4px rgba(0,51,153,0.15);
 }
-.timeline-dot svg {
-  stroke: var(--eu-blue);
-  transition: stroke 0.3s;
-}
-.timeline-item:hover .timeline-dot svg {
-  stroke: white;
-}
+.timeline-item:hover .timeline-dot svg { stroke: white; }
 
-/* Job dates harmonisés */
-.job-date {
-  background: var(--eu-blue-light);
-  color: var(--eu-blue);
-  transition: all 0.3s;
-}
+.job-date { transition: all 0.3s; }
 .job:hover .job-date {
   background: var(--eu-blue);
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 51, 153, 0.25);
+  box-shadow: 0 2px 8px rgba(0,51,153,0.25);
 }
 
-/* Skill tags harmonisés */
 .skill-tag {
-  background: var(--eu-blue-pale);
-  color: var(--eu-blue);
-  border-color: var(--eu-blue-light);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .skill-tag:hover {
   background: var(--eu-blue);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.2);
+  box-shadow: 0 4px 12px rgba(0,51,153,0.2);
 }
 
-/* Lang dots harmonisés */
 .lang-dot.filled {
-  background: var(--eu-blue);
-  box-shadow: 0 0 0 2px rgba(0, 51, 153, 0.1);
+  box-shadow: 0 0 0 2px rgba(0,51,153,0.1);
+  transition: all 0.3s;
 }
 .lang-item:hover .lang-dot.filled {
   transform: scale(1.2);
-  box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.15);
+  box-shadow: 0 0 0 4px rgba(0,51,153,0.15);
 }
 
-/* Cert items harmonisés */
-.cert-year {
-  background: var(--eu-blue-light);
-  color: var(--eu-blue);
-  transition: all 0.3s;
-}
+.cert-year { transition: all 0.3s; }
 .cert-item:hover .cert-year {
   background: var(--eu-blue);
   color: white;
 }
 
-/* Edu items harmonisés */
-.edu-date {
-  color: var(--eu-blue);
-  transition: color 0.3s;
-}
-.edu-item:hover .edu-date {
-  color: var(--eu-blue-mid);
-}
-
-/* Edu badges harmonisés */
-.edu-badge {
-  background: var(--eu-blue-pale);
-  border-color: var(--eu-blue-light);
-  color: var(--eu-blue);
-  transition: all 0.25s;
-}
+.edu-badge { transition: all 0.25s; }
 .edu-badge:hover {
   background: var(--eu-blue);
   color: white;
   transform: translateY(-1px);
 }
 
-/* Contact chips harmonisés */
 .contact-chip {
-  background: var(--surface);
-  border-color: var(--border);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contact-chip:hover {
@@ -574,41 +524,27 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   color: var(--eu-blue);
   background: var(--eu-blue-light);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.1);
+  box-shadow: 0 4px 12px rgba(0,51,153,0.1);
 }
 
-/* Stat cards harmonisés */
 .stat-card {
-  background: var(--surface);
-  border-color: var(--border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .stat-card:hover {
   border-color: var(--eu-blue);
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.12);
+  box-shadow: 0 8px 24px rgba(0,51,153,0.12);
 }
-.stat-number {
-  transition: color 0.3s;
-}
-.stat-card:hover .stat-number {
-  color: var(--eu-blue-mid);
-}
+.stat-card:hover .stat-number { color: var(--eu-blue-mid); }
 
-/* Hero harmonisé */
 .hero {
-  border-top-color: var(--eu-blue);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hero:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
 }
-.hero::before {
-  background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
-}
 
-/* Cards harmonisées */
 .card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -617,13 +553,8 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   border-color: var(--eu-blue-light);
   transform: translateY(-2px);
 }
-.card::before {
-  background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
-}
 
-/* Flexi card harmonisée */
 .flexi-card {
-  border-top-color: var(--flexi-green);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .flexi-card:hover {
@@ -631,68 +562,49 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   transform: translateY(-2px);
 }
 
-/* Blockchain proof harmonisé */
-.blockchain-proof {
-  border-color: #D1C4E9;
-  background: #F3EEF9;
-  transition: all 0.3s;
-}
+.blockchain-proof { transition: all 0.3s; }
 .blockchain-proof:hover {
   border-color: var(--eu-blue);
-  box-shadow: 0 4px 16px rgba(0, 51, 153, 0.1);
+  box-shadow: 0 4px 16px rgba(0,51,153,0.1);
 }
 
-/* Status badge harmonisé */
 .status-badge {
   background: var(--eu-blue-pale);
   border-color: var(--eu-blue-light);
   color: var(--eu-blue);
 }
-.status-dot {
-  background: var(--eu-blue);
-}
+.status-dot { background: var(--eu-blue); }
 
-/* Scroll top harmonisé */
 .scroll-top {
-  background: var(--eu-blue);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .scroll-top:hover {
   background: var(--eu-blue-mid);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.3);
+  box-shadow: 0 8px 24px rgba(0,51,153,0.3);
 }
 
-/* Topbar harmonisé */
-.topbar {
-  background: rgba(0, 51, 153, 0.95);
-  backdrop-filter: blur(12px);
-}
-
-/* Dark mode harmonisé */
-body.dark-mode .accordion-panel-v {
+/* Dark mode */
+body.dark-mode .accordion-cmd {
   background: var(--surface);
   border-color: #334155;
 }
-body.dark-mode .accordion-header-h {
+body.dark-mode .accordion-header-cmd {
   background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-  border-color: #334155;
 }
-body.dark-mode .accordion-panel-v:hover .accordion-header-h,
-body.dark-mode .accordion-panel-v.expanded .accordion-header-h {
+body.dark-mode .accordion-cmd.open .accordion-header-cmd {
   background: linear-gradient(135deg, var(--eu-blue) 0%, #1e3a5f 100%);
 }
-body.dark-mode .accordion-header-h .sl-icon {
+body.dark-mode .accordion-header-cmd .sl-icon {
   background: rgba(255,255,255,0.1);
 }
-body.dark-mode .accordion-header-h .h-title {
+body.dark-mode .accordion-header-cmd .cmd-title {
   color: #94A3B8;
 }
-body.dark-mode .accordion-panel-v:hover .accordion-header-h .h-title,
-body.dark-mode .accordion-panel-v.expanded .accordion-header-h .h-title {
+body.dark-mode .accordion-cmd.open .accordion-header-cmd .cmd-title {
   color: white;
 }
-body.dark-mode .accordion-body-v {
+body.dark-mode .accordion-body-cmd {
   background: var(--surface);
 }
 body.dark-mode .skill-tag {
@@ -728,9 +640,6 @@ body.dark-mode .timeline-dot {
 body.dark-mode .timeline-item:hover .timeline-dot {
   border-color: var(--eu-blue);
   background: var(--eu-blue);
-}
-body.dark-mode .timeline-line {
-  background: #334155;
 }
 body.dark-mode .job-date {
   background: #1E293B;
@@ -771,7 +680,7 @@ body.dark-mode .blockchain-proof:hover {
   border-color: var(--eu-blue);
 }
 
-/* Fix radar chart */
+/* Fix radar */
 #radarChart {
   width: 100%;
   max-width: 280px;
@@ -780,7 +689,6 @@ body.dark-mode .blockchain-proof:hover {
   margin: 0 auto;
 }
 
-/* Animation keyframes */
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 @media print{
@@ -942,14 +850,13 @@ body.dark-mode .blockchain-proof:hover {
 
 <div class="main-grid">
 <div>
-<div class="accordion-wrapper-v">
-<div class="accordion-panel-v" id="experience" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="accordion-cmd" id="experience">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-    <div class="h-title">Expérience professionnelle</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="cmd-title">Expérience professionnelle</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-v">
+  <div class="accordion-body-cmd">
 <div class="timeline">
     <div class="timeline-line"></div>
 
@@ -1050,13 +957,13 @@ body.dark-mode .blockchain-proof:hover {
   </div>
   </div>
 </div>
-<div class="accordion-panel-v" id="widget-interactif" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="accordion-cmd" id="widget-interactif">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-    <div class="h-title">Espace interactif</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="cmd-title">Espace interactif</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-v">
+  <div class="accordion-body-cmd">
 <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:240px">
         <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto"></svg>
@@ -1123,13 +1030,13 @@ body.dark-mode .blockchain-proof:hover {
   </div>
   </div>
 </div>
-<div class="accordion-panel-v" id="anim-integrity" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="accordion-cmd" id="anim-integrity">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="h-title">Chaîne de confiance IT & ITAA</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="cmd-title">Chaîne de confiance IT & ITAA</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-v">
+  <div class="accordion-body-cmd">
 <div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
     <!-- Animated background grid -->
     <div style="position:absolute;inset:0;opacity:0.15;background-image:linear-gradient(rgba(0,51,153,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,51,153,0.3) 1px,transparent 1px);background-size:30px 30px;animation:gridMove 20s linear infinite"></div>
@@ -1242,13 +1149,13 @@ body.dark-mode .blockchain-proof:hover {
   </div>
   </div>
 </div>
-<div class="accordion-panel-v" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="accordion-cmd">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-    <div class="h-title">Flexi-Job</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="cmd-title">Flexi-Job</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-v">
+  <div class="accordion-body-cmd">
 <div class="flexi-header">
     <div class="flexi-badge-eligible">
       <div class="flexi-dot"></div>
@@ -1295,13 +1202,13 @@ body.dark-mode .blockchain-proof:hover {
   </div>
   </div>
 </div>
-<div class="accordion-panel-v" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="accordion-cmd">
+  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="h-title">Formation continue & activités</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="cmd-title">Formation continue & activités</div>
+    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-v">
+  <div class="accordion-body-cmd">
 <div class="cont-item">
     <span class="cont-year">2024 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon"><use href="#icon-ext"/></svg></a> — Salzburg (AT)</span>
     <span>The Heritage of Money and Coinage: From the Mine to the Mint</span>
@@ -1328,18 +1235,16 @@ body.dark-mode .blockchain-proof:hover {
   </div>
   </div>
 </div>
-</div>
 </div><!-- /main col -->
-<div>
-<div class="accordion-wrapper-v">
-<div class="accordion-panel-v" id="formation" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+<div class="sidebar-fixed">
+<!-- FORMATION -->
+<div class="card animate-on-scroll" id="formation">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-    <div class="h-title">Formation</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
   </div>
-  <div class="accordion-body-v">
-<div class="edu-item">
+
+  <div class="edu-item">
     <div class="edu-school">
       <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
         ICHEC Brussels Management School
@@ -1486,16 +1391,15 @@ body.dark-mode .blockchain-proof:hover {
       </a>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-panel-v" id="langues" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+
+<!-- LANGUES -->
+<div class="card animate-on-scroll" id="langues">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <div class="h-title">Langues</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
-  <div class="accordion-body-v">
-<div class="lang-item">
+  <div class="lang-item">
     <div class="lang-row">
       <span class="lang-name">Français</span>
       <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
@@ -1527,16 +1431,15 @@ body.dark-mode .blockchain-proof:hover {
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
-  </div>
 </div>
-<div class="accordion-panel-v" id="competences" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+
+<!-- COMPETENCES -->
+<div class="card animate-on-scroll" id="competences">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <div class="h-title">Compétences</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
   </div>
-  <div class="accordion-body-v">
-<div class="skill-group">
+  <div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
       <span class="skill-tag t" data-fr="Comptabilité générale" data-en="General accounting" data-nl="Algemene boekhouding">Comptabilité générale</span>
@@ -1587,16 +1490,15 @@ body.dark-mode .blockchain-proof:hover {
       <span class="skill-tag t" data-fr="Esprit d'analyse" data-en="Analytical thinking" data-nl="Analytisch denken">Esprit d'analyse</span>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-panel-v" id="certifications" onclick="toggleAccordionV(this)">
-  <div class="accordion-header-h">
+
+<!-- CERTIFICATIONS -->
+<div class="card animate-on-scroll" id="certifications">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-    <div class="h-title">Certifications</div>
-    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
-  <div class="accordion-body-v">
-<div class="cert-item">
+  <div class="cert-item">
     <span class="cert-name">
       <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
       &nbsp;—&nbsp;
@@ -1619,8 +1521,6 @@ body.dark-mode .blockchain-proof:hover {
     </span>
     <span class="cert-year">2016</span>
   </div>
-  </div>
-</div>
 </div>
 </div><!-- /sidebar -->
 </div><!-- /main-grid -->
@@ -1638,12 +1538,18 @@ body.dark-mode .blockchain-proof:hover {
 
 <script>
 
-// ── ACCORDÉON VERTICAL ──
-function toggleAccordionV(panel) {
-  if (window.innerWidth <= 900) {
-    const wasExpanded = panel.classList.contains('expanded');
-    document.querySelectorAll('.accordion-panel-v').forEach(p => p.classList.remove('expanded'));
-    if (!wasExpanded) panel.classList.add('expanded');
+// ── ACCORDÉON À COMMANDE (CLIC) ──
+function toggleAccordionCmd(header) {
+  const cmd = header.parentElement;
+  const wasOpen = cmd.classList.contains('open');
+
+  // Fermer tous les autres dans la même colonne
+  const wrapper = cmd.parentElement;
+  wrapper.querySelectorAll('.accordion-cmd').forEach(c => c.classList.remove('open'));
+
+  // Toggle l'état actuel
+  if (!wasOpen) {
+    cmd.classList.add('open');
   }
 }
 
