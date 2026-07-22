@@ -323,87 +323,70 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .timeline-line{left:5px}
 }
 
-/* ── ACCORDÉONS HORIZONTAUX ── */
-.accordion-wrapper {
+/* ════════════════════════════════════════
+   ACCORDÉONS VERTICAUX — DESIGN HARMONISÉ
+   ════════════════════════════════════════ */
+
+/* Wrapper principal */
+.accordion-wrapper-v {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 0;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  min-height: 480px;
-  max-height: 520px;
-}
-.accordion-wrapper::-webkit-scrollbar {
-  height: 5px;
-}
-.accordion-wrapper::-webkit-scrollbar-track {
-  background: transparent;
-}
-.accordion-wrapper::-webkit-scrollbar-thumb {
-  background: var(--eu-blue);
-  border-radius: 3px;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
-.accordion-panel {
-  flex: 0 0 56px;
-  min-width: 56px;
-  max-width: 56px;
-  height: 480px;
+/* Panneau individuel */
+.accordion-panel-v {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  display: flex;
-  flex-direction: row;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow);
+  position: relative;
 }
-.accordion-panel:hover,
-.accordion-panel.active {
-  flex: 0 0 520px;
-  max-width: 520px;
-  border-color: var(--eu-blue);
-  box-shadow: var(--shadow-hover);
-  z-index: 10;
-}
-.accordion-panel::before {
+.accordion-panel-v::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
   opacity: 0;
   transition: opacity 0.3s;
-  z-index: 5;
 }
-.accordion-panel:hover::before,
-.accordion-panel.active::before {
+.accordion-panel-v:hover::before,
+.accordion-panel-v.expanded::before {
   opacity: 1;
 }
-
-/* Header vertical */
-.accordion-header-v {
-  width: 56px;
-  min-width: 56px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 16px 0;
-  gap: 10px;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 3;
+.accordion-panel-v:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--eu-blue-light);
+  transform: translateY(-1px);
 }
-.accordion-header-v .sl-icon {
+
+/* Header horizontal */
+.accordion-header-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--eu-blue-pale) 0%, var(--eu-blue-light) 100%);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  gap: 12px;
+}
+.accordion-panel-v:hover .accordion-header-h,
+.accordion-panel-v.expanded .accordion-header-h {
+  background: linear-gradient(135deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
+  border-bottom-color: var(--eu-blue);
+}
+
+/* Icône dans le header */
+.accordion-header-h .sl-icon {
   width: 32px; height: 32px;
-  background: rgba(255,255,255,0.15);
+  background: var(--eu-blue);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -411,206 +394,394 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   flex-shrink: 0;
   transition: all 0.3s;
 }
-.accordion-header-v .sl-icon svg {
+.accordion-panel-v:hover .accordion-header-h .sl-icon,
+.accordion-panel-v.expanded .accordion-header-h .sl-icon {
+  background: var(--eu-yellow);
+}
+.accordion-header-h .sl-icon svg {
   width: 16px; height: 16px;
   stroke: white; fill: none;
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: stroke 0.3s;
 }
-.accordion-header-v .v-title {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  font-size: 11px;
+.accordion-panel-v:hover .accordion-header-h .sl-icon svg,
+.accordion-panel-v.expanded .accordion-header-h .sl-icon svg {
+  stroke: var(--eu-blue);
+}
+
+/* Titre */
+.accordion-header-h .h-title {
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: white;
-  white-space: nowrap;
-  margin-top: 4px;
-  transition: all 0.3s;
-  opacity: 0.9;
+  color: var(--eu-blue);
+  flex: 1;
+  transition: color 0.3s;
 }
-.accordion-header-v .v-chevron {
-  width: 18px; height: 18px;
-  stroke: rgba(255,255,255,0.6);
+.accordion-panel-v:hover .accordion-header-h .h-title,
+.accordion-panel-v.expanded .accordion-header-h .h-title {
+  color: white;
+}
+
+/* Chevron */
+.accordion-header-h .h-chevron {
+  width: 20px; height: 20px;
+  stroke: var(--eu-blue);
   fill: none;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  margin-top: auto;
-  margin-bottom: 8px;
-  transition: all 0.4s;
-  transform: rotate(-90deg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
-.accordion-panel:hover .accordion-header-v .v-chevron,
-.accordion-panel.active .accordion-header-v .v-chevron {
-  transform: rotate(90deg);
-  stroke: var(--eu-yellow);
+.accordion-panel-v:hover .accordion-header-h .h-chevron,
+.accordion-panel-v.expanded .accordion-header-h .h-chevron {
+  stroke: white;
+  transform: rotate(180deg);
 }
 
 /* Body */
-.accordion-body-h {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0;
+.accordion-body-v {
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  transition: opacity 0.35s ease 0.15s, padding 0.3s ease;
-  width: 0;
-  position: relative;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.35s ease 0.1s,
+              padding 0.3s ease;
+  padding: 0 18px;
+  background: var(--bg);
 }
-.accordion-panel:hover .accordion-body-h,
-.accordion-panel.active .accordion-body-h {
-  padding: 1.25rem;
+.accordion-panel-v:hover .accordion-body-v,
+.accordion-panel-v.expanded .accordion-body-v {
+  max-height: 5000px;
   opacity: 1;
-  width: auto;
+  padding: 18px;
 }
-.accordion-body-h::-webkit-scrollbar {
+.accordion-body-v::-webkit-scrollbar {
   width: 4px;
 }
-.accordion-body-h::-webkit-scrollbar-thumb {
+.accordion-body-v::-webkit-scrollbar-thumb {
   background: var(--eu-blue-light);
   border-radius: 2px;
 }
 
-/* Section label dans le body */
-.accordion-body-h .section-label {
-  margin-bottom: 1rem;
-  padding-bottom: 7px;
-  border-bottom: 2px solid var(--eu-blue-light);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* Section label dans le body (masqué car déjà dans header) */
+.accordion-body-v .section-label {
+  display: none;
 }
 
-/* Dark mode */
-body.dark-mode .accordion-panel {
+/* ── HARMONISATION DES COULEURS ── */
+
+/* Timeline dots harmonisés */
+.timeline-dot {
+  background: var(--bg);
+  border-color: var(--eu-blue-light);
+  transition: all 0.3s;
+}
+.timeline-item:hover .timeline-dot {
+  border-color: var(--eu-blue);
+  background: var(--eu-blue);
+  box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.15);
+}
+.timeline-dot svg {
+  stroke: var(--eu-blue);
+  transition: stroke 0.3s;
+}
+.timeline-item:hover .timeline-dot svg {
+  stroke: white;
+}
+
+/* Job dates harmonisés */
+.job-date {
+  background: var(--eu-blue-light);
+  color: var(--eu-blue);
+  transition: all 0.3s;
+}
+.job:hover .job-date {
+  background: var(--eu-blue);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 51, 153, 0.25);
+}
+
+/* Skill tags harmonisés */
+.skill-tag {
+  background: var(--eu-blue-pale);
+  color: var(--eu-blue);
+  border-color: var(--eu-blue-light);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.skill-tag:hover {
+  background: var(--eu-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.2);
+}
+
+/* Lang dots harmonisés */
+.lang-dot.filled {
+  background: var(--eu-blue);
+  box-shadow: 0 0 0 2px rgba(0, 51, 153, 0.1);
+}
+.lang-item:hover .lang-dot.filled {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.15);
+}
+
+/* Cert items harmonisés */
+.cert-year {
+  background: var(--eu-blue-light);
+  color: var(--eu-blue);
+  transition: all 0.3s;
+}
+.cert-item:hover .cert-year {
+  background: var(--eu-blue);
+  color: white;
+}
+
+/* Edu items harmonisés */
+.edu-date {
+  color: var(--eu-blue);
+  transition: color 0.3s;
+}
+.edu-item:hover .edu-date {
+  color: var(--eu-blue-mid);
+}
+
+/* Edu badges harmonisés */
+.edu-badge {
+  background: var(--eu-blue-pale);
+  border-color: var(--eu-blue-light);
+  color: var(--eu-blue);
+  transition: all 0.25s;
+}
+.edu-badge:hover {
+  background: var(--eu-blue);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Contact chips harmonisés */
+.contact-chip {
+  background: var(--surface);
+  border-color: var(--border);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contact-chip:hover {
+  border-color: var(--eu-blue);
+  color: var(--eu-blue);
+  background: var(--eu-blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.1);
+}
+
+/* Stat cards harmonisés */
+.stat-card {
+  background: var(--surface);
+  border-color: var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.stat-card:hover {
+  border-color: var(--eu-blue);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.12);
+}
+.stat-number {
+  transition: color 0.3s;
+}
+.stat-card:hover .stat-number {
+  color: var(--eu-blue-mid);
+}
+
+/* Hero harmonisé */
+.hero {
+  border-top-color: var(--eu-blue);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.hero::before {
+  background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
+}
+
+/* Cards harmonisées */
+.card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--eu-blue-light);
+  transform: translateY(-2px);
+}
+.card::before {
+  background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
+}
+
+/* Flexi card harmonisée */
+.flexi-card {
+  border-top-color: var(--flexi-green);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flexi-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Blockchain proof harmonisé */
+.blockchain-proof {
+  border-color: #D1C4E9;
+  background: #F3EEF9;
+  transition: all 0.3s;
+}
+.blockchain-proof:hover {
+  border-color: var(--eu-blue);
+  box-shadow: 0 4px 16px rgba(0, 51, 153, 0.1);
+}
+
+/* Status badge harmonisé */
+.status-badge {
+  background: var(--eu-blue-pale);
+  border-color: var(--eu-blue-light);
+  color: var(--eu-blue);
+}
+.status-dot {
+  background: var(--eu-blue);
+}
+
+/* Scroll top harmonisé */
+.scroll-top {
+  background: var(--eu-blue);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scroll-top:hover {
+  background: var(--eu-blue-mid);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.3);
+}
+
+/* Topbar harmonisé */
+.topbar {
+  background: rgba(0, 51, 153, 0.95);
+  backdrop-filter: blur(12px);
+}
+
+/* Dark mode harmonisé */
+body.dark-mode .accordion-panel-v {
   background: var(--surface);
   border-color: #334155;
 }
-body.dark-mode .accordion-header-v {
-  background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+body.dark-mode .accordion-header-h {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  border-color: #334155;
 }
-body.dark-mode .accordion-header-v .sl-icon {
+body.dark-mode .accordion-panel-v:hover .accordion-header-h,
+body.dark-mode .accordion-panel-v.expanded .accordion-header-h {
+  background: linear-gradient(135deg, var(--eu-blue) 0%, #1e3a5f 100%);
+}
+body.dark-mode .accordion-header-h .sl-icon {
   background: rgba(255,255,255,0.1);
 }
-
-/* Responsive mobile: vertical stack */
-@media (max-width: 900px) {
-  .accordion-wrapper {
-    flex-direction: column;
-    gap: 8px;
-    min-height: auto;
-    max-height: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  .accordion-panel {
-    flex: 0 0 auto !important;
-    max-width: 100% !important;
-    width: 100%;
-    height: auto;
-    min-height: 56px;
-    max-height: 56px;
-    flex-direction: column;
-    transition: max-height 0.5s ease;
-  }
-  .accordion-panel:hover,
-  .accordion-panel.active {
-    max-height: 600px !important;
-    flex: none !important;
-  }
-  .accordion-header-v {
-    width: 100%;
-    height: 56px;
-    min-height: 56px;
-    flex-direction: row;
-    padding: 0 16px;
-    border-right: none;
-    background: linear-gradient(90deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
-  }
-  .accordion-header-v .v-title {
-    writing-mode: horizontal-tb;
-    transform: none;
-    margin-top: 0;
-    margin-left: 10px;
-    font-size: 12px;
-  }
-  .accordion-header-v .v-chevron {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: auto;
-    transform: rotate(0deg);
-  }
-  .accordion-panel:hover .accordion-header-v .v-chevron,
-  .accordion-panel.active .accordion-header-v .v-chevron {
-    transform: rotate(180deg);
-  }
-  .accordion-body-h {
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.3s ease, padding 0.3s ease;
-  }
-  .accordion-panel:hover .accordion-body-h,
-  .accordion-panel.active .accordion-body-h {
-    max-height: 600px;
-    padding: 1rem;
-    opacity: 1;
-  }
+body.dark-mode .accordion-header-h .h-title {
+  color: #94A3B8;
 }
-
-@media print {
-  .accordion-wrapper {
-    flex-direction: column;
-    gap: 12px;
-    min-height: auto;
-    max-height: none;
-    overflow: visible;
-  }
-  .accordion-panel {
-    flex: none !important;
-    max-width: 100% !important;
-    width: 100%;
-    height: auto;
-    max-height: none;
-    flex-direction: column;
-  }
-  .accordion-header-v {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    padding: 8px 12px;
-    background: var(--eu-blue);
-  }
-  .accordion-header-v .v-title {
-    writing-mode: horizontal-tb;
-    transform: none;
-    margin-top: 0;
-    margin-left: 8px;
-  }
-  .accordion-header-v .v-chevron {
-    display: none;
-  }
-  .accordion-body-h {
-    width: 100%;
-    max-height: none;
-    opacity: 1;
-    padding: 12px;
-    overflow: visible;
-  }
+body.dark-mode .accordion-panel-v:hover .accordion-header-h .h-title,
+body.dark-mode .accordion-panel-v.expanded .accordion-header-h .h-title {
+  color: white;
+}
+body.dark-mode .accordion-body-v {
+  background: var(--surface);
+}
+body.dark-mode .skill-tag {
+  background: #1E293B;
+  border-color: #475569;
+  color: #94A3B8;
+}
+body.dark-mode .skill-tag:hover {
+  background: var(--eu-blue);
+  color: white;
+  border-color: var(--eu-blue);
+}
+body.dark-mode .contact-chip {
+  background: #1E293B;
+  border-color: #475569;
+  color: #94A3B8;
+}
+body.dark-mode .contact-chip:hover {
+  background: #334155;
+  color: var(--eu-blue);
+}
+body.dark-mode .stat-card {
+  background: #1E293B;
+  border-color: #334155;
+}
+body.dark-mode .stat-card:hover {
+  border-color: var(--eu-blue);
+}
+body.dark-mode .timeline-dot {
+  background: #1E293B;
+  border-color: #475569;
+}
+body.dark-mode .timeline-item:hover .timeline-dot {
+  border-color: var(--eu-blue);
+  background: var(--eu-blue);
+}
+body.dark-mode .timeline-line {
+  background: #334155;
+}
+body.dark-mode .job-date {
+  background: #1E293B;
+  color: #60A5FA;
+  border: 1px solid #475569;
+}
+body.dark-mode .job:hover .job-date {
+  background: var(--eu-blue);
+  color: white;
+}
+body.dark-mode .cert-year {
+  background: #1E293B;
+  color: #60A5FA;
+  border: 1px solid #475569;
+}
+body.dark-mode .cert-item:hover .cert-year {
+  background: var(--eu-blue);
+  color: white;
+}
+body.dark-mode .edu-badge {
+  background: #1E293B;
+  border-color: #475569;
+  color: #60A5FA;
+}
+body.dark-mode .edu-badge:hover {
+  background: var(--eu-blue);
+  color: white;
+}
+body.dark-mode .lang-dot.filled {
+  background: #60A5FA;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+body.dark-mode .blockchain-proof {
+  background: #1E293B;
+  border-color: #475569;
+}
+body.dark-mode .blockchain-proof:hover {
+  border-color: var(--eu-blue);
 }
 
 /* Fix radar chart */
 #radarChart {
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
+
+/* Animation keyframes */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 @media print{
   .topbar,.scroll-progress,.scroll-top,.icon-btn{display:none!important}
@@ -771,18 +942,14 @@ body.dark-mode .accordion-header-v .sl-icon {
 
 <div class="main-grid">
 <div>
-<div class="accordion-wrapper">
-<div class="accordion-panel" id="experience" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-wrapper-v">
+<div class="accordion-panel-v" id="experience" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-    <div class="v-title">Expérience professionnelle</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Expérience professionnelle</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-      <span>Expérience professionnelle</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="timeline">
     <div class="timeline-line"></div>
 
@@ -883,17 +1050,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" id="widget-interactif" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" id="widget-interactif" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-    <div class="v-title">Espace interactif</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Espace interactif</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-      <span>Espace interactif</span>
-    </div>
+  <div class="accordion-body-v">
 <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:240px">
         <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto"></svg>
@@ -960,17 +1123,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" id="anim-integrity" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" id="anim-integrity" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="v-title">Chaîne de confiance IT & ITAA</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Chaîne de confiance IT & ITAA</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <span>Chaîne de confiance IT & ITAA</span>
-    </div>
+  <div class="accordion-body-v">
 <div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
     <!-- Animated background grid -->
     <div style="position:absolute;inset:0;opacity:0.15;background-image:linear-gradient(rgba(0,51,153,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,51,153,0.3) 1px,transparent 1px);background-size:30px 30px;animation:gridMove 20s linear infinite"></div>
@@ -1083,17 +1242,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-    <div class="v-title">Flexi-Job</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Flexi-Job</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-      <span>Flexi-Job</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="flexi-header">
     <div class="flexi-badge-eligible">
       <div class="flexi-dot"></div>
@@ -1140,17 +1295,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="v-title">Formation continue & activités</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Formation continue & activités</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <span>Formation continue & activités</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="cont-item">
     <span class="cont-year">2024 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon"><use href="#icon-ext"/></svg></a> — Salzburg (AT)</span>
     <span>The Heritage of Money and Coinage: From the Mine to the Mint</span>
@@ -1180,18 +1331,14 @@ body.dark-mode .accordion-header-v .sl-icon {
 </div>
 </div><!-- /main col -->
 <div>
-<div class="accordion-wrapper">
-<div class="accordion-panel" id="formation" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-wrapper-v">
+<div class="accordion-panel-v" id="formation" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-    <div class="v-title">Formation</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Formation</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-      <span>Formation</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="edu-item">
     <div class="edu-school">
       <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
@@ -1341,17 +1488,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" id="langues" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" id="langues" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <div class="v-title">Langues</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Langues</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-      <span>Langues</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="lang-item">
     <div class="lang-row">
       <span class="lang-name">Français</span>
@@ -1386,17 +1529,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" id="competences" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" id="competences" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <div class="v-title">Compétences</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Compétences</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <span>Compétences</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
@@ -1450,17 +1589,13 @@ body.dark-mode .accordion-header-v .sl-icon {
   </div>
   </div>
 </div>
-<div class="accordion-panel" id="certifications" onclick="activatePanel(this)">
-  <div class="accordion-header-v">
+<div class="accordion-panel-v" id="certifications" onclick="toggleAccordionV(this)">
+  <div class="accordion-header-h">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-    <div class="v-title">Certifications</div>
-    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="h-title">Certifications</div>
+    <svg class="h-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body-h">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-      <span>Certifications</span>
-    </div>
+  <div class="accordion-body-v">
 <div class="cert-item">
     <span class="cert-name">
       <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
@@ -1502,12 +1637,13 @@ body.dark-mode .accordion-header-v .sl-icon {
 </div><!-- /page -->
 
 <script>
-// ── ACCORDÉON HORIZONTAL ──
-function activatePanel(panel) {
+
+// ── ACCORDÉON VERTICAL ──
+function toggleAccordionV(panel) {
   if (window.innerWidth <= 900) {
-    const wasActive = panel.classList.contains('active');
-    document.querySelectorAll('.accordion-panel').forEach(p => p.classList.remove('active'));
-    if (!wasActive) panel.classList.add('active');
+    const wasExpanded = panel.classList.contains('expanded');
+    document.querySelectorAll('.accordion-panel-v').forEach(p => p.classList.remove('expanded'));
+    if (!wasExpanded) panel.classList.add('expanded');
   }
 }
 
