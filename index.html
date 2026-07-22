@@ -589,6 +589,294 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 </div>
 
 <!-- FLEXI-JOB -->
+<!-- WIDGET INTERACTIF -->
+<div class="card animate-on-scroll" id="widget-interactif" style="margin-bottom:1.25rem">
+  <div class="section-label">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+    <span class="t" data-fr="Espace interactif" data-en="Interactive Space" data-nl="Interactieve Ruimte">Espace interactif</span>
+  </div>
+
+  <!-- RADAR CHART -->
+  <div style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">Radar de compétences</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:100px">Finance × IT</span>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1;min-width:240px">
+        <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto">
+          <g id="grid"></g>
+          <polygon id="dataArea" fill="rgba(0,51,153,0.12)" stroke="#003399" stroke-width="2"/>
+          <g id="dataPoints"></g>
+          <g id="labels"></g>
+        </svg>
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Maîtrise ERP</div>
+        <div id="erpBars" style="display:flex;flex-direction:column;gap:6px"></div>
+        <div style="margin-top:12px;padding:10px;background:var(--surface);border-radius:4px;border-left:3px solid var(--eu-blue)">
+          <div style="font-size:10px;font-weight:700;color:var(--eu-blue);margin-bottom:3px">💡 Insight</div>
+          <div id="radarInsight" style="font-size:11px;color:var(--muted);line-height:1.5">Survolez le graphique pour les détails.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:16px 0"/>
+
+  <!-- BADGES -->
+  <div style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">Badges & Réussites</span>
+      <span id="badgeProgress" style="margin-left:auto;font-size:10px;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:100px">0/8</span>
+    </div>
+    <div id="badgesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px"></div>
+    <div id="badgeDetail" style="margin-top:12px;padding:10px;background:var(--surface);border-radius:4px;display:none">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="badgeDetailIcon" style="font-size:24px"></div>
+        <div>
+          <div id="badgeDetailTitle" style="font-size:12px;font-weight:700;color:var(--text)"></div>
+          <div id="badgeDetailDesc" style="font-size:11px;color:var(--muted);margin-top:2px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:16px 0"/>
+
+  <!-- CHATBOT -->
+  <div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">Assistant IA</span>
+      <span style="margin-left:auto;font-size:10px;color:#059669;display:flex;align-items:center;gap:3px">
+        <span style="width:5px;height:5px;border-radius:50%;background:#059669;animation:pulse 2s infinite"></span>
+        En ligne
+      </span>
+    </div>
+    <div id="chatMessages" style="height:160px;overflow-y:auto;padding:10px;background:var(--surface);border-radius:4px;margin-bottom:10px;display:flex;flex-direction:column;gap:6px">
+      <div style="align-self:flex-start;background:#fff;padding:8px 12px;border-radius:10px 10px 10px 2px;font-size:12px;color:var(--text);max-width:90%;box-shadow:0 1px 2px rgba(0,0,0,0.04)">
+        <strong style="color:var(--eu-blue)">🤖 Assistant</strong><br>
+        Bonjour ! Posez-moi une question sur le parcours, les compétences ou la disponibilité de Stevenson.
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+      <button onclick="askQuestion('erp')" style="font-size:10px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:inherit">ERP ?</button>
+      <button onclick="askQuestion('flexi')" style="font-size:10px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:inherit">Flexi-job ?</button>
+      <button onclick="askQuestion('master')" style="font-size:10px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:inherit">Master ?</button>
+      <button onclick="askQuestion('contact')" style="font-size:10px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:inherit">Contact ?</button>
+      <button onclick="askQuestion('blockchain')" style="font-size:10px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:inherit">Blockchain ?</button>
+    </div>
+    <div style="display:flex;gap:6px">
+      <input id="chatInput" type="text" placeholder="Votre question..." style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:inherit;outline:none" onkeypress="if(event.key==='Enter')sendChat()">
+      <button onclick="sendChat()" style="padding:8px 14px;background:var(--eu-blue);color:#fff;border:none;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit">Envoyer</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.badge-card{cursor:pointer;transition:all 0.3s;text-align:center;padding:8px 4px;border-radius:6px;border:2px solid transparent;background:var(--surface)}
+.badge-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.badge-card.locked{opacity:0.35;filter:grayscale(1)}
+.badge-card.unlocked{border-color:#10B981;background:#ECFDF5}
+.badge-card.unlocked:hover{border-color:#059669}
+.badge-emoji{font-size:22px;margin-bottom:2px;display:block;transition:transform 0.3s}
+.badge-card:hover .badge-emoji{transform:scale(1.15)}
+.badge-name{font-size:9px;font-weight:700;color:var(--text)}
+.badge-card.locked .badge-name{color:var(--muted)}
+.erp-bar{display:flex;align-items:center;gap:6px}
+.erp-name{font-size:11px;font-weight:600;color:var(--text);min-width:60px}
+.erp-track{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
+.erp-fill{height:100%;background:linear-gradient(90deg,var(--eu-blue),var(--eu-blue-mid));border-radius:100px;transition:width 1s ease}
+.erp-pct{font-size:10px;font-weight:700;color:var(--eu-blue);min-width:28px;text-align:right}
+</style>
+
+<script>
+// ===== RADAR CHART =====
+(function(){
+const skills = [
+  {name:'Comptabilité', value:95, color:'#003399'},
+  {name:'Fiscalité', value:75, color:'#059669'},
+  {name:'ERP/Systèmes', value:90, color:'#7C3AED'},
+  {name:'IT/Dév.', value:70, color:'#FF6B35'},
+  {name:'Gestion Proj.', value:80, color:'#0891B2'},
+  {name:'Langues', value:85, color:'#DC2626'}
+];
+const erps = [
+  {name:'Winbooks', value:95},
+  {name:'SAP', value:85},
+  {name:'Odoo', value:90},
+  {name:'Adfinity', value:88},
+  {name:'Octopus', value:80},
+  {name:'Excel', value:92}
+];
+const cx=130, cy=110, r=85;
+const n = skills.length;
+const grid = document.getElementById('grid');
+const dataArea = document.getElementById('dataArea');
+const points = document.getElementById('dataPoints');
+const labels = document.getElementById('labels');
+
+// Grid
+for(let level=1; level<=5; level++){
+  const pts=[];
+  for(let i=0; i<n; i++){
+    const angle=(Math.PI*2*i/n)-Math.PI/2;
+    const rad=(r*level/5);
+    pts.push(`${cx+rad*Math.cos(angle)},${cy+rad*Math.sin(angle)}`);
+  }
+  const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  poly.setAttribute('points',pts.join(' '));
+  poly.setAttribute('fill','none');
+  poly.setAttribute('stroke',level===5?'#D4D8DF':'#E5E7EB');
+  poly.setAttribute('stroke-width','1');
+  grid.appendChild(poly);
+}
+// Axes
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1',cx); line.setAttribute('y1',cy);
+  line.setAttribute('x2',cx+r*Math.cos(angle)); line.setAttribute('y2',cy+r*Math.sin(angle));
+  line.setAttribute('stroke','#E5E7EB');
+  line.setAttribute('stroke-width','1');
+  grid.appendChild(line);
+}
+// Data
+const dataPts=[];
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const rad=(skills[i].value/100)*r;
+  const x=cx+rad*Math.cos(angle);
+  const y=cy+rad*Math.sin(angle);
+  dataPts.push(`${x},${y}`);
+  const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  circle.setAttribute('cx',x); circle.setAttribute('cy',y);
+  circle.setAttribute('r','4');
+  circle.setAttribute('fill',skills[i].color);
+  circle.setAttribute('stroke','white');
+  circle.setAttribute('stroke-width','2');
+  circle.style.cursor='pointer';
+  circle.addEventListener('mouseenter',()=>{
+    const s=skills[i];
+    const texts={
+      'Comptabilité':'13 ans — cycle complet, IFRS, comptes annuels.',
+      'Fiscalité':'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.',
+      'ERP/Systèmes':'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.',
+      'IT/Dév.':'Master STIC ULB — SQL, PHP, BPMN, projet IT.',
+      'Gestion Proj.':'Supervision FSE, animation Toastmasters.',
+      'Langues':'FR natif, EN courant (B2-C1), NL notions, Créole natif.'
+    };
+    document.getElementById('radarInsight').innerHTML='<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+texts[s.name]+'</span>';
+  });
+  circle.addEventListener('mouseleave',()=>{
+    document.getElementById('radarInsight').textContent='Survolez le graphique pour les détails.';
+  });
+  points.appendChild(circle);
+}
+dataArea.setAttribute('points',dataPts.join(' '));
+// Labels
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const lx=cx+(r+18)*Math.cos(angle);
+  const ly=cy+(r+18)*Math.sin(angle);
+  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+  text.setAttribute('x',lx); text.setAttribute('y',ly);
+  text.setAttribute('text-anchor','middle');
+  text.setAttribute('dominant-baseline','middle');
+  text.setAttribute('font-size','9');
+  text.setAttribute('font-weight','600');
+  text.setAttribute('fill','#5C6470');
+  text.textContent=skills[i].name;
+  labels.appendChild(text);
+}
+// ERP Bars
+const erpContainer=document.getElementById('erpBars');
+erps.forEach((erp,i)=>{
+  const div=document.createElement('div');
+  div.className='erp-bar';
+  div.innerHTML='<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
+  erpContainer.appendChild(div);
+  setTimeout(()=>{div.querySelector('.erp-fill').style.width=erp.value+'%';},200+i*80);
+});
+})();
+
+// ===== BADGES =====
+(function(){
+const badges=[
+  {id:'diplome', emoji:'🎓', name:'Diplômé', desc:'Master STIC ULB + Licence Comptable', unlocked:true},
+  {id:'expert', emoji:'🏆', name:'Expert', desc:'13 ans d'expérience + Bruxelles Formation', unlocked:true},
+  {id:'sap', emoji:'💻', name:'SAP Key', desc:'Certification SAP + Europass', unlocked:true},
+  {id:'blockchain', emoji:'⛓️', name:'Blockchain', desc:'Certificat ancré sur Bitcoin (Merkle)', unlocked:true},
+  {id:'fiscal', emoji:'⚖️', name:'Fiscaliste', desc:'Parcours ITAA ICHEC en cours', unlocked:false},
+  {id:'erasmus', emoji:'🇪🇺', name:'Erasmus+', desc:'2 mobilités: Salzburg & Aix-Marseille', unlocked:true},
+  {id:'toast', emoji:'🎤', name:'Orateur', desc:'Président Toastmasters International', unlocked:true},
+  {id:'flexi', emoji:'⏰', name:'Flexi', desc:'Disponible soirs & week-ends', unlocked:true}
+];
+let unlocked=0;
+const grid=document.getElementById('badgesGrid');
+badges.forEach(b=>{
+  const div=document.createElement('div');
+  div.className='badge-card '+(b.unlocked?'unlocked':'locked');
+  if(b.unlocked) unlocked++;
+  div.innerHTML='<span class="badge-emoji">'+(b.unlocked?b.emoji:'🔒')+'</span><span class="badge-name">'+b.name+'</span>';
+  div.onclick=()=>{
+    const d=document.getElementById('badgeDetail');
+    document.getElementById('badgeDetailIcon').textContent=b.unlocked?b.emoji:'🔒';
+    document.getElementById('badgeDetailTitle').textContent=b.name+(b.unlocked?' ✅':' 🔒');
+    document.getElementById('badgeDetailDesc').textContent=b.desc;
+    d.style.display='block';
+  };
+  grid.appendChild(div);
+});
+document.getElementById('badgeProgress').textContent=unlocked+'/'+badges.length+' débloqués';
+})();
+
+// ===== CHATBOT =====
+const responses={
+  erp:{q:'Quels ERP maîtrisez-vous ?', a:'<strong>5 ERP principaux</strong> :<br>• <strong>SAP</strong> (Key User certifié)<br>• <strong>Odoo</strong> — Comptabilité & CRM<br>• <strong>Winbooks</strong> — Standard belge<br>• <strong>Adfinity</strong> — ASBLs & fondations<br>• <strong>Octopus</strong> — Gestion documentaire<br><br>+ Excel avancé (VBA, tableaux croisés)'},
+  flexi:{q:'Flexi-job disponible ?', a:'<strong>✅ Disponible en Flexi-Job !</strong><br>• Secteurs : Horeca 🍽️, Logistique 📦, Admin/IT 💻<br>• Horaires : Soirs & week-ends<br>• Zone : Bruxelles<br>• Vérifié sur <a href="https://mycareer.socialsecurity.be/" target="_blank" class="ref-link">mycareer.be</a><br><br>Idéal pour compléter mon emploi principal.'},
+  master:{q:'Parlez-moi de votre Master', a:'<strong>Double Master :</strong><br><br>🎓 <strong>Master STIC</strong> (2021-2023) — ULB<br>• SQL, PHP, BPMN, gestion projet IT<br>• QR code diplôme vérifiable<br><br>⚖️ <strong>Master Droit Fiscal</strong> (2025-2027) — ICHEC<br>• Parcours professionnel ITAA<br>• Objectif : Fiscaliste / Direction financière'},
+  contact:{q:'Comment vous contacter ?', a:'<strong>📞 Contact direct :</strong><br>• Tél : <a href="tel:+32471692067" class="ref-link">+32 471 69 20 67</a><br>• Email : <a href="mailto:elaurentsteve@gmail.com" class="ref-link">elaurentsteve@gmail.com</a><br>• Adresse : Rue Jules Broeren 30, 1070 Bruxelles<br><br>• Réponse sous 24h<br>• En poste, ouvert aux opportunités'},
+  blockchain:{q:'Certificat blockchain ?', a:'<strong>⛓️ Oui, ancré sur Bitcoin !</strong><br>• Émetteur : Bruxelles Formation<br>• Hash SHA256 vérifié<br>• Merkle Root : <code style="font-size:9px">0e47af4b...</code><br>• <a href="https://www.blockchain.com/btc/tx/c8958b63fff7bece5917f444147eafa6113297c6ba9437f201c0265ae70522b8" target="_blank" class="ref-link">Voir sur blockchain.com</a><br><br>Standard : Chainpoint v2 + Woleet Signature v2'},
+  default:{q:'', a:'Je peux répondre sur :<br>• 💻 ERP et outils maîtrisés<br>• ⏰ Disponibilité flexi-job<br>• 🎓 Formations et diplômes<br>• 📞 Coordonnées de contact<br>• ⛓️ Certificat blockchain<br><br><em>Cliquez sur un bouton ou posez votre question !</em>'}
+};
+
+function askQuestion(key){
+  const r=responses[key]||responses.default;
+  addChat(r.q,'user');
+  setTimeout(()=>addChat(r.a,'bot'),300);
+}
+function sendChat(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text) return;
+  addChat(text,'user');
+  input.value='';
+  setTimeout(()=>{
+    const lower=text.toLowerCase();
+    let key='default';
+    if(lower.includes('erp')||lower.includes('sap')||lower.includes('odoo')||lower.includes('winbook')) key='erp';
+    else if(lower.includes('flexi')||lower.includes('job')||lower.includes('soir')||lower.includes('week')) key='flexi';
+    else if(lower.includes('master')||lower.includes('stic')||lower.includes('ichec')||lower.includes('diplome')) key='master';
+    else if(lower.includes('contact')||lower.includes('tel')||lower.includes('mail')||lower.includes('email')||lower.includes('adresse')) key='contact';
+    else if(lower.includes('blockchain')||lower.includes('bitcoin')||lower.includes('merkle')||lower.includes('certificat')) key='blockchain';
+    addChat(responses[key].a,'bot');
+  },500);
+}
+function addChat(html,sender){
+  const container=document.getElementById('chatMessages');
+  const div=document.createElement('div');
+  div.style.cssText=sender==='bot'
+    ? 'align-self:flex-start;background:#fff;padding:8px 12px;border-radius:10px 10px 10px 2px;font-size:11px;color:var(--text);max-width:90%;box-shadow:0 1px 2px rgba(0,0,0,0.04)'
+    : 'align-self:flex-end;background:var(--eu-blue);padding:8px 12px;border-radius:10px 10px 2px 10px;font-size:11px;color:#fff;max-width:90%';
+  div.innerHTML=sender==='bot'?'<strong style="color:var(--eu-blue)">🤖</strong> '+html:html;
+  container.appendChild(div);
+  container.scrollTop=container.scrollHeight;
+}
+</script>
+
+
 <div class="flexi-card animate-on-scroll">
   <div class="flexi-header">
     <div class="flexi-badge-eligible">
