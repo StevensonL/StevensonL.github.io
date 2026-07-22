@@ -322,6 +322,296 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .timeline-dot{left:-18px;width:16px;height:16px}
   .timeline-line{left:5px}
 }
+
+/* ── ACCORDÉONS HORIZONTAUX ── */
+.accordion-wrapper {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  min-height: 480px;
+  max-height: 520px;
+}
+.accordion-wrapper::-webkit-scrollbar {
+  height: 5px;
+}
+.accordion-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.accordion-wrapper::-webkit-scrollbar-thumb {
+  background: var(--eu-blue);
+  border-radius: 3px;
+}
+
+.accordion-panel {
+  flex: 0 0 56px;
+  min-width: 56px;
+  max-width: 56px;
+  height: 480px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-shadow: var(--shadow);
+}
+.accordion-panel:hover,
+.accordion-panel.active {
+  flex: 0 0 520px;
+  max-width: 520px;
+  border-color: var(--eu-blue);
+  box-shadow: var(--shadow-hover);
+  z-index: 10;
+}
+.accordion-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--eu-blue), var(--eu-yellow));
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 5;
+}
+.accordion-panel:hover::before,
+.accordion-panel.active::before {
+  opacity: 1;
+}
+
+/* Header vertical */
+.accordion-header-v {
+  width: 56px;
+  min-width: 56px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 0;
+  gap: 10px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+.accordion-header-v .sl-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.accordion-header-v .sl-icon svg {
+  width: 16px; height: 16px;
+  stroke: white; fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.accordion-header-v .v-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  white-space: nowrap;
+  margin-top: 4px;
+  transition: all 0.3s;
+  opacity: 0.9;
+}
+.accordion-header-v .v-chevron {
+  width: 18px; height: 18px;
+  stroke: rgba(255,255,255,0.6);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-top: auto;
+  margin-bottom: 8px;
+  transition: all 0.4s;
+  transform: rotate(-90deg);
+}
+.accordion-panel:hover .accordion-header-v .v-chevron,
+.accordion-panel.active .accordion-header-v .v-chevron {
+  transform: rotate(90deg);
+  stroke: var(--eu-yellow);
+}
+
+/* Body */
+.accordion-body-h {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease 0.15s, padding 0.3s ease;
+  width: 0;
+  position: relative;
+}
+.accordion-panel:hover .accordion-body-h,
+.accordion-panel.active .accordion-body-h {
+  padding: 1.25rem;
+  opacity: 1;
+  width: auto;
+}
+.accordion-body-h::-webkit-scrollbar {
+  width: 4px;
+}
+.accordion-body-h::-webkit-scrollbar-thumb {
+  background: var(--eu-blue-light);
+  border-radius: 2px;
+}
+
+/* Section label dans le body */
+.accordion-body-h .section-label {
+  margin-bottom: 1rem;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--eu-blue-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Dark mode */
+body.dark-mode .accordion-panel {
+  background: var(--surface);
+  border-color: #334155;
+}
+body.dark-mode .accordion-header-v {
+  background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+}
+body.dark-mode .accordion-header-v .sl-icon {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Responsive mobile: vertical stack */
+@media (max-width: 900px) {
+  .accordion-wrapper {
+    flex-direction: column;
+    gap: 8px;
+    min-height: auto;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .accordion-panel {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    max-height: 56px;
+    flex-direction: column;
+    transition: max-height 0.5s ease;
+  }
+  .accordion-panel:hover,
+  .accordion-panel.active {
+    max-height: 600px !important;
+    flex: none !important;
+  }
+  .accordion-header-v {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    flex-direction: row;
+    padding: 0 16px;
+    border-right: none;
+    background: linear-gradient(90deg, var(--eu-blue) 0%, var(--eu-blue-mid) 100%);
+  }
+  .accordion-header-v .v-title {
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin-top: 0;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  .accordion-header-v .v-chevron {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    transform: rotate(0deg);
+  }
+  .accordion-panel:hover .accordion-header-v .v-chevron,
+  .accordion-panel.active .accordion-header-v .v-chevron {
+    transform: rotate(180deg);
+  }
+  .accordion-body-h {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.3s ease, padding 0.3s ease;
+  }
+  .accordion-panel:hover .accordion-body-h,
+  .accordion-panel.active .accordion-body-h {
+    max-height: 600px;
+    padding: 1rem;
+    opacity: 1;
+  }
+}
+
+@media print {
+  .accordion-wrapper {
+    flex-direction: column;
+    gap: 12px;
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .accordion-panel {
+    flex: none !important;
+    max-width: 100% !important;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    flex-direction: column;
+  }
+  .accordion-header-v {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 8px 12px;
+    background: var(--eu-blue);
+  }
+  .accordion-header-v .v-title {
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin-top: 0;
+    margin-left: 8px;
+  }
+  .accordion-header-v .v-chevron {
+    display: none;
+  }
+  .accordion-body-h {
+    width: 100%;
+    max-height: none;
+    opacity: 1;
+    padding: 12px;
+    overflow: visible;
+  }
+}
+
+/* Fix radar chart */
+#radarChart {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  display: block;
+}
+
 @media print{
   .topbar,.scroll-progress,.scroll-top,.icon-btn{display:none!important}
   body{background:white}
@@ -330,112 +620,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   a.ref-link{color:var(--eu-blue);border-bottom:none}
   .animate-on-scroll{opacity:1;transform:none}
 }
-
-/* ── ACCORDÉON HOVER ── */
-.card.accordion, .flexi-card.accordion {
-  padding: 0 !important;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.card.accordion .accordion-header,
-.flexi-card.accordion .accordion-header {
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  background: var(--bg);
-}
-.card.accordion .accordion-header:hover,
-.flexi-card.accordion .accordion-header:hover {
-  background: var(--eu-blue-light);
-}
-.card.accordion .accordion-header .section-label,
-.flexi-card.accordion .accordion-header .section-label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-  flex: 1;
-}
-.card.accordion .accordion-chevron,
-.flexi-card.accordion .accordion-chevron {
-  width: 20px;
-  height: 20px;
-  stroke: var(--eu-blue);
-  fill: none;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-.card.accordion.expanded .accordion-chevron,
-.flexi-card.accordion.expanded .accordion-chevron {
-  transform: rotate(180deg);
-}
-.card.accordion .accordion-body,
-.flexi-card.accordion .accordion-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
-  padding: 0 1.5rem;
-}
-.card.accordion.expanded .accordion-body,
-.flexi-card.accordion.expanded .accordion-body {
-  max-height: 5000px;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-/* Hover expand pour desktop */
-@media (min-width: 901px) {
-  .card.accordion:hover .accordion-body,
-  .flexi-card.accordion:hover .accordion-body {
-    max-height: 5000px;
-    padding: 0 1.5rem 1.5rem 1.5rem;
-  }
-  .card.accordion:hover .accordion-chevron,
-  .flexi-card.accordion:hover .accordion-chevron {
-    transform: rotate(180deg);
-  }
-}
-
-/* Mobile: click only */
-@media (max-width: 900px) {
-  .card.accordion .accordion-header,
-  .flexi-card.accordion .accordion-header {
-    padding: 1rem;
-  }
-  .card.accordion .accordion-body,
-  .flexi-card.accordion .accordion-body {
-    padding: 0 1rem;
-  }
-  .card.accordion.expanded .accordion-body,
-  .flexi-card.accordion.expanded .accordion-body {
-    padding: 0 1rem 1rem 1rem;
-  }
-}
-
-/* Dark mode accordéon */
-body.dark-mode .card.accordion .accordion-header:hover,
-body.dark-mode .flexi-card.accordion .accordion-header:hover {
-  background: #334155;
-}
-
-/* Fix radar chart container */
-#radarChart {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: block;
-}
-
-/* Fix animation keyframes conflict */
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
 </style>
 </head>
 <body>
@@ -587,18 +771,19 @@ body.dark-mode .flexi-card.accordion .accordion-header:hover {
 
 <div class="main-grid">
 <div>
-<!-- EXPERIENCE -->
-<div class="card animate-on-scroll accordion" id="experience">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-wrapper">
+<div class="accordion-panel" id="experience" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Expérience professionnelle</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
-  </div>
-
-  <div class="timeline">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+      <span>Expérience professionnelle</span>
+    </div>
+<div class="timeline">
     <div class="timeline-line"></div>
 
     <div class="timeline-item">
@@ -698,28 +883,20 @@ body.dark-mode .flexi-card.accordion .accordion-header:hover {
   </div>
   </div>
 </div>
-
-<!-- FLEXI-JOB -->
-<!-- WIDGET INTERACTIF -->
-<div class="card animate-on-scroll accordion" id="widget-interactif" style="margin-bottom:1.25rem">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" id="widget-interactif" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Espace interactif</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Espace interactif" data-en="Interactive Space" data-nl="Interactieve Ruimte">Espace interactif</span>
-  </div>
-
-  <!-- RADAR CHART -->
-  <div style="margin-bottom:20px">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-      <span style="font-size:13px;font-weight:700;color:var(--text)">Radar de compétences</span>
-      <span style="margin-left:auto;font-size:10px;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:100px">Finance × IT</span>
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+      <span>Espace interactif</span>
     </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:240px">
-        <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:300px;display:block;margin:0 auto"></svg>
+        <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto"></svg>
       </div>
       <div style="flex:1;min-width:180px">
         <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Maîtrise ERP</div>
@@ -783,389 +960,18 @@ body.dark-mode .flexi-card.accordion .accordion-header:hover {
   </div>
   </div>
 </div>
-
-<style>
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.badge-card{cursor:pointer;transition:all 0.3s;text-align:center;padding:8px 4px;border-radius:6px;border:2px solid transparent;background:var(--surface)}
-.badge-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.badge-card.locked{opacity:0.35;filter:grayscale(1)}
-.badge-card.unlocked{border-color:#10B981;background:#ECFDF5}
-.badge-card.unlocked:hover{border-color:#059669}
-.badge-emoji{font-size:22px;margin-bottom:2px;display:block;transition:transform 0.3s}
-.badge-card:hover .badge-emoji{transform:scale(1.15)}
-.badge-name{font-size:9px;font-weight:700;color:var(--text)}
-.badge-card.locked .badge-name{color:var(--muted)}
-.erp-bar{display:flex;align-items:center;gap:6px}
-.erp-name{font-size:11px;font-weight:600;color:var(--text);min-width:60px}
-.erp-track{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
-.erp-fill{height:100%;background:linear-gradient(90deg,var(--eu-blue),var(--eu-blue-mid));border-radius:100px;transition:width 1s ease}
-.erp-pct{font-size:10px;font-weight:700;color:var(--eu-blue);min-width:28px;text-align:right}
-
-/* ── ACCORDÉON HOVER ── */
-.card.accordion, .flexi-card.accordion {
-  padding: 0 !important;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.card.accordion .accordion-header,
-.flexi-card.accordion .accordion-header {
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  background: var(--bg);
-}
-.card.accordion .accordion-header:hover,
-.flexi-card.accordion .accordion-header:hover {
-  background: var(--eu-blue-light);
-}
-.card.accordion .accordion-header .section-label,
-.flexi-card.accordion .accordion-header .section-label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-  flex: 1;
-}
-.card.accordion .accordion-chevron,
-.flexi-card.accordion .accordion-chevron {
-  width: 20px;
-  height: 20px;
-  stroke: var(--eu-blue);
-  fill: none;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-.card.accordion.expanded .accordion-chevron,
-.flexi-card.accordion.expanded .accordion-chevron {
-  transform: rotate(180deg);
-}
-.card.accordion .accordion-body,
-.flexi-card.accordion .accordion-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
-  padding: 0 1.5rem;
-}
-.card.accordion.expanded .accordion-body,
-.flexi-card.accordion.expanded .accordion-body {
-  max-height: 5000px;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-/* Hover expand pour desktop */
-@media (min-width: 901px) {
-  .card.accordion:hover .accordion-body,
-  .flexi-card.accordion:hover .accordion-body {
-    max-height: 5000px;
-    padding: 0 1.5rem 1.5rem 1.5rem;
-  }
-  .card.accordion:hover .accordion-chevron,
-  .flexi-card.accordion:hover .accordion-chevron {
-    transform: rotate(180deg);
-  }
-}
-
-/* Mobile: click only */
-@media (max-width: 900px) {
-  .card.accordion .accordion-header,
-  .flexi-card.accordion .accordion-header {
-    padding: 1rem;
-  }
-  .card.accordion .accordion-body,
-  .flexi-card.accordion .accordion-body {
-    padding: 0 1rem;
-  }
-  .card.accordion.expanded .accordion-body,
-  .flexi-card.accordion.expanded .accordion-body {
-    padding: 0 1rem 1rem 1rem;
-  }
-}
-
-/* Dark mode accordéon */
-body.dark-mode .card.accordion .accordion-header:hover,
-body.dark-mode .flexi-card.accordion .accordion-header:hover {
-  background: #334155;
-}
-
-/* Fix radar chart container */
-#radarChart {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: block;
-}
-
-/* Fix animation keyframes conflict */
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-</style>
-
-<script>
-// ===== RADAR CHART =====
-(function(){
-  'use strict';
-
-  const skills = [
-    {name:'Comptabilité', value:95, color:'#003399', desc:'13 ans — cycle complet, IFRS, comptes annuels.'},
-    {name:'Fiscalité', value:75, color:'#059669', desc:'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.'},
-    {name:'ERP/Systèmes', value:90, color:'#7C3AED', desc:'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.'},
-    {name:'IT/Dév.', value:70, color:'#FF6B35', desc:'Master STIC ULB — SQL, PHP, BPMN, projet IT.'},
-    {name:'Gestion Proj.', value:80, color:'#0891B2', desc:'Supervision FSE, animation Toastmasters.'},
-    {name:'Langues', value:85, color:'#DC2626', desc:'FR natif, EN courant (B2-C1), NL notions, Créole natif.'}
-  ];
-
-  const erps = [
-    {name:'Winbooks', value:95},
-    {name:'SAP', value:85},
-    {name:'Odoo', value:90},
-    {name:'Adfinity', value:88},
-    {name:'Octopus', value:80},
-    {name:'Excel', value:92}
-  ];
-
-  // Attendre que le DOM soit prêt
-  function initRadar() {
-    const svg = document.getElementById('radarChart');
-    if(!svg) { console.error('radarChart SVG not found'); return; }
-
-    // Vider le SVG
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-
-    const cx = 130, cy = 110, r = 85;
-    const n = skills.length;
-
-    // Créer les groupes
-    const grid = document.createElementNS('http://www.w3.org/2000/svg','g');
-    const dataArea = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-    const points = document.createElementNS('http://www.w3.org/2000/svg','g');
-    const labels = document.createElementNS('http://www.w3.org/2000/svg','g');
-
-    svg.appendChild(grid);
-    svg.appendChild(dataArea);
-    svg.appendChild(points);
-    svg.appendChild(labels);
-
-    // Grille circulaire
-    for(let level=1; level<=5; level++){
-      const pts = [];
-      for(let i=0; i<n; i++){
-        const angle = (Math.PI*2*i/n) - Math.PI/2;
-        const rad = r * level / 5;
-        pts.push((cx + rad * Math.cos(angle)) + ',' + (cy + rad * Math.sin(angle)));
-      }
-      const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-      poly.setAttribute('points', pts.join(' '));
-      poly.setAttribute('fill', 'none');
-      poly.setAttribute('stroke', level===5 ? '#D4D8DF' : '#E5E7EB');
-      poly.setAttribute('stroke-width', '1');
-      grid.appendChild(poly);
-    }
-
-    // Axes
-    for(let i=0; i<n; i++){
-      const angle = (Math.PI*2*i/n) - Math.PI/2;
-      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
-      line.setAttribute('x2', cx + r * Math.cos(angle)); 
-      line.setAttribute('y2', cy + r * Math.sin(angle));
-      line.setAttribute('stroke', '#E5E7EB');
-      line.setAttribute('stroke-width', '1');
-      grid.appendChild(line);
-    }
-
-    // Données
-    const dataPts = [];
-    for(let i=0; i<n; i++){
-      const angle = (Math.PI*2*i/n) - Math.PI/2;
-      const rad = (skills[i].value / 100) * r;
-      const x = cx + rad * Math.cos(angle);
-      const y = cy + rad * Math.sin(angle);
-      dataPts.push(x + ',' + y);
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      circle.setAttribute('cx', x); 
-      circle.setAttribute('cy', y);
-      circle.setAttribute('r', '6');
-      circle.setAttribute('fill', skills[i].color);
-      circle.setAttribute('stroke', 'white');
-      circle.setAttribute('stroke-width', '2');
-      circle.style.cursor = 'pointer';
-      circle.style.transition = 'r 0.2s ease';
-
-      // Events
-      circle.addEventListener('mouseenter', function() {
-        this.setAttribute('r', '9');
-        const s = skills[i];
-        const insight = document.getElementById('radarInsight');
-        if(insight) {
-          insight.innerHTML = '<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+s.desc+'</span>';
-        }
-      });
-
-      circle.addEventListener('mouseleave', function() {
-        this.setAttribute('r', '6');
-        const insight = document.getElementById('radarInsight');
-        if(insight) {
-          insight.innerHTML = 'Survolez le graphique pour les détails.';
-        }
-      });
-
-      points.appendChild(circle);
-    }
-
-    dataArea.setAttribute('points', dataPts.join(' '));
-    dataArea.setAttribute('fill', 'rgba(0,51,153,0.15)');
-    dataArea.setAttribute('stroke', '#003399');
-    dataArea.setAttribute('stroke-width', '2.5');
-    dataArea.setAttribute('stroke-linejoin', 'round');
-
-    // Labels
-    for(let i=0; i<n; i++){
-      const angle = (Math.PI*2*i/n) - Math.PI/2;
-      const lx = cx + (r + 22) * Math.cos(angle);
-      const ly = cy + (r + 22) * Math.sin(angle);
-      const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-      text.setAttribute('x', lx); 
-      text.setAttribute('y', ly);
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('dominant-baseline', 'middle');
-      text.setAttribute('font-size', '9');
-      text.setAttribute('font-weight', '700');
-      text.setAttribute('fill', '#5C6470');
-      text.textContent = skills[i].name;
-      labels.appendChild(text);
-    }
-
-    // Animation d'entrée
-    dataArea.style.opacity = '0';
-    setTimeout(() => { dataArea.style.transition = 'opacity 1s ease'; dataArea.style.opacity = '1'; }, 100);
-  }
-
-  // ERP Bars
-  function initERPBars() {
-    const erpContainer = document.getElementById('erpBars');
-    if(!erpContainer) return;
-    erpContainer.innerHTML = '';
-
-    erps.forEach(function(erp, i){
-      const div = document.createElement('div');
-      div.className = 'erp-bar';
-      div.innerHTML = '<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
-      erpContainer.appendChild(div);
-      setTimeout(function(){
-        const fill = div.querySelector('.erp-fill');
-        if(fill) fill.style.width = erp.value + '%';
-      }, 300 + i * 100);
-    });
-  }
-
-  // Initialiser quand le DOM est prêt
-  if(document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      initRadar();
-      initERPBars();
-    });
-  } else {
-    initRadar();
-    initERPBars();
-  }
-})();
-// ===== BADGES =====
-(function(){
-const badges=[
-  {id:'diplome', emoji:'🎓', name:'Diplômé', desc:'Master STIC ULB + Licence Comptable', unlocked:true},
-  {id:'expert', emoji:'🏆', name:'Expert', desc:'13 ans d'expérience + Bruxelles Formation', unlocked:true},
-  {id:'sap', emoji:'💻', name:'SAP Key', desc:'Certification SAP + Europass', unlocked:true},
-  {id:'blockchain', emoji:'⛓️', name:'Blockchain', desc:'Certificat ancré sur Bitcoin (Merkle)', unlocked:true},
-  {id:'fiscal', emoji:'⚖️', name:'Fiscaliste', desc:'Parcours ITAA ICHEC en cours', unlocked:false},
-  {id:'erasmus', emoji:'🇪🇺', name:'Erasmus+', desc:'2 mobilités: Salzburg & Aix-Marseille', unlocked:true},
-  {id:'toast', emoji:'🎤', name:'Orateur', desc:'Président Toastmasters International', unlocked:true},
-  {id:'flexi', emoji:'⏰', name:'Flexi', desc:'Disponible soirs & week-ends', unlocked:true}
-];
-let unlocked=0;
-const grid=document.getElementById('badgesGrid');
-badges.forEach(b=>{
-  const div=document.createElement('div');
-  div.className='badge-card '+(b.unlocked?'unlocked':'locked');
-  if(b.unlocked) unlocked++;
-  div.innerHTML='<span class="badge-emoji">'+(b.unlocked?b.emoji:'🔒')+'</span><span class="badge-name">'+b.name+'</span>';
-  div.onclick=()=>{
-    const d=document.getElementById('badgeDetail');
-    document.getElementById('badgeDetailIcon').textContent=b.unlocked?b.emoji:'🔒';
-    document.getElementById('badgeDetailTitle').textContent=b.name+(b.unlocked?' ✅':' 🔒');
-    document.getElementById('badgeDetailDesc').textContent=b.desc;
-    d.style.display='block';
-  };
-  grid.appendChild(div);
-});
-document.getElementById('badgeProgress').textContent=unlocked+'/'+badges.length+' débloqués';
-})();
-
-// ===== CHATBOT =====
-const responses={
-  erp:{q:'Quels ERP maîtrisez-vous ?', a:'<strong>5 ERP principaux</strong> :<br>• <strong>SAP</strong> (Key User certifié)<br>• <strong>Odoo</strong> — Comptabilité & CRM<br>• <strong>Winbooks</strong> — Standard belge<br>• <strong>Adfinity</strong> — ASBLs & fondations<br>• <strong>Octopus</strong> — Gestion documentaire<br><br>+ Excel avancé (VBA, tableaux croisés)'},
-  flexi:{q:'Flexi-job disponible ?', a:'<strong>✅ Disponible en Flexi-Job !</strong><br>• Secteurs : Horeca 🍽️, Logistique 📦, Admin/IT 💻<br>• Horaires : Soirs & week-ends<br>• Zone : Bruxelles<br>• Vérifié sur <a href="https://mycareer.socialsecurity.be/" target="_blank" class="ref-link">mycareer.be</a><br><br>Idéal pour compléter mon emploi principal.'},
-  master:{q:'Parlez-moi de votre Master', a:'<strong>Double Master :</strong><br><br>🎓 <strong>Master STIC</strong> (2021-2023) — ULB<br>• SQL, PHP, BPMN, gestion projet IT<br>• QR code diplôme vérifiable<br><br>⚖️ <strong>Master Droit Fiscal</strong> (2025-2027) — ICHEC<br>• Parcours professionnel ITAA<br>• Objectif : Fiscaliste / Direction financière'},
-  contact:{q:'Comment vous contacter ?', a:'<strong>📞 Contact direct :</strong><br>• Tél : <a href="tel:+32471692067" class="ref-link">+32 471 69 20 67</a><br>• Email : <a href="mailto:elaurentsteve@gmail.com" class="ref-link">elaurentsteve@gmail.com</a><br>• Adresse : Rue Jules Broeren 30, 1070 Bruxelles<br><br>• Réponse sous 24h<br>• En poste, ouvert aux opportunités'},
-  blockchain:{q:'Certificat blockchain ?', a:'<strong>⛓️ Oui, ancré sur Bitcoin !</strong><br>• Émetteur : Bruxelles Formation<br>• Hash SHA256 vérifié<br>• Merkle Root : <code style="font-size:9px">0e47af4b...</code><br>• <a href="https://www.blockchain.com/btc/tx/c8958b63fff7bece5917f444147eafa6113297c6ba9437f201c0265ae70522b8" target="_blank" class="ref-link">Voir sur blockchain.com</a><br><br>Standard : Chainpoint v2 + Woleet Signature v2'},
-  default:{q:'', a:'Je peux répondre sur :<br>• 💻 ERP et outils maîtrisés<br>• ⏰ Disponibilité flexi-job<br>• 🎓 Formations et diplômes<br>• 📞 Coordonnées de contact<br>• ⛓️ Certificat blockchain<br><br><em>Cliquez sur un bouton ou posez votre question !</em>'}
-};
-
-function askQuestion(key){
-  const r=responses[key]||responses.default;
-  addChat(r.q,'user');
-  setTimeout(()=>addChat(r.a,'bot'),300);
-}
-function sendChat(){
-  const input=document.getElementById('chatInput');
-  const text=input.value.trim();
-  if(!text) return;
-  addChat(text,'user');
-  input.value='';
-  setTimeout(()=>{
-    const lower=text.toLowerCase();
-    let key='default';
-    if(lower.includes('erp')||lower.includes('sap')||lower.includes('odoo')||lower.includes('winbook')) key='erp';
-    else if(lower.includes('flexi')||lower.includes('job')||lower.includes('soir')||lower.includes('week')) key='flexi';
-    else if(lower.includes('master')||lower.includes('stic')||lower.includes('ichec')||lower.includes('diplome')) key='master';
-    else if(lower.includes('contact')||lower.includes('tel')||lower.includes('mail')||lower.includes('email')||lower.includes('adresse')) key='contact';
-    else if(lower.includes('blockchain')||lower.includes('bitcoin')||lower.includes('merkle')||lower.includes('certificat')) key='blockchain';
-    addChat(responses[key].a,'bot');
-  },500);
-}
-function addChat(html,sender){
-  const container=document.getElementById('chatMessages');
-  const div=document.createElement('div');
-  div.style.cssText=sender==='bot'
-    ? 'align-self:flex-start;background:#fff;padding:8px 12px;border-radius:10px 10px 10px 2px;font-size:11px;color:var(--text);max-width:90%;box-shadow:0 1px 2px rgba(0,0,0,0.04)'
-    : 'align-self:flex-end;background:var(--eu-blue);padding:8px 12px;border-radius:10px 10px 2px 10px;font-size:11px;color:#fff;max-width:90%';
-  div.innerHTML=sender==='bot'?'<strong style="color:var(--eu-blue)">🤖</strong> '+html:html;
-  container.appendChild(div);
-  container.scrollTop=container.scrollHeight;
-}
-</script>
-
-
-<!-- ANIMATION IT + DATA INTEGRITY + ITAA -->
-<div class="card animate-on-scroll accordion" id="anim-integrity" style="margin-bottom:1.25rem;overflow:hidden">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" id="anim-integrity" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Chaîne de confiance IT & ITAA</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Chaîne de confiance IT & ITAA" data-en="IT Trust Chain & ITAA" data-nl="IT Vertrouwensketen & ITAA">Chaîne de confiance IT & ITAA</span>
-  </div>
-
-  <div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <span>Chaîne de confiance IT & ITAA</span>
+    </div>
+<div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
     <!-- Animated background grid -->
     <div style="position:absolute;inset:0;opacity:0.15;background-image:linear-gradient(rgba(0,51,153,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,51,153,0.3) 1px,transparent 1px);background-size:30px 30px;animation:gridMove 20s linear infinite"></div>
 
@@ -1277,185 +1083,18 @@ function addChat(html,sender){
   </div>
   </div>
 </div>
-
-<style>
-@keyframes gridMove{0%{background-position:0 0}100%{background-position:30px 30px}}
-@keyframes hubPulse{0%,100%{box-shadow:0 0 40px rgba(0,51,153,0.6),0 0 80px rgba(255,204,0,0.2);transform:scale(1)}50%{box-shadow:0 0 60px rgba(0,51,153,0.8),0 0 120px rgba(255,204,0,0.3);transform:scale(1.05)}}
-@keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── ACCORDÉON HOVER ── */
-.card.accordion, .flexi-card.accordion {
-  padding: 0 !important;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.card.accordion .accordion-header,
-.flexi-card.accordion .accordion-header {
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  background: var(--bg);
-}
-.card.accordion .accordion-header:hover,
-.flexi-card.accordion .accordion-header:hover {
-  background: var(--eu-blue-light);
-}
-.card.accordion .accordion-header .section-label,
-.flexi-card.accordion .accordion-header .section-label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-  flex: 1;
-}
-.card.accordion .accordion-chevron,
-.flexi-card.accordion .accordion-chevron {
-  width: 20px;
-  height: 20px;
-  stroke: var(--eu-blue);
-  fill: none;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-.card.accordion.expanded .accordion-chevron,
-.flexi-card.accordion.expanded .accordion-chevron {
-  transform: rotate(180deg);
-}
-.card.accordion .accordion-body,
-.flexi-card.accordion .accordion-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.4s ease;
-  padding: 0 1.5rem;
-}
-.card.accordion.expanded .accordion-body,
-.flexi-card.accordion.expanded .accordion-body {
-  max-height: 5000px;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-/* Hover expand pour desktop */
-@media (min-width: 901px) {
-  .card.accordion:hover .accordion-body,
-  .flexi-card.accordion:hover .accordion-body {
-    max-height: 5000px;
-    padding: 0 1.5rem 1.5rem 1.5rem;
-  }
-  .card.accordion:hover .accordion-chevron,
-  .flexi-card.accordion:hover .accordion-chevron {
-    transform: rotate(180deg);
-  }
-}
-
-/* Mobile: click only */
-@media (max-width: 900px) {
-  .card.accordion .accordion-header,
-  .flexi-card.accordion .accordion-header {
-    padding: 1rem;
-  }
-  .card.accordion .accordion-body,
-  .flexi-card.accordion .accordion-body {
-    padding: 0 1rem;
-  }
-  .card.accordion.expanded .accordion-body,
-  .flexi-card.accordion.expanded .accordion-body {
-    padding: 0 1rem 1rem 1rem;
-  }
-}
-
-/* Dark mode accordéon */
-body.dark-mode .card.accordion .accordion-header:hover,
-body.dark-mode .flexi-card.accordion .accordion-header:hover {
-  background: #334155;
-}
-
-/* Fix radar chart container */
-#radarChart {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: block;
-}
-
-/* Fix animation keyframes conflict */
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-</style>
-
-<script>
-// Position orbit nodes
-(function(){
-const container=document.getElementById('orbitContainer');
-const nodes=container.querySelectorAll('.orbit-node');
-const radius=110;
-nodes.forEach(node=>{
-  const angle=parseFloat(node.dataset.angle)*Math.PI/180;
-  const x=radius*Math.cos(angle);
-  const y=radius*Math.sin(angle);
-  node.style.left='50%';
-  node.style.top='50%';
-  node.style.transform='translate('+(x-25)+'px,'+(y-25)+'px)';
-});
-
-// Create particles
-const particlesContainer=document.getElementById('particles');
-for(let i=0;i<20;i++){
-  const p=document.createElement('div');
-  p.style.cssText='position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,204,0,'+(0.2+Math.random()*0.3)+');animation:floatParticle '+(8+Math.random()*12)+'s linear infinite;left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%';
-  particlesContainer.appendChild(p);
-}
-})();
-
-const nodeDetails={
-  blockchain:{icon:'₿',title:'Certificat Blockchain — Bruxelles Formation',desc:'Ancré sur la blockchain Bitcoin via Chainpoint SHA256 v2. Hash document vérifié, Merkle root immuable, signature Woleet v2. Preuve mathématique d'authenticité.'},
-  itaa:{icon:'⚖️',title:'Parcours Professionnel ITAA',desc:'Master en Droit Fiscal à l'ICHEC (2025-2027). Objectif : expertise comptable et fiscale. Maîtrise des déclarations TVA, IPM, ISOC, IPP en environnement belge.'},
-  erp:{icon:'💻',title:'Maîtrise des ERP',desc:'SAP Key User certifié (Europass), Odoo, Winbooks, Adfinity, Octopus. Intégration comptable, automatisation des processus, reporting multi-dimensions.'},
-  stic:{icon:'🎓',title:'Master STIC — ULB',desc:'Sciences et Technologies de l'Information. Compétences : SQL, PHP, BPMN, gestion de projet IT. QR code diplôme vérifiable sur registre officiel ULB.'},
-  ifrs:{icon:'📊',title:'Normes IFRS',desc:'Comptabilité selon les normes internationales IFRS. Application pratique chez Reinbold Export Import. Convergence des standards comptables mondiaux.'}
-};
-
-function showNodeDetail(key){
-  const d=nodeDetails[key];
-  const panel=document.getElementById('nodeDetail');
-  document.getElementById('nodeDetailIcon').textContent=d.icon;
-  document.getElementById('nodeDetailTitle').textContent=d.title;
-  document.getElementById('nodeDetailDesc').textContent=d.desc;
-  panel.style.display='block';
-}
-function closeNodeDetail(){
-  document.getElementById('nodeDetail').style.display='none';
-}
-
-// Central hub click
- document.getElementById('centralHub').addEventListener('click',function(){
-  document.getElementById('nodeDetailIcon').textContent='🔐';
-  document.getElementById('nodeDetailTitle').textContent='Data Integrity Hub';
-  document.getElementById('nodeDetailDesc').textContent='Centre de convergence : blockchain (preuve immuable) + ITAA (expertise réglementée) + ERP (systèmes d'information) + Master STIC (compétences IT) + IFRS (normes internationales). La double compétence Finance × IT garantit l'intégrité des données de bout en bout.';
-  document.getElementById('nodeDetail').style.display='block';
-});
-</script>
-
-
-<div class="flexi-card animate-on-scroll accordion">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
-      <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-      <span>Section</span>
-    </div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+<div class="accordion-panel" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
+    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
+    <div class="v-title">Flexi-Job</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <div class="flexi-header">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
+      <span>Flexi-Job</span>
+    </div>
+<div class="flexi-header">
     <div class="flexi-badge-eligible">
       <div class="flexi-dot"></div>
       <span class="t" data-fr="Disponible en Flexi-Job" data-en="Available for Flexi-Job" data-nl="Beschikbaar Flexi-Job">Disponible en Flexi-Job</span>
@@ -1501,19 +1140,18 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
-<!-- FORMATION CONTINUE -->
-<div class="card animate-on-scroll accordion">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Formation continue & activités</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Formation continue & activités" data-en="Continuing Education & Activities" data-nl="Permanente Vorming & Activiteiten">Formation continue & activités</span>
-  </div>
-
-  <div class="cont-item">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <span>Formation continue & activités</span>
+    </div>
+<div class="cont-item">
     <span class="cont-year">2024 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon"><use href="#icon-ext"/></svg></a> — Salzburg (AT)</span>
     <span>The Heritage of Money and Coinage: From the Mine to the Mint</span>
   </div>
@@ -1539,23 +1177,22 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
+</div>
 </div><!-- /main col -->
-
-<!-- SIDEBAR -->
 <div>
-<!-- FORMATION -->
-<div class="card animate-on-scroll accordion" id="formation">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-wrapper">
+<div class="accordion-panel" id="formation" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Formation</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
-  </div>
-
-  <div class="edu-item">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <span>Formation</span>
+    </div>
+<div class="edu-item">
     <div class="edu-school">
       <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
         ICHEC Brussels Management School
@@ -1704,18 +1341,18 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
-<!-- LANGUES -->
-<div class="card animate-on-scroll accordion" id="langues">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" id="langues" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Langues</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
-  </div>
-  <div class="lang-item">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <span>Langues</span>
+    </div>
+<div class="lang-item">
     <div class="lang-row">
       <span class="lang-name">Français</span>
       <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
@@ -1749,18 +1386,18 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
-<!-- COMPETENCES -->
-<div class="card animate-on-scroll accordion" id="competences">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" id="competences" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Compétences</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
-  </div>
-  <div class="skill-group">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <span>Compétences</span>
+    </div>
+<div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
       <span class="skill-tag t" data-fr="Comptabilité générale" data-en="General accounting" data-nl="Algemene boekhouding">Comptabilité générale</span>
@@ -1813,18 +1450,18 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
-<!-- CERTIFICATIONS -->
-<div class="card animate-on-scroll accordion" id="certifications">
-  <div class="accordion-header" onclick="toggleAccordion(this)">
-    <div class="section-label">
+<div class="accordion-panel" id="certifications" onclick="activatePanel(this)">
+  <div class="accordion-header-v">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-    <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <div class="v-title">Certifications</div>
+    <svg class="v-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="accordion-body">
-    <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
-  </div>
-  <div class="cert-item">
+  <div class="accordion-body-h">
+    <div class="section-label">
+      <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
+      <span>Certifications</span>
+    </div>
+<div class="cert-item">
     <span class="cert-name">
       <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
       &nbsp;—&nbsp;
@@ -1849,7 +1486,7 @@ function closeNodeDetail(){
   </div>
   </div>
 </div>
-
+</div>
 </div><!-- /sidebar -->
 </div><!-- /main-grid -->
 
@@ -1865,7 +1502,151 @@ function closeNodeDetail(){
 </div><!-- /page -->
 
 <script>
+// ── ACCORDÉON HORIZONTAL ──
+function activatePanel(panel) {
+  if (window.innerWidth <= 900) {
+    const wasActive = panel.classList.contains('active');
+    document.querySelectorAll('.accordion-panel').forEach(p => p.classList.remove('active'));
+    if (!wasActive) panel.classList.add('active');
+  }
+}
+
+// ── RADAR CHART ──
+function initRadar() {
+  const svg = document.getElementById('radarChart');
+  if (!svg) return;
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const skills = [
+    {name:'Comptabilité', value:95, color:'#003399', desc:'13 ans — cycle complet, IFRS, comptes annuels.'},
+    {name:'Fiscalité', value:75, color:'#059669', desc:'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.'},
+    {name:'ERP/Systèmes', value:90, color:'#7C3AED', desc:'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.'},
+    {name:'IT/Dév.', value:70, color:'#FF6B35', desc:'Master STIC ULB — SQL, PHP, BPMN, projet IT.'},
+    {name:'Gestion Proj.', value:80, color:'#0891B2', desc:'Supervision FSE, animation Toastmasters.'},
+    {name:'Langues', value:85, color:'#DC2626', desc:'FR natif, EN courant (B2-C1), NL notions, Créole natif.'}
+  ];
+
+  const cx = 130, cy = 110, r = 85;
+  const n = skills.length;
+
+  const grid = document.createElementNS('http://www.w3.org/2000/svg','g');
+  const dataArea = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  const points = document.createElementNS('http://www.w3.org/2000/svg','g');
+  const labels = document.createElementNS('http://www.w3.org/2000/svg','g');
+
+  svg.appendChild(grid);
+  svg.appendChild(dataArea);
+  svg.appendChild(points);
+  svg.appendChild(labels);
+
+  // Grille
+  for (let level = 1; level <= 5; level++) {
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      const rad = r * level / 5;
+      pts.push((cx + rad * Math.cos(angle)) + ',' + (cy + rad * Math.sin(angle)));
+    }
+    const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    poly.setAttribute('points', pts.join(' '));
+    poly.setAttribute('fill', 'none');
+    poly.setAttribute('stroke', level === 5 ? '#D4D8DF' : '#E5E7EB');
+    poly.setAttribute('stroke-width', '1');
+    grid.appendChild(poly);
+  }
+
+  // Axes
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+    line.setAttribute('x2', cx + r * Math.cos(angle));
+    line.setAttribute('y2', cy + r * Math.sin(angle));
+    line.setAttribute('stroke', '#E5E7EB');
+    grid.appendChild(line);
+  }
+
+  // Données
+  const dataPts = [];
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const rad = (skills[i].value / 100) * r;
+    const x = cx + rad * Math.cos(angle);
+    const y = cy + rad * Math.sin(angle);
+    dataPts.push(x + ',' + y);
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx', x); circle.setAttribute('cy', y);
+    circle.setAttribute('r', '6');
+    circle.setAttribute('fill', skills[i].color);
+    circle.setAttribute('stroke', 'white');
+    circle.setAttribute('stroke-width', '2');
+    circle.style.cursor = 'pointer';
+
+    circle.addEventListener('mouseenter', function() {
+      this.setAttribute('r', '9');
+      const s = skills[i];
+      const insight = document.getElementById('radarInsight');
+      if (insight) insight.innerHTML = '<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+s.desc+'</span>';
+    });
+
+    circle.addEventListener('mouseleave', function() {
+      this.setAttribute('r', '6');
+      const insight = document.getElementById('radarInsight');
+      if (insight) insight.innerHTML = 'Survolez le graphique pour les détails.';
+    });
+
+    points.appendChild(circle);
+  }
+
+  dataArea.setAttribute('points', dataPts.join(' '));
+  dataArea.setAttribute('fill', 'rgba(0,51,153,0.15)');
+  dataArea.setAttribute('stroke', '#003399');
+  dataArea.setAttribute('stroke-width', '2.5');
+
+  // Labels
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+    text.setAttribute('x', cx + (r + 22) * Math.cos(angle));
+    text.setAttribute('y', cy + (r + 22) * Math.sin(angle));
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-size', '9');
+    text.setAttribute('font-weight', '700');
+    text.setAttribute('fill', '#5C6470');
+    text.textContent = skills[i].name;
+    labels.appendChild(text);
+  }
+
+  dataArea.style.opacity = '0';
+  setTimeout(() => { dataArea.style.opacity = '1'; dataArea.style.transition = 'opacity 1s ease'; }, 100);
+}
+
+function initERPBars() {
+  const container = document.getElementById('erpBars');
+  if (!container) return;
+
+  const erps = [
+    {name:'Winbooks', value:95}, {name:'SAP', value:85},
+    {name:'Odoo', value:90}, {name:'Adfinity', value:88},
+    {name:'Octopus', value:80}, {name:'Excel', value:92}
+  ];
+
+  container.innerHTML = '';
+  erps.forEach((erp, i) => {
+    const div = document.createElement('div');
+    div.className = 'erp-bar';
+    div.innerHTML = '<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
+    container.appendChild(div);
+    setTimeout(() => {
+      const fill = div.querySelector('.erp-fill');
+      if (fill) fill.style.width = erp.value + '%';
+    }, 300 + i * 100);
+  });
+}
+
 // ── SCROLL PROGRESS ──
+
 window.addEventListener('scroll', () => {
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1916,33 +1697,6 @@ if (localStorage.getItem('darkMode') === 'true') {
   document.getElementById('themeIcon').innerHTML = '<use href="#icon-sun"/>';
 }
 
-
-// ── ACCORDÉON ──
-function toggleAccordion(header) {
-  const card = header.closest('.accordion');
-  if (!card) return;
-
-  // Sur mobile, on toggle. Sur desktop, le hover gère tout.
-  if (window.innerWidth <= 900) {
-    card.classList.toggle('expanded');
-  }
-}
-
-// Sur desktop, les accordéons sont dépliés par défaut au chargement
-// pour que le contenu soit visible, mais se replient au hover
-function initAccordions() {
-  const accordions = document.querySelectorAll('.card.accordion, .flexi-card.accordion');
-  accordions.forEach(function(acc) {
-    // Sur desktop (>900px), on laisse le hover gérer
-    // Sur mobile, on commence replié
-    if (window.innerWidth <= 900) {
-      acc.classList.remove('expanded');
-    }
-  });
-}
-
-window.addEventListener('resize', initAccordions);
-
 // ── PROFILE SWITCHER ──
 let currentProfile = 'comptable';
 function setProfile(profile) {
@@ -1990,7 +1744,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Initialize
-setLang('fr');
+initRadar();
+initERPBars();
+
 </script>
 
 </body>
