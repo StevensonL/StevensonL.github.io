@@ -15,7 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --eu-blue:#003399;--eu-yellow:#FFCC00;--eu-blue-mid:#336699;
@@ -34,6 +33,39 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--s
 
 /* ── DARK MODE ── */
 body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--surface-alt:#334155;--border:#334155;--eu-blue-light:#1E3A5F;--eu-blue-pale:#1E293B;--shadow:0 4px 16px rgba(0,0,0,0.3);--shadow-hover:0 8px 32px rgba(0,0,0,0.4)}
+body.dark-mode .card,body.dark-mode .hero{background:var(--surface);border-color:#334155}
+body.dark-mode .topbar{background:rgba(30,41,59,0.95);border-color:#334155}
+body.dark-mode .skill-tag{background:#1E293B;border-color:#475569}
+body.dark-mode .contact-chip{background:#1E293B;border-color:#475569;color:#94A3B8}
+body.dark-mode .contact-chip:hover{background:#334155;color:var(--eu-blue)}
+body.dark-mode .timeline-dot{background:#475569}
+body.dark-mode .timeline-line{background:#334155}
+body.dark-mode .lang-dot{background:#475569}
+body.dark-mode .blockchain-proof{background:#1E293B;border-color:#475569}
+body.dark-mode .blockchain-proof-header{background:#334155}
+body.dark-mode .blockchain-proof-body{border-color:#475569}
+body.dark-mode .blockchain-val{color:#CBD5E1}
+body.dark-mode .blockchain-merkle-note{background:#334155;color:#94A3B8}
+body.dark-mode .flexi-info{background:#1E293B}
+body.dark-mode .flexi-role{background:#1E293B;border-color:#475569}
+body.dark-mode .flexi-avantage-tag{background:#1E293B;border-color:#475569}
+body.dark-mode .edu-badge{background:#1E293B;border-color:#475569}
+body.dark-mode .edu-badge:hover{background:#334155}
+body.dark-mode .cont-item{background:#1E293B;border-color:#334155}
+body.dark-mode .stat-card{background:#1E293B;border-color:#334155}
+body.dark-mode .lang-card{background:#1E293B;border-color:#334155}
+body.dark-mode .cert-card{background:#1E293B;border-color:#334155}
+body.dark-mode .testimonial-card{background:#1E293B;border-color:#334155}
+body.dark-mode .blockchain-proof-title{color:#94A3B8}
+body.dark-mode .blockchain-key{color:#94A3B8}
+body.dark-mode .blockchain-divider{border-color:#475569}
+body.dark-mode .btc-badge{background:#1E293B;border-color:#475569}
+body.dark-mode .blockchain-verified-badge{background:#1E293B;border-color:#475569}
+body.dark-mode .blockchain-verified-dot{background:#10B981}
+body.dark-mode .blockchain-chain-icon{background:#334155}
+body.dark-mode .blockchain-val a{color:#60A5FA;border-color:#60A5FA}
+body.dark-mode .blockchain-val a:hover{color:#93C5FD}
+body.dark-mode .blockchain-chevron{stroke:#94A3B8}
 
 /* ── TOPBAR ── */
 .topbar{background:var(--eu-blue);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;position:fixed;top:0;left:0;right:0;z-index:200;gap:1rem;backdrop-filter:blur(12px);background:rgba(0,51,153,0.95);transition:all var(--transition)}
@@ -66,7 +98,7 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 .hero{background:var(--bg);border:1px solid var(--border);border-top:4px solid var(--eu-blue);padding:2rem 2rem 1.75rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:flex-start;margin-bottom:1.25rem;transition:all var(--transition);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--eu-blue),var(--eu-yellow));opacity:0;transition:opacity var(--transition)}
 .hero:hover::before{opacity:1}
-.hero:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.hero:hover{box-shadow:var(--shadow-hover);transform:translateY(-1px)}
 .avatar{width:96px;height:96px;border-radius:0;background:var(--eu-blue);overflow:hidden;flex-shrink:0;border:2px solid var(--border);transition:all var(--transition)}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .avatar-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',serif;font-size:28px;color:var(--eu-yellow)}
@@ -79,55 +111,40 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 /* ── CONTACT BAR ── */
 .contact-bar{display:flex;flex-wrap:wrap;gap:8px}
 .contact-chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:3px 10px;text-decoration:none;transition:all var(--transition)}
-.contact-chip:hover{border-color:var(--eu-blue);color:var(--eu-blue);background:var(--eu-blue-light);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,51,153,0.1)}
+.contact-chip:hover{border-color:var(--eu-blue);color:var(--eu-blue);background:var(--eu-blue-light);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
 .contact-chip svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
 /* ── STATS ── */
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;max-width:400px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:default}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,51,153,0.12);border-color:var(--eu-blue)}
-.stat-number{font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:var(--eu-blue);line-height:1;transition:color 0.3s}
-.stat-card:hover .stat-number{color:var(--eu-blue-mid)}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;transition:all var(--transition);cursor:default}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--eu-blue-light)}
+.stat-number{font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:var(--eu-blue);line-height:1}
 .stat-label{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600}
 
-/* ── MAIN GRID ── */
+/* ── MAIN GRID 2 COL ── */
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:1.25rem;align-items:start}
 
-/* ── ACCORDÉONS À COMMANDE ── */
-.accordion-cmd{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:var(--shadow);position:relative;margin-bottom:12px}
-.accordion-cmd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--eu-blue),var(--eu-yellow));opacity:0;transition:opacity 0.3s}
-.accordion-cmd:hover::before,.accordion-cmd.open::before{opacity:1}
-.accordion-cmd:hover{box-shadow:var(--shadow-hover);border-color:var(--eu-blue-light);transform:translateY(-1px)}
-.accordion-cmd.open{box-shadow:var(--shadow-hover);border-color:var(--eu-blue)}
+/* ── CARDS ── */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;transition:all var(--transition);position:relative;overflow:hidden}
+.card:hover{box-shadow:var(--shadow);border-color:var(--eu-blue-light);transform:translateY(-1px)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--eu-blue),var(--eu-yellow));opacity:0;transition:opacity var(--transition)}
+.card:hover::before{opacity:1}
+.card:last-child{margin-bottom:0}
 
-.accordion-header-cmd{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;background:linear-gradient(135deg,var(--eu-blue-pale) 0%,var(--eu-blue-light) 100%);border-bottom:1px solid transparent;transition:all 0.3s ease;position:relative;z-index:2;gap:12px;user-select:none}
-.accordion-cmd.open .accordion-header-cmd{background:linear-gradient(135deg,var(--eu-blue) 0%,var(--eu-blue-mid) 100%);border-bottom-color:var(--eu-blue)}
-.accordion-header-cmd .sl-icon{width:32px;height:32px;background:var(--eu-blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
-.accordion-cmd.open .accordion-header-cmd .sl-icon{background:var(--eu-yellow)}
-.accordion-header-cmd .sl-icon svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.3s}
-.accordion-cmd.open .accordion-header-cmd .sl-icon svg{stroke:var(--eu-blue)}
-.accordion-header-cmd .cmd-title{font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--eu-blue);flex:1;transition:color 0.3s}
-.accordion-cmd.open .accordion-header-cmd .cmd-title{color:white}
-.accordion-header-cmd .cmd-chevron{width:20px;height:20px;stroke:var(--eu-blue);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);flex-shrink:0}
-.accordion-cmd.open .accordion-header-cmd .cmd-chevron{stroke:white;transform:rotate(180deg)}
-
-.accordion-body-cmd{max-height:0;overflow:hidden;opacity:0;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1),opacity 0.3s ease,padding 0.3s ease;padding:0 18px;background:var(--bg)}
-.accordion-cmd.open .accordion-body-cmd{max-height:5000px;opacity:1;padding:18px}
-.accordion-body-cmd::-webkit-scrollbar{width:4px}
-.accordion-body-cmd::-webkit-scrollbar-thumb{background:var(--eu-blue-light);border-radius:2px}
-
-/* Masquer section-label dans body */
-.accordion-body-cmd > .section-label:first-child{display:none}
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--eu-blue);margin-bottom:1rem;padding-bottom:7px;border-bottom:2px solid var(--eu-blue-light);display:flex;align-items:center;gap:8px;transition:all var(--transition)}
+.section-label .sl-icon{width:16px;height:16px;background:var(--eu-blue);border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--transition)}
+.card:hover .section-label .sl-icon{background:var(--eu-blue-mid)}
+.section-label .sl-icon svg{width:10px;height:10px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
 /* ── TIMELINE ── */
 .timeline{position:relative;padding-left:28px}
 .timeline-line{position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border);border-radius:1px}
 .timeline-item{position:relative;padding-bottom:24px}
 .timeline-item:last-child{padding-bottom:0}
-.timeline-dot{position:absolute;left:-24px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--bg);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:2}
-.timeline-item:hover .timeline-dot{border-color:var(--eu-blue);background:var(--eu-blue);box-shadow:0 0 0 4px rgba(0,51,153,0.15)}
+.timeline-dot{position:absolute;left:-24px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--bg);border:3px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all var(--transition);z-index:2}
 .timeline-dot svg{width:8px;height:8px;stroke:var(--muted);fill:none;stroke-width:2.5}
-.timeline-item:hover .timeline-dot svg{stroke:white}
+.timeline-item:hover .timeline-dot{border-color:var(--eu-blue);background:var(--eu-blue-light)}
+.timeline-item:hover .timeline-dot svg{stroke:var(--eu-blue)}
 
 /* ── JOBS ── */
 .job{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);transition:all var(--transition)}
@@ -136,8 +153,8 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 .job-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:4px}
 .job-company{font-size:13.5px;font-weight:700;color:var(--text);transition:color var(--transition)}
 .job-company:hover{color:var(--eu-blue)}
-.job-date{font-size:11px;color:var(--eu-blue);background:var(--eu-blue-light);padding:2px 8px;border-radius:3px;font-weight:600;white-space:nowrap;transition:all 0.3s}
-.job:hover .job-date{background:var(--eu-blue);color:white;box-shadow:0 2px 8px rgba(0,51,153,0.25)}
+.job-date{font-size:11px;color:var(--eu-blue);background:var(--eu-blue-light);padding:2px 8px;border-radius:3px;font-weight:600;white-space:nowrap;transition:all var(--transition)}
+.job:hover .job-date{background:var(--eu-blue);color:white}
 .job-role{font-size:12px;color:var(--muted);margin:2px 0 7px;font-style:italic}
 .job-location{font-size:11px;color:var(--muted);margin-bottom:6px}
 .bullets{list-style:none;padding:0}
@@ -156,8 +173,8 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 .edu-date{font-size:11px;color:var(--eu-blue);font-weight:600;transition:all var(--transition)}
 .edu-item:hover .edu-date{color:var(--eu-blue-mid)}
 .edu-note{font-size:11px;color:var(--muted);margin-top:2px}
-.edu-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#1565C0;background:#E3F2FD;border:1px solid #90CAF9;border-radius:3px;padding:2px 8px;text-decoration:none;transition:all 0.25s;margin:2px}
-.edu-badge:hover{background:var(--eu-blue);color:white;transform:translateY(-1px)}
+.edu-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#1565C0;background:#E3F2FD;border:1px solid #90CAF9;border-radius:3px;padding:2px 8px;text-decoration:none;transition:all var(--transition);margin:2px}
+.edu-badge:hover{background:#BBDEFB;transform:translateY(-1px)}
 .edu-badge svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2}
 .edu-qr{display:flex;align-items:center;gap:12px;margin-top:8px}
 .edu-qr img{width:64px;height:64px;border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition)}
@@ -166,8 +183,8 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 .edu-qr-text strong{color:var(--eu-blue);font-weight:700}
 
 /* ── BLOCKCHAIN PROOF ── */
-.blockchain-proof{margin-top:8px;border:1px solid #D1C4E9;border-radius:var(--radius);background:#F3EEF9;overflow:hidden;transition:all 0.3s}
-.blockchain-proof:hover{border-color:var(--eu-blue);box-shadow:0 4px 16px rgba(0,51,153,0.1)}
+.blockchain-proof{margin-top:8px;border:1px solid #D1C4E9;border-radius:var(--radius);background:#F3EEF9;overflow:hidden;transition:all var(--transition)}
+.blockchain-proof:hover{border-color:#B39DDB}
 .blockchain-proof-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#EDE7F6;cursor:pointer;user-select:none;gap:8px;transition:all var(--transition)}
 .blockchain-proof-header:hover{background:#E1D5F0}
 .blockchain-proof-left{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
@@ -177,6 +194,7 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 .blockchain-verified-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:#2E7D32;background:#E8F5E9;border:1px solid #A5D6A7;border-radius:3px;padding:2px 8px;transition:all var(--transition)}
 .blockchain-verified-dot{width:6px;height:6px;border-radius:50%;background:#2E7D32;transition:all var(--transition)}
 .blockchain-proof:hover .blockchain-verified-dot{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 .blockchain-chevron{width:14px;height:14px;stroke:#6C3FC1;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition);flex-shrink:0}
 .blockchain-proof.open .blockchain-chevron{transform:rotate(180deg)}
 .blockchain-proof-body{display:none;padding:10px 12px;border-top:1px solid #D1C4E9}
@@ -194,7 +212,7 @@ body.dark-mode{--text:#F1F5F9;--muted:#94A3B8;--bg:#0F172A;--surface:#1E293B;--s
 
 /* ── FLEXI-JOB ── */
 .flexi-card{background:var(--bg);border:1px solid var(--flexi-green-border);border-top:4px solid var(--flexi-green);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;transition:all var(--transition)}
-.flexi-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.flexi-card:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
 .flexi-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .flexi-badge-eligible{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--flexi-green);background:var(--flexi-green-bg);border:1px solid var(--flexi-green-border);border-radius:3px;padding:4px 12px;transition:all var(--transition)}
 .flexi-badge-eligible:hover{transform:scale(1.02)}
@@ -228,8 +246,8 @@ a.ref-link:hover .ext-icon{opacity:1}
 .skill-group-title{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--eu-blue);margin-bottom:6px;transition:color var(--transition)}
 .skill-group:hover .skill-group-title{color:var(--eu-blue-mid)}
 .skill-tags{display:flex;flex-wrap:wrap;gap:5px}
-.skill-tag{font-size:11.5px;background:var(--eu-blue-pale);color:var(--eu-blue);border:1px solid var(--eu-blue-light);border-radius:3px;padding:2px 8px;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);cursor:default}
-.skill-tag:hover{background:var(--eu-blue);color:white;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,51,153,0.2)}
+.skill-tag{font-size:11.5px;background:var(--eu-blue-pale);color:var(--eu-blue);border:1px solid var(--eu-blue-light);border-radius:3px;padding:2px 8px;transition:all var(--transition);cursor:default}
+.skill-tag:hover{background:var(--eu-blue);color:white;transform:scale(1.05);box-shadow:var(--shadow-sm)}
 .skill-tag a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:3px}
 .skill-tag a svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2}
 
@@ -242,9 +260,9 @@ a.ref-link:hover .ext-icon{opacity:1}
 .lang-item:hover .lang-name{color:var(--eu-blue)}
 .lang-level{color:var(--muted);font-size:11.5px}
 .lang-dots{display:flex;gap:4px}
-.lang-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all 0.3s}
-.lang-dot.filled{background:var(--eu-blue);box-shadow:0 0 0 2px rgba(0,51,153,0.1)}
-.lang-item:hover .lang-dot.filled{transform:scale(1.2);box-shadow:0 0 0 4px rgba(0,51,153,0.15)}
+.lang-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all var(--transition)}
+.lang-dot.filled{background:var(--eu-blue)}
+.lang-item:hover .lang-dot.filled{transform:scale(1.15)}
 .cefr{font-size:10px;color:var(--muted);margin-top:2px}
 
 /* ── CONTINUING EDU ── */
@@ -259,18 +277,18 @@ a.ref-link:hover .ext-icon{opacity:1}
 .cert-item:hover{padding-left:4px}
 .cert-name{font-weight:600;color:var(--text);transition:color var(--transition)}
 .cert-item:hover .cert-name{color:var(--eu-blue)}
-.cert-year{font-size:11px;color:var(--eu-blue);font-weight:700;flex-shrink:0;background:var(--eu-blue-light);padding:2px 8px;border-radius:3px;transition:all 0.3s}
+.cert-year{font-size:11px;color:var(--eu-blue);font-weight:700;flex-shrink:0;background:var(--eu-blue-light);padding:2px 8px;border-radius:3px;transition:all var(--transition)}
 .cert-item:hover .cert-year{background:var(--eu-blue);color:white}
 
 /* ── STATUS BADGE ── */
-.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--eu-blue);background:var(--eu-blue-pale);border:1px solid var(--eu-blue-light);border-radius:3px;padding:3px 10px;margin-bottom:12px;transition:all var(--transition)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#2D7D46;background:#E8F5ED;border:1px solid #B3DEC3;border-radius:3px;padding:3px 10px;margin-bottom:12px;transition:all var(--transition)}
 .status-badge:hover{transform:scale(1.02);box-shadow:var(--shadow-sm)}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--eu-blue);animation:pulse 2s infinite}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#2D7D46;animation:pulse 2s infinite}
 
 /* ── SCROLL TO TOP ── */
-.scroll-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:var(--eu-blue);color:white;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);opacity:0;transform:translateY(20px);transition:all 0.3s cubic-bezier(0.4,0,0.2,1);z-index:999}
+.scroll-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:var(--eu-blue);color:white;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);opacity:0;transform:translateY(20px);transition:all var(--transition);z-index:999}
 .scroll-top.visible{opacity:1;transform:translateY(0)}
-.scroll-top:hover{background:var(--eu-blue-mid);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,51,153,0.3)}
+.scroll-top:hover{background:var(--eu-blue-mid);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
 .scroll-top svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ── ANIMATIONS ── */
@@ -284,22 +302,6 @@ footer:hover{color:#999}
 footer .ep-footer{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
 footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 
-/* ── BADGES CENTRÉS ── */
-#badgesGrid{display:grid !important;grid-template-columns:repeat(4,1fr) !important;gap:10px !important;max-width:340px !important;margin:0 auto !important}
-.badge-card{cursor:pointer;transition:all 0.3s;text-align:center;padding:10px 4px;border-radius:8px;border:2px solid transparent;background:var(--surface)}
-.badge-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.badge-card.locked{opacity:0.35;filter:grayscale(1)}
-.badge-card.unlocked{border-color:var(--eu-blue);background:var(--eu-blue-pale)}
-.badge-card.unlocked:hover{border-color:var(--eu-blue-mid);background:var(--eu-blue-light)}
-.badge-emoji{font-size:24px;margin-bottom:4px;display:block;transition:transform 0.3s}
-.badge-card:hover .badge-emoji{transform:scale(1.15)}
-.badge-name{font-size:10px;font-weight:700;color:var(--text)}
-.badge-card.locked .badge-name{color:var(--muted)}
-
-/* ── CHATBOT ── */
-#chatMessages{background:var(--surface);border:1px solid var(--border);border-radius:4px}
-#chatMessages > div:first-child{background:var(--bg) !important;border:1px solid var(--border)}
-
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;text-align:center}
@@ -312,7 +314,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .lang-btn{font-size:10px;padding:2px 6px}
   .flexi-roles{grid-template-columns:1fr}
   .hero-stats{max-width:300px;margin:0 auto}
-  #badgesGrid{grid-template-columns:repeat(4,1fr) !important}
 }
 @media(max-width:600px){
   .hero-stats{grid-template-columns:repeat(3,1fr)}
@@ -320,22 +321,17 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
   .timeline{padding-left:20px}
   .timeline-dot{left:-18px;width:16px;height:16px}
   .timeline-line{left:5px}
-  #badgesGrid{grid-template-columns:repeat(2,1fr) !important}
 }
 @media print{
   .topbar,.scroll-progress,.scroll-top,.icon-btn{display:none!important}
   body{background:white}
-  .accordion-cmd,.hero{border:1px solid #ccc;box-shadow:none!important;transform:none!important}
-  .accordion-body-cmd{max-height:none!important;opacity:1!important;padding:18px!important}
-  .accordion-header-cmd .cmd-chevron{display:none}
+  .card,.hero,.flexi-card{border:1px solid #ccc;box-shadow:none!important;transform:none!important}
   .page{padding:0}
   a.ref-link{color:var(--eu-blue);border-bottom:none}
   .animate-on-scroll{opacity:1;transform:none}
 }
-
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-
 </style>
+</head>
 <body>
 
 <!-- Scroll Progress -->
@@ -485,14 +481,14 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 
 <div class="main-grid">
 <div>
-<div class="accordion-cmd" id="experience">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+<!-- EXPERIENCE -->
+<div class="card animate-on-scroll" id="experience">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-    <div class="cmd-title">Expérience professionnelle</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="timeline">
+
+  <div class="timeline">
     <div class="timeline-line"></div>
 
     <div class="timeline-item">
@@ -590,16 +586,23 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       </div>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd" id="widget-interactif">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- FLEXI-JOB -->
+<!-- WIDGET INTERACTIF -->
+<div class="card animate-on-scroll" id="widget-interactif" style="margin-bottom:1.25rem">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-    <div class="cmd-title">Espace interactif</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Espace interactif" data-en="Interactive Space" data-nl="Interactieve Ruimte">Espace interactif</span>
   </div>
-  <div class="accordion-body-cmd">
-<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+
+  <!-- RADAR CHART -->
+  <div style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">Radar de compétences</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted);background:var(--surface);padding:2px 8px;border-radius:100px">Finance × IT</span>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:240px">
         <svg id="radarChart" viewBox="0 0 260 240" style="width:100%;max-width:280px;display:block;margin:0 auto">
           <g id="grid"></g>
@@ -668,16 +671,235 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <button onclick="sendChat()" style="padding:8px 14px;background:var(--eu-blue);color:#fff;border:none;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit">Envoyer</button>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd" id="anim-integrity">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<style>
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.badge-card{cursor:pointer;transition:all 0.3s;text-align:center;padding:8px 4px;border-radius:6px;border:2px solid transparent;background:var(--surface)}
+.badge-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.badge-card.locked{opacity:0.35;filter:grayscale(1)}
+.badge-card.unlocked{border-color:#10B981;background:#ECFDF5}
+.badge-card.unlocked:hover{border-color:#059669}
+.badge-emoji{font-size:22px;margin-bottom:2px;display:block;transition:transform 0.3s}
+.badge-card:hover .badge-emoji{transform:scale(1.15)}
+.badge-name{font-size:9px;font-weight:700;color:var(--text)}
+.badge-card.locked .badge-name{color:var(--muted)}
+.erp-bar{display:flex;align-items:center;gap:6px}
+.erp-name{font-size:11px;font-weight:600;color:var(--text);min-width:60px}
+.erp-track{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
+.erp-fill{height:100%;background:linear-gradient(90deg,var(--eu-blue),var(--eu-blue-mid));border-radius:100px;transition:width 1s ease}
+.erp-pct{font-size:10px;font-weight:700;color:var(--eu-blue);min-width:28px;text-align:right}
+</style>
+
+<script>
+// ===== RADAR CHART =====
+(function(){
+const skills = [
+  {name:'Comptabilité', value:95, color:'#003399'},
+  {name:'Fiscalité', value:75, color:'#059669'},
+  {name:'ERP/Systèmes', value:90, color:'#7C3AED'},
+  {name:'IT/Dév.', value:70, color:'#FF6B35'},
+  {name:'Gestion Proj.', value:80, color:'#0891B2'},
+  {name:'Langues', value:85, color:'#DC2626'}
+];
+const erps = [
+  {name:'Winbooks', value:95},
+  {name:'SAP', value:85},
+  {name:'Odoo', value:90},
+  {name:'Adfinity', value:88},
+  {name:'Octopus', value:80},
+  {name:'Excel', value:92}
+];
+
+// Draw radar chart
+const svg = document.getElementById('radarChart');
+if(!svg){console.error('radarChart SVG not found'); return;}
+
+const cx=130, cy=110, r=85;
+const n = skills.length;
+const grid = document.getElementById('grid');
+const dataArea = document.getElementById('dataArea');
+const points = document.getElementById('dataPoints');
+const labels = document.getElementById('labels');
+
+if(!grid || !dataArea || !points || !labels){console.error('Radar elements not found'); return;}
+
+// Draw grid circles
+for(let level=1; level<=5; level++){
+  const pts=[];
+  for(let i=0; i<n; i++){
+    const angle=(Math.PI*2*i/n)-Math.PI/2;
+    const rad=(r*level/5);
+    pts.push((cx+rad*Math.cos(angle))+','+(cy+rad*Math.sin(angle)));
+  }
+  const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  poly.setAttribute('points',pts.join(' '));
+  poly.setAttribute('fill','none');
+  poly.setAttribute('stroke',level===5?'#D4D8DF':'#E5E7EB');
+  poly.setAttribute('stroke-width','1');
+  grid.appendChild(poly);
+}
+
+// Draw axes
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1',cx); line.setAttribute('y1',cy);
+  line.setAttribute('x2',cx+r*Math.cos(angle)); line.setAttribute('y2',cy+r*Math.sin(angle));
+  line.setAttribute('stroke','#E5E7EB');
+  line.setAttribute('stroke-width','1');
+  grid.appendChild(line);
+}
+
+// Draw data polygon
+const dataPts=[];
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const rad=(skills[i].value/100)*r;
+  const x=cx+rad*Math.cos(angle);
+  const y=cy+rad*Math.sin(angle);
+  dataPts.push(x+','+y);
+
+  const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  circle.setAttribute('cx',x); circle.setAttribute('cy',y);
+  circle.setAttribute('r','5');
+  circle.setAttribute('fill',skills[i].color);
+  circle.setAttribute('stroke','white');
+  circle.setAttribute('stroke-width','2');
+  circle.style.cursor='pointer';
+  circle.addEventListener('mouseenter',(function(idx){return function(){
+    const s=skills[idx];
+    const texts={
+      'Comptabilité':'13 ans — cycle complet, IFRS, comptes annuels.',
+      'Fiscalité':'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.',
+      'ERP/Systèmes':'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.',
+      'IT/Dév.':'Master STIC ULB — SQL, PHP, BPMN, projet IT.',
+      'Gestion Proj.':'Supervision FSE, animation Toastmasters.',
+      'Langues':'FR natif, EN courant (B2-C1), NL notions, Créole natif.'
+    };
+    const insight=document.getElementById('radarInsight');
+    if(insight) insight.innerHTML='<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+texts[s.name]+'</span>';
+  };})(i));
+  circle.addEventListener('mouseleave',function(){
+    const insight=document.getElementById('radarInsight');
+    if(insight) insight.innerHTML='Survolez le graphique pour les détails.';
+  });
+  points.appendChild(circle);
+}
+dataArea.setAttribute('points', dataPts.join(' '));
+
+// Labels
+for(let i=0; i<n; i++){
+  const angle=(Math.PI*2*i/n)-Math.PI/2;
+  const lx=cx+(r+20)*Math.cos(angle);
+  const ly=cy+(r+20)*Math.sin(angle);
+  const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+  text.setAttribute('x',lx); text.setAttribute('y',ly);
+  text.setAttribute('text-anchor','middle');
+  text.setAttribute('dominant-baseline','middle');
+  text.setAttribute('font-size','9');
+  text.setAttribute('font-weight','600');
+  text.setAttribute('fill','#5C6470');
+  text.textContent=skills[i].name;
+  labels.appendChild(text);
+}
+
+// ERP Bars
+const erpContainer=document.getElementById('erpBars');
+if(erpContainer){
+  erps.forEach(function(erp,i){
+    const div=document.createElement('div');
+    div.className='erp-bar';
+    div.innerHTML='<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
+    erpContainer.appendChild(div);
+    setTimeout(function(){div.querySelector('.erp-fill').style.width=erp.value+'%';},200+i*80);
+  });
+}
+})();
+// ===== BADGES =====
+(function(){
+const badges=[
+  {id:'diplome', emoji:'🎓', name:'Diplômé', desc:'Master STIC ULB + Licence Comptable', unlocked:true},
+  {id:'expert', emoji:'🏆', name:'Expert', desc:'13 ans d'expérience + Bruxelles Formation', unlocked:true},
+  {id:'sap', emoji:'💻', name:'SAP Key', desc:'Certification SAP + Europass', unlocked:true},
+  {id:'blockchain', emoji:'⛓️', name:'Blockchain', desc:'Certificat ancré sur Bitcoin (Merkle)', unlocked:true},
+  {id:'fiscal', emoji:'⚖️', name:'Fiscaliste', desc:'Parcours ITAA ICHEC en cours', unlocked:false},
+  {id:'erasmus', emoji:'🇪🇺', name:'Erasmus+', desc:'2 mobilités: Salzburg & Aix-Marseille', unlocked:true},
+  {id:'toast', emoji:'🎤', name:'Orateur', desc:'Président Toastmasters International', unlocked:true},
+  {id:'flexi', emoji:'⏰', name:'Flexi', desc:'Disponible soirs & week-ends', unlocked:true}
+];
+let unlocked=0;
+const grid=document.getElementById('badgesGrid');
+badges.forEach(b=>{
+  const div=document.createElement('div');
+  div.className='badge-card '+(b.unlocked?'unlocked':'locked');
+  if(b.unlocked) unlocked++;
+  div.innerHTML='<span class="badge-emoji">'+(b.unlocked?b.emoji:'🔒')+'</span><span class="badge-name">'+b.name+'</span>';
+  div.onclick=()=>{
+    const d=document.getElementById('badgeDetail');
+    document.getElementById('badgeDetailIcon').textContent=b.unlocked?b.emoji:'🔒';
+    document.getElementById('badgeDetailTitle').textContent=b.name+(b.unlocked?' ✅':' 🔒');
+    document.getElementById('badgeDetailDesc').textContent=b.desc;
+    d.style.display='block';
+  };
+  grid.appendChild(div);
+});
+document.getElementById('badgeProgress').textContent=unlocked+'/'+badges.length+' débloqués';
+})();
+
+// ===== CHATBOT =====
+const responses={
+  erp:{q:'Quels ERP maîtrisez-vous ?', a:'<strong>5 ERP principaux</strong> :<br>• <strong>SAP</strong> (Key User certifié)<br>• <strong>Odoo</strong> — Comptabilité & CRM<br>• <strong>Winbooks</strong> — Standard belge<br>• <strong>Adfinity</strong> — ASBLs & fondations<br>• <strong>Octopus</strong> — Gestion documentaire<br><br>+ Excel avancé (VBA, tableaux croisés)'},
+  flexi:{q:'Flexi-job disponible ?', a:'<strong>✅ Disponible en Flexi-Job !</strong><br>• Secteurs : Horeca 🍽️, Logistique 📦, Admin/IT 💻<br>• Horaires : Soirs & week-ends<br>• Zone : Bruxelles<br>• Vérifié sur <a href="https://mycareer.socialsecurity.be/" target="_blank" class="ref-link">mycareer.be</a><br><br>Idéal pour compléter mon emploi principal.'},
+  master:{q:'Parlez-moi de votre Master', a:'<strong>Double Master :</strong><br><br>🎓 <strong>Master STIC</strong> (2021-2023) — ULB<br>• SQL, PHP, BPMN, gestion projet IT<br>• QR code diplôme vérifiable<br><br>⚖️ <strong>Master Droit Fiscal</strong> (2025-2027) — ICHEC<br>• Parcours professionnel ITAA<br>• Objectif : Fiscaliste / Direction financière'},
+  contact:{q:'Comment vous contacter ?', a:'<strong>📞 Contact direct :</strong><br>• Tél : <a href="tel:+32471692067" class="ref-link">+32 471 69 20 67</a><br>• Email : <a href="mailto:elaurentsteve@gmail.com" class="ref-link">elaurentsteve@gmail.com</a><br>• Adresse : Rue Jules Broeren 30, 1070 Bruxelles<br><br>• Réponse sous 24h<br>• En poste, ouvert aux opportunités'},
+  blockchain:{q:'Certificat blockchain ?', a:'<strong>⛓️ Oui, ancré sur Bitcoin !</strong><br>• Émetteur : Bruxelles Formation<br>• Hash SHA256 vérifié<br>• Merkle Root : <code style="font-size:9px">0e47af4b...</code><br>• <a href="https://www.blockchain.com/btc/tx/c8958b63fff7bece5917f444147eafa6113297c6ba9437f201c0265ae70522b8" target="_blank" class="ref-link">Voir sur blockchain.com</a><br><br>Standard : Chainpoint v2 + Woleet Signature v2'},
+  default:{q:'', a:'Je peux répondre sur :<br>• 💻 ERP et outils maîtrisés<br>• ⏰ Disponibilité flexi-job<br>• 🎓 Formations et diplômes<br>• 📞 Coordonnées de contact<br>• ⛓️ Certificat blockchain<br><br><em>Cliquez sur un bouton ou posez votre question !</em>'}
+};
+
+function askQuestion(key){
+  const r=responses[key]||responses.default;
+  addChat(r.q,'user');
+  setTimeout(()=>addChat(r.a,'bot'),300);
+}
+function sendChat(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text) return;
+  addChat(text,'user');
+  input.value='';
+  setTimeout(()=>{
+    const lower=text.toLowerCase();
+    let key='default';
+    if(lower.includes('erp')||lower.includes('sap')||lower.includes('odoo')||lower.includes('winbook')) key='erp';
+    else if(lower.includes('flexi')||lower.includes('job')||lower.includes('soir')||lower.includes('week')) key='flexi';
+    else if(lower.includes('master')||lower.includes('stic')||lower.includes('ichec')||lower.includes('diplome')) key='master';
+    else if(lower.includes('contact')||lower.includes('tel')||lower.includes('mail')||lower.includes('email')||lower.includes('adresse')) key='contact';
+    else if(lower.includes('blockchain')||lower.includes('bitcoin')||lower.includes('merkle')||lower.includes('certificat')) key='blockchain';
+    addChat(responses[key].a,'bot');
+  },500);
+}
+function addChat(html,sender){
+  const container=document.getElementById('chatMessages');
+  const div=document.createElement('div');
+  div.style.cssText=sender==='bot'
+    ? 'align-self:flex-start;background:#fff;padding:8px 12px;border-radius:10px 10px 10px 2px;font-size:11px;color:var(--text);max-width:90%;box-shadow:0 1px 2px rgba(0,0,0,0.04)'
+    : 'align-self:flex-end;background:var(--eu-blue);padding:8px 12px;border-radius:10px 10px 2px 10px;font-size:11px;color:#fff;max-width:90%';
+  div.innerHTML=sender==='bot'?'<strong style="color:var(--eu-blue)">🤖</strong> '+html:html;
+  container.appendChild(div);
+  container.scrollTop=container.scrollHeight;
+}
+</script>
+
+
+<!-- ANIMATION IT + DATA INTEGRITY + ITAA -->
+<div class="card animate-on-scroll" id="anim-integrity" style="margin-bottom:1.25rem;overflow:hidden">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="cmd-title">Chaîne de confiance IT & ITAA</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Chaîne de confiance IT & ITAA" data-en="IT Trust Chain & ITAA" data-nl="IT Vertrouwensketen & ITAA">Chaîne de confiance IT & ITAA</span>
   </div>
-  <div class="accordion-body-cmd">
-<div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
+
+  <div style="position:relative;height:320px;background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);border-radius:8px;overflow:hidden;margin:-1.5rem -1.5rem 0 -1.5rem;padding:24px">
     <!-- Animated background grid -->
     <div style="position:absolute;inset:0;opacity:0.15;background-image:linear-gradient(rgba(0,51,153,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,51,153,0.3) 1px,transparent 1px);background-size:30px 30px;animation:gridMove 20s linear infinite"></div>
 
@@ -787,16 +1009,72 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <div style="font-size:10px;color:var(--muted);margin-top:2px">SHA256 · Woleet · Chainpoint</div>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
-    <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
-    <div class="cmd-title">Flexi-Job</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-  </div>
-  <div class="accordion-body-cmd">
-<div class="flexi-header">
+
+<style>
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:30px 30px}}
+@keyframes hubPulse{0%,100%{box-shadow:0 0 40px rgba(0,51,153,0.6),0 0 80px rgba(255,204,0,0.2);transform:scale(1)}50%{box-shadow:0 0 60px rgba(0,51,153,0.8),0 0 120px rgba(255,204,0,0.3);transform:scale(1.05)}}
+@keyframes nodeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+
+<script>
+// Position orbit nodes
+(function(){
+const container=document.getElementById('orbitContainer');
+const nodes=container.querySelectorAll('.orbit-node');
+const radius=110;
+nodes.forEach(node=>{
+  const angle=parseFloat(node.dataset.angle)*Math.PI/180;
+  const x=radius*Math.cos(angle);
+  const y=radius*Math.sin(angle);
+  node.style.left='50%';
+  node.style.top='50%';
+  node.style.transform='translate('+(x-25)+'px,'+(y-25)+'px)';
+});
+
+// Create particles
+const particlesContainer=document.getElementById('particles');
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.style.cssText='position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,204,0,'+(0.2+Math.random()*0.3)+');animation:floatParticle '+(8+Math.random()*12)+'s linear infinite;left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%';
+  particlesContainer.appendChild(p);
+}
+})();
+
+const nodeDetails={
+  blockchain:{icon:'₿',title:'Certificat Blockchain — Bruxelles Formation',desc:'Ancré sur la blockchain Bitcoin via Chainpoint SHA256 v2. Hash document vérifié, Merkle root immuable, signature Woleet v2. Preuve mathématique d'authenticité.'},
+  itaa:{icon:'⚖️',title:'Parcours Professionnel ITAA',desc:'Master en Droit Fiscal à l'ICHEC (2025-2027). Objectif : expertise comptable et fiscale. Maîtrise des déclarations TVA, IPM, ISOC, IPP en environnement belge.'},
+  erp:{icon:'💻',title:'Maîtrise des ERP',desc:'SAP Key User certifié (Europass), Odoo, Winbooks, Adfinity, Octopus. Intégration comptable, automatisation des processus, reporting multi-dimensions.'},
+  stic:{icon:'🎓',title:'Master STIC — ULB',desc:'Sciences et Technologies de l'Information. Compétences : SQL, PHP, BPMN, gestion de projet IT. QR code diplôme vérifiable sur registre officiel ULB.'},
+  ifrs:{icon:'📊',title:'Normes IFRS',desc:'Comptabilité selon les normes internationales IFRS. Application pratique chez Reinbold Export Import. Convergence des standards comptables mondiaux.'}
+};
+
+function showNodeDetail(key){
+  const d=nodeDetails[key];
+  const panel=document.getElementById('nodeDetail');
+  document.getElementById('nodeDetailIcon').textContent=d.icon;
+  document.getElementById('nodeDetailTitle').textContent=d.title;
+  document.getElementById('nodeDetailDesc').textContent=d.desc;
+  panel.style.display='block';
+}
+function closeNodeDetail(){
+  document.getElementById('nodeDetail').style.display='none';
+}
+
+// Central hub click
+ document.getElementById('centralHub').addEventListener('click',function(){
+  document.getElementById('nodeDetailIcon').textContent='🔐';
+  document.getElementById('nodeDetailTitle').textContent='Data Integrity Hub';
+  document.getElementById('nodeDetailDesc').textContent='Centre de convergence : blockchain (preuve immuable) + ITAA (expertise réglementée) + ERP (systèmes d'information) + Master STIC (compétences IT) + IFRS (normes internationales). La double compétence Finance × IT garantit l'intégrité des données de bout en bout.';
+  document.getElementById('nodeDetail').style.display='block';
+});
+</script>
+
+
+<div class="flexi-card animate-on-scroll">
+  <div class="flexi-header">
     <div class="flexi-badge-eligible">
       <div class="flexi-dot"></div>
       <span class="t" data-fr="Disponible en Flexi-Job" data-en="Available for Flexi-Job" data-nl="Beschikbaar Flexi-Job">Disponible en Flexi-Job</span>
@@ -840,16 +1118,16 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <span class="flexi-avantage-tag">✅ Horaires flexibles</span>
     <span class="flexi-avantage-tag">✅ Complément de revenus</span>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- FORMATION CONTINUE -->
+<div class="card animate-on-scroll">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="cmd-title">Formation continue & activités</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Formation continue & activités" data-en="Continuing Education & Activities" data-nl="Permanente Vorming & Activiteiten">Formation continue & activités</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="cont-item">
+
+  <div class="cont-item">
     <span class="cont-year">2024 · <a href="https://erasmus-plus.ec.europa.eu/" target="_blank" rel="noopener" class="ref-link">Erasmus+<svg class="ext-icon"><use href="#icon-ext"/></svg></a> — Salzburg (AT)</span>
     <span>The Heritage of Money and Coinage: From the Mine to the Mint</span>
   </div>
@@ -873,18 +1151,20 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <span class="cont-year">2015–2016 · <a href="https://www.byupathway.org/" target="_blank" rel="noopener" class="ref-link">BYU Idaho (USA)<svg class="ext-icon"><use href="#icon-ext"/></svg></a></span>
     <span>Online Certificate — Pathway Program</span>
   </div>
-  </div>
 </div>
+
 </div><!-- /main col -->
-<div class="sidebar-col">
-<div class="accordion-cmd" id="formation">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- SIDEBAR -->
+<div>
+<!-- FORMATION -->
+<div class="card animate-on-scroll" id="formation">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-    <div class="cmd-title">Formation</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="edu-item">
+
+  <div class="edu-item">
     <div class="edu-school">
       <a href="https://www.ichec.be/fr/formations/master-en-droit-fiscal" target="_blank" rel="noopener" class="ref-link">
         ICHEC Brussels Management School
@@ -1031,16 +1311,15 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       </a>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd" id="langues">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- LANGUES -->
+<div class="card animate-on-scroll" id="langues">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-    <div class="cmd-title">Langues</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Langues" data-en="Languages" data-nl="Talen">Langues</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="lang-item">
+  <div class="lang-item">
     <div class="lang-row">
       <span class="lang-name">Français</span>
       <span class="lang-level t" data-fr="Langue maternelle" data-en="Native" data-nl="Moedertaal">Langue maternelle</span>
@@ -1072,16 +1351,15 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     <div class="lang-dots"><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div><div class="lang-dot filled"></div></div>
     <div class="cefr">C2</div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd" id="competences">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- COMPETENCES -->
+<div class="card animate-on-scroll" id="competences">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-    <div class="cmd-title">Compétences</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="skill-group">
+  <div class="skill-group">
     <div class="skill-group-title t" data-fr="Comptabilité & Finance" data-en="Accounting & Finance" data-nl="Boekhouding & Financiën">Comptabilité & Finance</div>
     <div class="skill-tags">
       <span class="skill-tag t" data-fr="Comptabilité générale" data-en="General accounting" data-nl="Algemene boekhouding">Comptabilité générale</span>
@@ -1132,16 +1410,15 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
       <span class="skill-tag t" data-fr="Esprit d'analyse" data-en="Analytical thinking" data-nl="Analytisch denken">Esprit d'analyse</span>
     </div>
   </div>
-  </div>
 </div>
-<div class="accordion-cmd" id="certifications">
-  <div class="accordion-header-cmd" onclick="toggleAccordionCmd(this)">
+
+<!-- CERTIFICATIONS -->
+<div class="card animate-on-scroll" id="certifications">
+  <div class="section-label">
     <div class="sl-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-    <div class="cmd-title">Certifications</div>
-    <svg class="cmd-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <span class="t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
   </div>
-  <div class="accordion-body-cmd">
-<div class="cert-item">
+  <div class="cert-item">
     <span class="cert-name">
       <a href="https://www.sap.com/belgium/training-certification.html" target="_blank" rel="noopener" class="ref-link">SAP Key User<svg class="ext-icon"><use href="#icon-ext"/></svg></a>
       &nbsp;—&nbsp;
@@ -1164,8 +1441,8 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
     </span>
     <span class="cert-year">2016</span>
   </div>
-  </div>
 </div>
+
 </div><!-- /sidebar -->
 </div><!-- /main-grid -->
 
@@ -1181,155 +1458,6 @@ footer .ep-footer-stars{font-size:9px;color:var(--eu-yellow)}
 </div><!-- /page -->
 
 <script>
-// ── ACCORDÉON À COMMANDE (CLIC) ──
-function toggleAccordionCmd(header) {
-  const cmd = header.parentElement;
-  const wasOpen = cmd.classList.contains('open');
-
-  // Fermer tous les autres dans la même colonne
-  const wrapper = cmd.parentElement;
-  wrapper.querySelectorAll('.accordion-cmd').forEach(c => c.classList.remove('open'));
-
-  // Toggle l'état actuel
-  if (!wasOpen) {
-    cmd.classList.add('open');
-  }
-}
-
-// ── RADAR CHART ──
-function initRadar() {
-  const svg = document.getElementById('radarChart');
-  if (!svg) return;
-  while (svg.firstChild) svg.removeChild(svg.firstChild);
-
-  const skills = [
-    {name:'Comptabilité', value:95, color:'#003399', desc:'13 ans — cycle complet, IFRS, comptes annuels.'},
-    {name:'Fiscalité', value:75, color:'#059669', desc:'Parcours ITAA — TVA, IPM, ISOC, IPP maîtrisés.'},
-    {name:'ERP/Systèmes', value:90, color:'#7C3AED', desc:'SAP Key User, Odoo, Winbooks, Adfinity, Octopus.'},
-    {name:'IT/Dév.', value:70, color:'#FF6B35', desc:'Master STIC ULB — SQL, PHP, BPMN, projet IT.'},
-    {name:'Gestion Proj.', value:80, color:'#0891B2', desc:'Supervision FSE, animation Toastmasters.'},
-    {name:'Langues', value:85, color:'#DC2626', desc:'FR natif, EN courant (B2-C1), NL notions, Créole natif.'}
-  ];
-
-  const cx = 130, cy = 110, r = 85;
-  const n = skills.length;
-
-  const grid = document.createElementNS('http://www.w3.org/2000/svg','g');
-  const dataArea = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-  const points = document.createElementNS('http://www.w3.org/2000/svg','g');
-  const labels = document.createElementNS('http://www.w3.org/2000/svg','g');
-
-  svg.appendChild(grid);
-  svg.appendChild(dataArea);
-  svg.appendChild(points);
-  svg.appendChild(labels);
-
-  // Grille
-  for (let level = 1; level <= 5; level++) {
-    const pts = [];
-    for (let i = 0; i < n; i++) {
-      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
-      const rad = r * level / 5;
-      pts.push((cx + rad * Math.cos(angle)) + ',' + (cy + rad * Math.sin(angle)));
-    }
-    const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-    poly.setAttribute('points', pts.join(' '));
-    poly.setAttribute('fill', 'none');
-    poly.setAttribute('stroke', level === 5 ? '#D4D8DF' : '#E5E7EB');
-    poly.setAttribute('stroke-width', '1');
-    grid.appendChild(poly);
-  }
-
-  // Axes
-  for (let i = 0; i < n; i++) {
-    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
-    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
-    line.setAttribute('x2', cx + r * Math.cos(angle));
-    line.setAttribute('y2', cy + r * Math.sin(angle));
-    line.setAttribute('stroke', '#E5E7EB');
-    grid.appendChild(line);
-  }
-
-  // Données
-  const dataPts = [];
-  for (let i = 0; i < n; i++) {
-    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
-    const rad = (skills[i].value / 100) * r;
-    const x = cx + rad * Math.cos(angle);
-    const y = cy + rad * Math.sin(angle);
-    dataPts.push(x + ',' + y);
-
-    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('cx', x); circle.setAttribute('cy', y);
-    circle.setAttribute('r', '6');
-    circle.setAttribute('fill', skills[i].color);
-    circle.setAttribute('stroke', 'white');
-    circle.setAttribute('stroke-width', '2');
-    circle.style.cursor = 'pointer';
-
-    circle.addEventListener('mouseenter', function() {
-      this.setAttribute('r', '9');
-      const s = skills[i];
-      const insight = document.getElementById('radarInsight');
-      if (insight) insight.innerHTML = '<strong style="color:'+s.color+'">'+s.name+'</strong> — '+s.value+'%<br><span style="font-size:10px">'+s.desc+'</span>';
-    });
-
-    circle.addEventListener('mouseleave', function() {
-      this.setAttribute('r', '6');
-      const insight = document.getElementById('radarInsight');
-      if (insight) insight.innerHTML = 'Survolez le graphique pour les détails.';
-    });
-
-    points.appendChild(circle);
-  }
-
-  dataArea.setAttribute('points', dataPts.join(' '));
-  dataArea.setAttribute('fill', 'rgba(0,51,153,0.15)');
-  dataArea.setAttribute('stroke', '#003399');
-  dataArea.setAttribute('stroke-width', '2.5');
-
-  // Labels
-  for (let i = 0; i < n; i++) {
-    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
-    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-    text.setAttribute('x', cx + (r + 22) * Math.cos(angle));
-    text.setAttribute('y', cy + (r + 22) * Math.sin(angle));
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('font-size', '9');
-    text.setAttribute('font-weight', '700');
-    text.setAttribute('fill', '#5C6470');
-    text.textContent = skills[i].name;
-    labels.appendChild(text);
-  }
-
-  dataArea.style.opacity = '0';
-  setTimeout(() => { dataArea.style.opacity = '1'; dataArea.style.transition = 'opacity 1s ease'; }, 100);
-}
-
-function initERPBars() {
-  const container = document.getElementById('erpBars');
-  if (!container) return;
-
-  const erps = [
-    {name:'Winbooks', value:95}, {name:'SAP', value:85},
-    {name:'Odoo', value:90}, {name:'Adfinity', value:88},
-    {name:'Octopus', value:80}, {name:'Excel', value:92}
-  ];
-
-  container.innerHTML = '';
-  erps.forEach((erp, i) => {
-    const div = document.createElement('div');
-    div.className = 'erp-bar';
-    div.innerHTML = '<span class="erp-name">'+erp.name+'</span><div class="erp-track"><div class="erp-fill" style="width:0%"></div></div><span class="erp-pct">'+erp.value+'%</span>';
-    container.appendChild(div);
-    setTimeout(() => {
-      const fill = div.querySelector('.erp-fill');
-      if (fill) fill.style.width = erp.value + '%';
-    }, 300 + i * 100);
-  });
-}
-
 // ── SCROLL PROGRESS ──
 window.addEventListener('scroll', () => {
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1428,9 +1556,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Initialize
-initRadar();
-initERPBars();
 setLang('fr');
 </script>
 
 </body>
+</html>
