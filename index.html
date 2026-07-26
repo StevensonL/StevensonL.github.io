@@ -52,7 +52,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 .sidebar::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
 .main-content{background:var(--bg);padding:2rem}
 .photo-wrap{text-align:center;margin-bottom:1.5rem;position:relative;z-index:1}
-.photo-circle{width:140px;height:140px;border-radius:50%;border:4px solid rgba(255,255,255,0.3);overflow:hidden;margin:0 auto;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
+.photo-frame{width:150px;height:150px;border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,0.25),0 0 0 1px rgba(255,255,255,0.15);border:4px solid rgba(255,255,255,0.3);overflow:hidden;margin:0 auto;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
 .photo-circle img{width:100%;height:100%;object-fit:cover}
 .photo-fallback{font-family:'Source Serif 4',serif;font-size:48px;color:rgba(255,255,255,0.9)}
 .name-sidebar{font-family:'Source Serif 4',serif;font-size:24px;font-weight:700;text-align:center;margin-top:12px;color:white;letter-spacing:-0.01em}
@@ -79,8 +79,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 .parcours-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
 .main-content h2{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;color:var(--eu-blue);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--eu-blue-light);display:flex;align-items:center;gap:8px}
 .main-content h2 svg{width:18px;height:18px;stroke:var(--eu-blue);fill:none;stroke-width:2}
-.accordion{margin-bottom:1rem;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--transition)}
-.accordion:hover{box-shadow:var(--shadow)}
+.accordion{margin-bottom:1.25rem;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;perspective:1200px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.accordion:hover{transform:translateY(-6px) translateZ(20px) rotateX(1deg);box-shadow:0 25px 50px rgba(0,0,0,0.12),0 10px 20px rgba(0,0,0,0.08);border-color:var(--eu-blue-mid)}
 .accordion-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--surface);cursor:pointer;user-select:none;transition:all var(--transition);gap:12px}
 .accordion-header:hover{background:var(--eu-blue-light)}
 .accordion-header-left{display:flex;align-items:center;gap:10px}
@@ -91,6 +91,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 .accordion.open .accordion-chevron{transform:rotate(180deg)}
 .accordion-body{display:none;padding:18px;background:var(--bg)}
 .accordion.open .accordion-body{display:block;animation:fadeIn 0.3s ease}
+.accordion.open{transform:translateY(-4px) translateZ(30px) rotateX(0deg);box-shadow:0 30px 60px rgba(0,0,0,0.15),0 12px 24px rgba(0,0,0,0.1);border-color:var(--eu-blue-light)}
+.accordion-header{transform:translateZ(12px);backface-visibility:hidden}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .bio-text{display:none}
 .bio-text.active{display:block}
@@ -226,6 +228,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
   .chatbot-wrap{display:none}
 }
 </style>
+<base target="_blank">
 </head>
 <body>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -290,7 +293,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 <div class="cv-wrapper">
 <div class="sidebar">
   <div class="photo-wrap">
-    <div class="photo-circle">
+    <div class="photo-frame">
       <img src="photo.jpg" alt="Stevenson Laurent" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
       <div class="photo-fallback" style="display:none">SL</div>
     </div>
@@ -381,8 +384,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 <div class="main-content">
 
 <!-- PROFIL -->
-<div class="accordion animate-on-scroll" id="acc-profil">
-  <div class="accordion-header" onclick="toggleAccordion('acc-profil')">
+<div class="accordion animate-on-scroll" id="acc-profil" onmouseleave="closeAccordion('acc-profil')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-profil')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-user"/></svg></div>
       <span class="accordion-title t" data-fr="Profil" data-en="Profile" data-nl="Profiel">Profil</span>
@@ -406,8 +409,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- EXPERIENCE -->
-<div class="accordion animate-on-scroll" id="acc-exp">
-  <div class="accordion-header" onclick="toggleAccordion('acc-exp')">
+<div class="accordion animate-on-scroll" id="acc-exp" onmouseleave="closeAccordion('acc-exp')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-exp')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-briefcase"/></svg></div>
       <span class="accordion-title t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
@@ -494,8 +497,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FORMATION -->
-<div class="accordion animate-on-scroll" id="acc-edu">
-  <div class="accordion-header" onclick="toggleAccordion('acc-edu')">
+<div class="accordion animate-on-scroll" id="acc-edu" onmouseleave="closeAccordion('acc-edu')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-edu')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-graduation"/></svg></div>
       <span class="accordion-title t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
@@ -571,8 +574,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- COMPETENCES -->
-<div class="accordion animate-on-scroll" id="acc-skills">
-  <div class="accordion-header" onclick="toggleAccordion('acc-skills')">
+<div class="accordion animate-on-scroll" id="acc-skills" onmouseleave="closeAccordion('acc-skills')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-skills')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-zap"/></svg></div>
       <span class="accordion-title t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
@@ -635,8 +638,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FLEXI-JOB -->
-<div class="accordion animate-on-scroll" id="acc-flexi">
-  <div class="accordion-header" onclick="toggleAccordion('acc-flexi')">
+<div class="accordion animate-on-scroll" id="acc-flexi" onmouseleave="closeAccordion('acc-flexi')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-flexi')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-clock"/></svg></div>
       <span class="accordion-title">Flexi-Job</span>
@@ -660,8 +663,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- INTERETS -->
-<div class="accordion animate-on-scroll" id="acc-interests">
-  <div class="accordion-header" onclick="toggleAccordion('acc-interests')">
+<div class="accordion animate-on-scroll" id="acc-interests" onmouseleave="closeAccordion('acc-interests')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-interests')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-heart"/></svg></div>
       <span class="accordion-title t" data-fr="Intérêts" data-en="Interests" data-nl="Interesses">Intérêts</span>
@@ -679,8 +682,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- CERTIFICATIONS -->
-<div class="accordion animate-on-scroll" id="acc-certs">
-  <div class="accordion-header" onclick="toggleAccordion('acc-certs')">
+<div class="accordion animate-on-scroll" id="acc-certs" onmouseleave="closeAccordion('acc-certs')">
+  <div class="accordion-header" onmouseenter="openAccordion('acc-certs')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-award"/></svg></div>
       <span class="accordion-title t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
@@ -865,6 +868,11 @@ if(erpContainer){
   });
 }
 })();
+
+
+// ===== ACCORDION HOVER =====
+function openAccordion(id){ document.getElementById(id).classList.add('open'); }
+function closeAccordion(id){ document.getElementById(id).classList.remove('open'); }
 
 // ===== CHATBOT =====
 const responses={
