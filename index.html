@@ -52,8 +52,11 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 .sidebar::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
 .main-content{background:var(--bg);padding:2rem}
 .photo-wrap{text-align:center;margin-bottom:1.5rem;position:relative;z-index:1}
-.photo-frame{width:150px;height:150px;border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,0.25),0 0 0 1px rgba(255,255,255,0.15);border:4px solid rgba(255,255,255,0.3);overflow:hidden;margin:0 auto;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center}
-.photo-circle img{width:100%;height:100%;object-fit:cover}
+.photo-frame{width:170px;height:170px;border-radius:3px;border:none;overflow:hidden;margin:0 auto;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(255,255,255,0.08),0 16px 48px rgba(0,0,0,0.4),0 4px 12px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.1);position:relative;transition:all 0.4s ease}
+.photo-frame img{width:100%;height:100%;object-fit:cover;filter:contrast(1.08) saturate(1.15);transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+.photo-frame:hover{transform:translateY(-4px);box-shadow:0 0 0 2px rgba(255,255,255,0.15),0 24px 64px rgba(0,0,0,0.45),0 6px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15)}
+.photo-frame:hover img{transform:scale(1.06)}
+.photo-frame::after{content:'';position:absolute;inset:0;border-radius:3px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06),inset 0 0 40px rgba(0,0,0,0.2);pointer-events:none;z-index:2}
 .photo-fallback{font-family:'Source Serif 4',serif;font-size:48px;color:rgba(255,255,255,0.9)}
 .name-sidebar{font-family:'Source Serif 4',serif;font-size:24px;font-weight:700;text-align:center;margin-top:12px;color:white;letter-spacing:-0.01em}
 .title-sidebar{font-size:11px;text-align:center;color:rgba(255,255,255,0.7);margin-top:4px;letter-spacing:0.08em;text-transform:uppercase}
@@ -384,8 +387,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 <div class="main-content">
 
 <!-- PROFIL -->
-<div class="accordion animate-on-scroll" id="acc-profil" onmouseleave="closeAccordion('acc-profil')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-profil')">
+<div class="accordion animate-on-scroll" id="acc-profil" onmouseleave="hoverClose('acc-profil')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-profil')" onclick="togglePin('acc-profil')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-user"/></svg></div>
       <span class="accordion-title t" data-fr="Profil" data-en="Profile" data-nl="Profiel">Profil</span>
@@ -409,8 +412,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- EXPERIENCE -->
-<div class="accordion animate-on-scroll" id="acc-exp" onmouseleave="closeAccordion('acc-exp')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-exp')">
+<div class="accordion animate-on-scroll" id="acc-exp" onmouseleave="hoverClose('acc-exp')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-exp')" onclick="togglePin('acc-exp')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-briefcase"/></svg></div>
       <span class="accordion-title t" data-fr="Expérience professionnelle" data-en="Work Experience" data-nl="Beroepservaring">Expérience professionnelle</span>
@@ -497,8 +500,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FORMATION -->
-<div class="accordion animate-on-scroll" id="acc-edu" onmouseleave="closeAccordion('acc-edu')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-edu')">
+<div class="accordion animate-on-scroll" id="acc-edu" onmouseleave="hoverClose('acc-edu')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-edu')" onclick="togglePin('acc-edu')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-graduation"/></svg></div>
       <span class="accordion-title t" data-fr="Formation" data-en="Education" data-nl="Opleiding">Formation</span>
@@ -574,8 +577,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- COMPETENCES -->
-<div class="accordion animate-on-scroll" id="acc-skills" onmouseleave="closeAccordion('acc-skills')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-skills')">
+<div class="accordion animate-on-scroll" id="acc-skills" onmouseleave="hoverClose('acc-skills')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-skills')" onclick="togglePin('acc-skills')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-zap"/></svg></div>
       <span class="accordion-title t" data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span>
@@ -638,8 +641,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FLEXI-JOB -->
-<div class="accordion animate-on-scroll" id="acc-flexi" onmouseleave="closeAccordion('acc-flexi')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-flexi')">
+<div class="accordion animate-on-scroll" id="acc-flexi" onmouseleave="hoverClose('acc-flexi')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-flexi')" onclick="togglePin('acc-flexi')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-clock"/></svg></div>
       <span class="accordion-title">Flexi-Job</span>
@@ -663,8 +666,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- INTERETS -->
-<div class="accordion animate-on-scroll" id="acc-interests" onmouseleave="closeAccordion('acc-interests')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-interests')">
+<div class="accordion animate-on-scroll" id="acc-interests" onmouseleave="hoverClose('acc-interests')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-interests')" onclick="togglePin('acc-interests')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-heart"/></svg></div>
       <span class="accordion-title t" data-fr="Intérêts" data-en="Interests" data-nl="Interesses">Intérêts</span>
@@ -682,8 +685,8 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- CERTIFICATIONS -->
-<div class="accordion animate-on-scroll" id="acc-certs" onmouseleave="closeAccordion('acc-certs')">
-  <div class="accordion-header" onmouseenter="openAccordion('acc-certs')">
+<div class="accordion animate-on-scroll" id="acc-certs" onmouseleave="hoverClose('acc-certs')">
+  <div class="accordion-header" onmouseenter="hoverOpen('acc-certs')" onclick="togglePin('acc-certs')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-award"/></svg></div>
       <span class="accordion-title t" data-fr="Certifications" data-en="Certifications" data-nl="Certificaten">Certifications</span>
@@ -870,9 +873,26 @@ if(erpContainer){
 })();
 
 
-// ===== ACCORDION HOVER =====
-function openAccordion(id){ document.getElementById(id).classList.add('open'); }
-function closeAccordion(id){ document.getElementById(id).classList.remove('open'); }
+// ===== ACCORDION HYBRIDE HOVER + CLIC =====
+const pinnedAccordions = new Set();
+function hoverOpen(id){
+  document.getElementById(id).classList.add('open');
+}
+function hoverClose(id){
+  if(!pinnedAccordions.has(id)){
+    document.getElementById(id).classList.remove('open');
+  }
+}
+function togglePin(id){
+  const el = document.getElementById(id);
+  if(pinnedAccordions.has(id)){
+    pinnedAccordions.delete(id);
+    el.classList.remove('open');
+  } else {
+    pinnedAccordions.add(id);
+    el.classList.add('open');
+  }
+}
 
 // ===== CHATBOT =====
 const responses={
