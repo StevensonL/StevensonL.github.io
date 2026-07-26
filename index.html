@@ -74,6 +74,9 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 .social-item svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
 .status-sidebar{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#10B981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);border-radius:3px;padding:4px 10px;margin-top:12px;width:100%;justify-content:center}
 .status-dot-sidebar{width:6px;height:6px;border-radius:50%;background:#10B981;animation:pulse 2s infinite}
+.parcours-link{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.9);text-decoration:none;padding:10px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;transition:all 0.2s;margin-top:8px}
+.parcours-link:hover{background:rgba(255,255,255,0.2);transform:translateY(-1px);border-color:var(--eu-yellow)}
+.parcours-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
 .main-content h2{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;color:var(--eu-blue);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--eu-blue-light);display:flex;align-items:center;gap:8px}
 .main-content h2 svg{width:18px;height:18px;stroke:var(--eu-blue);fill:none;stroke-width:2}
 .accordion{margin-bottom:1rem;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--transition)}
@@ -320,6 +323,10 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
       <svg><use href="#icon-calendar"/></svg>
       <span class="t" data-fr="Né le 28/08/1987" data-en="Born 28/08/1987" data-nl="Geboren 28/08/1987">Né le 28/08/1987</span>
     </div>
+    <a href="parcours.html" class="parcours-link">
+      <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      <span class="t" data-fr="Voir mon parcours BPMN" data-en="View my BPMN career path" data-nl="Bekijk mijn BPMN carrièrepad">Voir mon parcours BPMN</span>
+    </a>
   </div>
 
   <div class="sidebar-section">
@@ -371,34 +378,10 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
     </div>
   </div>
 </div>
-
 <div class="main-content">
 
-<!-- RADAR CHART -->
-<div class="radar-wrap animate-on-scroll">
-  <div class="radar-header">
-    <span class="radar-title">📊 <span class="t" data-fr="Radar de compétences" data-en="Skills Radar" data-nl="Vaardigheden Radar">Radar de compétences</span></span>
-    <span class="radar-badge">Finance × IT</span>
-  </div>
-  <div class="radar-grid">
-    <div class="radar-svg-wrap">
-      <svg id="radarChart" viewBox="0 0 260 240" style="display:block;margin:0 auto">
-        <g id="grid"></g>
-        <polygon id="dataArea" fill="rgba(0,51,153,0.12)" stroke="#003399" stroke-width="2"/>
-        <g id="dataPoints"></g>
-        <g id="labels"></g>
-      </svg>
-    </div>
-    <div>
-      <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Maîtrise ERP</div>
-      <div id="erpBars" class="erp-bars-wrap"></div>
-      <div class="radar-insight" id="radarInsight">Survolez le graphique pour les détails.</div>
-    </div>
-  </div>
-</div>
-
 <!-- PROFIL -->
-<div class="accordion open animate-on-scroll" id="acc-profil">
+<div class="accordion animate-on-scroll" id="acc-profil">
   <div class="accordion-header" onclick="toggleAccordion('acc-profil')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-user"/></svg></div>
@@ -423,7 +406,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- EXPERIENCE -->
-<div class="accordion open animate-on-scroll" id="acc-exp">
+<div class="accordion animate-on-scroll" id="acc-exp">
   <div class="accordion-header" onclick="toggleAccordion('acc-exp')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-briefcase"/></svg></div>
@@ -511,7 +494,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FORMATION -->
-<div class="accordion open animate-on-scroll" id="acc-edu">
+<div class="accordion animate-on-scroll" id="acc-edu">
   <div class="accordion-header" onclick="toggleAccordion('acc-edu')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-graduation"/></svg></div>
@@ -554,7 +537,6 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
         <a href="https://europass.eu/fr/create-europass/cv" target="_blank" rel="noopener" style="font-size:11px;color:var(--eu-blue)">Certifié Europass</a>
         <a href="https://www.smartcertificate.com/SmartDiploma/?1%7ce119c612-1fd1-4f5b-9b89-8cf13a253746%7c84bfe790-6423-45dc-97ec-4f1e2b7df532#/" target="_blank" rel="noopener" class="edu-badge">Smart Diploma</a>
       </div>
-      <!-- BLOCKCHAIN PROOF -->
       <div class="blockchain-proof" id="bf-proof">
         <div class="blockchain-proof-header" onclick="toggleProof('bf-proof')">
           <div class="blockchain-proof-left">
@@ -589,7 +571,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- COMPETENCES -->
-<div class="accordion open animate-on-scroll" id="acc-skills">
+<div class="accordion animate-on-scroll" id="acc-skills">
   <div class="accordion-header" onclick="toggleAccordion('acc-skills')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-zap"/></svg></div>
@@ -653,7 +635,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- FLEXI-JOB -->
-<div class="accordion open animate-on-scroll" id="acc-flexi">
+<div class="accordion animate-on-scroll" id="acc-flexi">
   <div class="accordion-header" onclick="toggleAccordion('acc-flexi')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-clock"/></svg></div>
@@ -678,7 +660,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- INTERETS -->
-<div class="accordion open animate-on-scroll" id="acc-interests">
+<div class="accordion animate-on-scroll" id="acc-interests">
   <div class="accordion-header" onclick="toggleAccordion('acc-interests')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-heart"/></svg></div>
@@ -697,7 +679,7 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
 </div>
 
 <!-- CERTIFICATIONS -->
-<div class="accordion open animate-on-scroll" id="acc-certs">
+<div class="accordion animate-on-scroll" id="acc-certs">
   <div class="accordion-header" onclick="toggleAccordion('acc-certs')">
     <div class="accordion-header-left">
       <div class="accordion-icon"><svg><use href="#icon-award"/></svg></div>
@@ -717,6 +699,29 @@ body.dark-mode .interest-item{background:var(--surface);border-color:#334155}
     <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;font-size:12px">
       <span style="font-weight:600"><a href="https://www.byupathway.org/" target="_blank" rel="noopener" style="color:var(--eu-blue);text-decoration:none;border-bottom:1px dotted var(--eu-blue-mid)">Pathway Program — BYU Idaho (USA)</a></span>
       <span style="font-size:11px;color:var(--eu-blue);font-weight:700;background:var(--eu-blue-light);padding:2px 8px;border-radius:3px">2016</span>
+    </div>
+  </div>
+</div>
+
+<!-- RADAR CHART EN BAS -->
+<div class="radar-wrap animate-on-scroll">
+  <div class="radar-header">
+    <span class="radar-title">📊 <span class="t" data-fr="Radar de compétences" data-en="Skills Radar" data-nl="Vaardigheden Radar">Radar de compétences</span></span>
+    <span class="radar-badge">Finance × IT</span>
+  </div>
+  <div class="radar-grid">
+    <div class="radar-svg-wrap">
+      <svg id="radarChart" viewBox="0 0 260 240" style="display:block;margin:0 auto">
+        <g id="grid"></g>
+        <polygon id="dataArea" fill="rgba(0,51,153,0.12)" stroke="#003399" stroke-width="2"/>
+        <g id="dataPoints"></g>
+        <g id="labels"></g>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Maîtrise ERP</div>
+      <div id="erpBars" class="erp-bars-wrap"></div>
+      <div class="radar-insight" id="radarInsight">Survolez le graphique pour les détails.</div>
     </div>
   </div>
 </div>
