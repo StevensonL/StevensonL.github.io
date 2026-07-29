@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adfinity Master Bot</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',system-ui,sans-serif; background:#f4f6f8; height:100vh; display:flex; justify-content:center; align-items:center; }
+  #app { width:100%; max-width:900px; height:95vh; display:flex; flex-direction:column; background:white; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.15); overflow:hidden; }
+  header { background:linear-gradient(90deg,#4a148c,#7b1fa2); color:white; padding:18px 24px; display:flex; align-items:center; gap:14px; }
+  header .avatar { width:44px; height:44px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#4a148c; font-size:20px; }
+  header h1 { font-size:17px; font-weight:600; }
+  header p { font-size:12px; opacity:0.85; }
+  #chat { flex:1; overflow-y:auto; padding:22px; display:flex; flex-direction:column; gap:14px; }
+  .msg { max-width:82%; padding:13px 17px; font-size:14.2px; line-height:1.55; border-radius:18px; animation:fadeIn 0.25s ease; }
+  .bot { align-self:flex-start; background:white; color:#333; border-radius:18px 18px 18px 4px; box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+  .user { align-self:flex-end; background:#4a148c; color:white; border-radius:18px 18px 4px 18px; }
+  .msg b { font-weight:600; }
+  .msg ul { margin:6px 0 6px 18px; }
+  .msg li { margin-bottom:4px; }
+  .quick-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip { border:none; padding:8px 14px; border-radius:20px; font-size:13px; cursor:pointer; font-weight:500; transition:transform .1s, box-shadow .2s; }
+  .chip:hover { transform:translateY(-1px); box-shadow:0 3px 8px rgba(0,0,0,0.12); }
+  .chip.purple { background:#ede7f6; color:#4a148c; }
+  .chip.orange { background:#fff3e0; color:#e65100; }
+  #input-area { padding:16px 22px; background:#fafafa; border-top:1px solid #e0e0e0; display:flex; gap:10px; align-items:center; }
+  #user-input { flex:1; border:1px solid #ccc; border-radius:24px; padding:11px 20px; font-size:14.5px; outline:none; transition:border .2s; }
+  #user-input:focus { border-color:#7b1fa2; }
+  #send-btn { width:42px; height:42px; border-radius:50%; background:#4a148c; color:white; border:none; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+  #send-btn:hover { background:#6a1b9a; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:translateY(0);} }
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-thumb { background:#ccc; border-radius:3px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="avatar">A</div>
+    <div>
+      <h1>Adfinity Master Bot</h1>
+      <p>Expert Encodages, Paiements & Gestion Comptable — hors-ligne</p>
+    </div>
+  </header>
+  <div id="chat"></div>
+  <div id="input-area">
+    <input id="user-input" type="text" placeholder="Ex: Comment encoder une facture avec OCR ?" onkeydown="if(event.key==='Enter')handleUser()">
+    <button id="send-btn" onclick="handleUser()">➤</button>
+  </div>
+</div>
+
+<script>
+const KB = {
+  adflow: `<b>📄 Adflow – Traitement des factures entrantes</b><br><br>
+🔹 <b>Rôle :</b> Découper les PDF globaux (scan de plusieurs factures) en PDF individuels par facture, détecter les codes-barres des étiquettes, renommer et déplacer les fichiers.<br>
+🔹 <b>Workflow papier :</b> Étiquette avec code-barre → Scan → PDF global → Adflow (Split & Renommage) → PDF à lier dans Adfinity.<br>
+🔹 <b>Workflow email :</b> Emails reçus sur boîte dédiée → PDF extrait → Adflow → PDF à lier.<br>
+🔹 <b>Manuel vs Service :</b> Adflow peut tourner en mode manuel (intervention utilisateur) ou en mode service (automatique sur serveur/poste).<br>
+🔹 <b>Écran :</b> 5 zones : (1) Configuration, (2) Configs existantes, (3) Manipulations fichier, (4) Contenu du lot, (5) Visualisation page.<br><br>
+💡 <b>Astuce :</b> Le séparateur entre factures est le code-barre apposé sur chaque première page.`,
+
+  encode_achat: `<b>🧾 Encodage d'une facture d'achat</b><br><br>
+🔹 <b>Accès :</b> DSPJOUPUR ou Module Fin → Fournisseurs → Général → Journaux<br>
+🔹 <b>Étapes :</b><br>
+1. Choisir le journal d'achats (ex: 455)<br>
+2. Créer une nouvelle pièce (ALT+F6 ou bouton Ajouter)<br>
+3. Alimenter l'en-tête : Fournisseur, Date, N° PDF, Références, Montant<br>
+4. Saisir les imputations comptables (touche + du pavé numérique)<br>
+5. Valider<br><br>
+🔹 <b>Champs auto-alimentés :</b><br>
+• Fournisseur + Profil → Date d'échéance<br>
+• Fournisseur → Compte général par défaut (si paramétré)<br>
+• Société de paiement → Compte bancaire<br><br>
+💡 <b>Astuce :</b> Il est possible d'activer un message en cas de doublon (même date, société, montant).`,
+
+  ocr: `<b>🔍 OCR (Reconnaissance Optique de Caractères)</b><br><br>
+🔹 <b>Partenaire :</b> Index Me. Système de cartouche : 1 doc reconnu = 1 unité consommée (2 unités si >2 pages).<br>
+🔹 <b>Champs reconnus auto :</b> Date document, date d'échéance, fournisseur, montant, références, n° VCS, type doc, taux TVA, devise, compte bancaire.<br>
+🔹 <b>Qualité :</b> Index Me renvoie un indice de qualité. Scan < 66 = risque d'erreur.<br>
+🔹 <b>Couleurs :</b><br>
+• Rouge = champ non trouvé<br>
+• Orange = champ détecté mais non conforme (ex: date échéance différente du calcul)<br>
+• Vert = champ validé<br><br>
+🔹 <b>Correction :</b> Clic droit sur le PDF → dessiner un encadrement autour de la valeur → associer au champ.<br>
+🔹 <b>Variante :</b> Programme WRKASSINP pour créer les factures depuis la liste des docs OCRisés.<br><br>
+💡 <b>Astuce :</b> L'OCR + compte général par défaut fournisseur = encodage quasi automatique.`,
+
+  psm: `<b>💼 Sundry Invoicing (PSM Vente)</b><br><br>
+🔹 <b>Concept :</b> Module de facturation simplifié lié à la comptabilité. Les documents créés sont transférés en comptabilité en quelques clics.<br>
+🔹 <b>Notions clés :</b><br>
+• <b>Article</b> = base de l'encodage (équivalent compte général)<br>
+• <b>Type de mouvement</b> = équivalent du journal (ex: SINV)<br>
+• <b>Statuts</b> = étapes du document (ex: 16 Brouillon → 96 Facture)<br>
+• <b>Changement de statut</b> = passage d'une étape à l'autre<br><br>
+🔹 <b>Flux type (5 étapes) :</b><br>
+1. Choix du type de mouvement<br>
+2. Nouveau document (ALT+F6)<br>
+3. Alimentation : articles, quantités, références, commentaires<br>
+4. Validation / Changement de statut (global ou détaillé)<br>
+5. Transfert en comptabilité<br><br>
+🔹 <b>Numérotation :</b> Gérée par statut. Le transfert en compta reprend le n° du statut final.<br><br>
+💡 <b>Astuce :</b> Un document au statut final est verrouillé. Pour modifier, faire un <b>Undo</b> (retour en arrière) puis rechangement de statut.`,
+
+  paiement: `<b>💳 Paiements Fournisseurs (WRKPAYSUP)</b><br><br>
+🔹 <b>3 statuts du lot :</b><br>
+1. Proposition en cours (modifiable)<br>
+2. Fichier généré<br>
+3. OD générée<br><br>
+🔹 <b>Création lot :</b><br>
+• Filtres : compte général, journal, société, mode de paiement, code approbation<br>
+• Date pivot : compare à l'échéance/estimée/escompte pour inclusion<br>
+• Types de fichier : ISS (SEPA), ISA/ISE (Isabel), etc.<br><br>
+🔹 <b>Groupes de paiement :</b> Chaque groupe doit avoir un solde positif. Sinon = "paiement négatif" bloquant.<br>
+🔹 <b>Cas de paiement négatif :</b> NC isolée, NC > facture lettrée, VCS déséquilibré. Solution : lettrer ou vider le VCS.<br>
+🔹 <b>Approbation :</b> Possible de paramétrer un cycle d'approbation sur les lots avant génération fichier.<br><br>
+💡 <b>Astuce :</b> Bouton <b>Audit</b> (dans Actions) pour lister les anomalies avant génération du fichier.`,
+
+  rappels: `<b>📢 Rappels Clients (WRKREM)</b><br><br>
+🔹 <b>4 étapes :</b><br>
+1. Création du lot & retraitement<br>
+2. Validation (impression définitive / envoi email)<br>
+3. Archivage des rappels<br>
+4. Mise à jour des niveaux de rappel (+1 par facture)<br><br>
+🔹 <b>Options clés :</b><br>
+• Date pivot : détermine les factures échues<br>
+• Montant minimum : exclut les soldes trop faibles<br>
+• Nouveau VCS : génère un VCS global pour le lot<br>
+• Intérêts : calculables et comptabilisables ou non<br><br>
+🔹 <b>Envoi électronique :</b><br>
+• Lot WRKEINV créé auto pour rappels électroniques<br>
+• Nécessite l'option "Reminder by e-mail" sur fiche client<br>
+• Peppol/Digiteal disponible pour envoi EFF<br><br>
+🔹 <b>Modèles :</b> Créables pour automatiser date pivot et périodes.<br><br>
+💡 <b>Astuce :</b> Un lot peut être réimprimé sans confirmation. La confirmation met à jour les niveaux de rappel.`,
+
+  consult: `<b>📊 Consultations & Soldes</b><br><br>
+🔹 <b>Balance (PRTBALGEN/ANA) :</b> Soldes par compte général ou analytique. Comparaison périodes possible.<br>
+🔹 <b>Balance Interactive (DSPBALINT) :</b> Écran temps réel, accès direct au détail, modulable par regroupements.<br>
+🔹 <b>Grand Livre (PRTHISGEN/ADV) :</b> Détail des mouvements. 5 formats d'impression. Filtres dynamiques avancés.<br>
+🔹 <b>Consultation des comptes (DSPACCADV/CUS/SUP) :</b><br>
+• Filtres dynamiques (commence par, contient...)<br>
+• Couleurs : Noir=lettré, Bleu=ouvert, Vert=partiel, Rouge=échu, Orange/Mauve/Brun=litige<br>
+• Présélection pour lettrage<br>
+• Bouton Transfert : modif analytique en masse ou génération OD<br>
+• Bouton Extourne (ALT+S) : extourne la pièce entière<br><br>
+🔹 <b>Solde à date :</b> Option "Reconstituer le solde" pour voir l'état au dernier jour d'une période passée.<br><br>
+💡 <b>Astuce :</b> Verrouiller le compte général (cadenas) permet de parcourir les sociétés sans changer le compte collectif.`,
+
+  coda: `<b>🏦 CODA / CAMT – Import bancaire</b><br><br>
+🔹 <b>Principe :</b> Import de fichiers extraits de compte électroniques. Lettrage automatique intégré.<br>
+🔹 <b>Accès :</b> Bouton aF6 (Actions) dans le journal financier.<br>
+🔹 <b>Options d'import :</b><br>
+• Comptes d'attente (débit/crédit) pour mouvements non lettrés<br>
+• Compte VCS (débit/crédit) pour paiements structurés<br>
+• Désactivation lettrage sur montant<br>
+• Recherche VCS dans communication / référence interne<br><br>
+🔹 <b>Gestion VCS :</b><br>
+• Soit importés en détail dans une OD (solde globalisé dans financier)<br>
+• Soit importés directement dans le financier<br><br>
+🔹 <b>Workflow CODA :</b> Permet de vérifier le cheminement du lettrage auto. Vue simplifiée (résultat) ou avancée (toutes les séquences).<br>
+🔹 <b>Paramétrage avancé (WRKCODASET) :</b> Pour cas spécifiques (Bancontact, tickets resto, cartes crédit, loyers...).<br><br>
+💡 <b>Astuce :</b> Le workflow CODA est précieux pour comprendre pourquoi un lettrage n'a pas eu lieu.`,
+
+  raccourcis: `<b>⌨️ Raccourcis & Astuces Adfinity</b><br><br>
+<b>Encodage :</b><br>
+• ALT+F1 : recherche dans liste de données<br>
+• ALT+F2 : modèle de pièce (depuis liste des pièces)<br>
+• ALT+F6 : récupération mouvements gestion commerciale (PSM)<br>
+• ALT+F8 : forcer le montant de la TVA<br>
+• ALT+F9 : supprimer ligne d'imputation<br>
+• ALT+F12 : utiliser un modèle de pièce<br>
+• F12 : écran de lettrage<br>
+• TAB / SHIFT+TAB : navigation champs<br>
+• + (pavé numérique) : ajouter ligne d'imputation<br><br>
+<b>Consultations :</b><br>
+• ALT+F2 (dans consultation comptes) : détail mouvement<br>
+• ALT+S : extourner pièce<br>
+• CTRL+double clic (lettrage) : récupérer n° de lettrage existant<br><br>
+<b>Conseils :</b><br>
+• Toujours vérifier la période calendrier est ouverte pour le type d'opération<br>
+• Utiliser les modèles pour factures récurrentes<br>
+• Paramétrer imputations par défaut sur fournisseurs pour gagner du temps<br>
+• Vérifier impact TVA via onglet dédié avant validation`,
+
+  reconciliation: `<b>🔗 Réconciliation Achats (PSM)</b><br><br>
+🔹 <b>Intérêts :</b> Clôturer bons de commande, lier pièces comptables et docs achats, éviter fausses factures, compléter imputations auto.<br>
+🔹 <b>Procédure :</b><br>
+1. Encoder l'en-tête de la facture (fournisseur, réf. interne...)<br>
+2. Bouton <b>Reconc.</b> (ou ALT+F6)<br>
+3. Écran préfiltré sur fournisseur et référence<br>
+4. Sélectionner lignes de commande/réception<br>
+5. Validation → imputations injectées dans la pièce<br><br>
+🔹 <b>Variante Package :</b> Pour volumes importants, les magasiniers préparent des packages à réconcilier. Le comptable sélectionne le package sans connaître le détail.<br>
+🔹 <b>Tolérance :</b> Différence de quelques centimes peut être comptabilisée auto selon seuil paramétré.<br><br>
+💡 <b>Astuce :</b> La référence interne (bon de commande) est le critère clé pour préfiltrer les mouvements.`,
+
+  etalements: `<b>📅 Étalements de charges</b><br><br>
+🔹 <b>Principe :</b> Génération automatique d'OD d'étalement lors de la validation de la pièce.<br>
+🔹 <b>Configuration :</b> Réalisée en amont sur les comptes généraux et journaux concernés (formation Setup & Paramétrage).<br>
+🔹 <b>Utilisation :</b> Indiquer le nombre de périodes d'étalement dans la zone "Quantité" de la ligne d'imputation. Forcer la période de début si nécessaire.<br>
+🔹 <b>Résultat :</b> Génération de N+1 OD dans le journal paramétré (ex: 900).<br><br>
+💡 <b>Astuce :</b> La zone quantité est vidée auto après génération pour éviter doubles générations.`,
+
+  litiges: `<b>⚠️ Gestion des Litiges</b><br><br>
+🔹 <b>Fournisseurs :</b><br>
+• Blocage global : option "Blocking of payments" sur fiche fournisseur<br>
+• Code litige sur facture : manuellement ou via outil de mise à jour en masse<br>
+• Exclusion lots paiement : filtrer sur code litige vide<br><br>
+🔹 <b>Clients :</b><br>
+• Codes litige utilisables aussi pour rappels et plans de paiement<br>
+• Plans de paiement : génèrent OD unique, peuvent imposer code litige 150<br><br>
+🔹 <b>Couleurs consultation :</b> Orange/Mauve/Brun selon valeur du code litige (paramétrable).`,
+
+  default: `Je n'ai pas trouvé de réponse exacte dans ma base de connaissances Adfinity. Essayez de reformuler ou utilisez les boutons rapides ci-dessous.<br><br>
+Vous pouvez me demander par exemple :<br>
+• "Comment scanner avec Adflow ?"<br>
+• "Raccourci lettrage"<br>
+• "Paiement négatif"<br>
+• "Changement de statut PSM"<br>
+• "Balance âgée client"`
+};
+
+function renderQuickButtons() {
+  return `<div class="quick-row">
+    <button class="chip purple" onclick="sendTopic('adflow')">📄 Adflow</button>
+    <button class="chip purple" onclick="sendTopic('encode_achat')">🧾 Encodage Achat</button>
+    <button class="chip purple" onclick="sendTopic('ocr')">🔍 OCR</button>
+    <button class="chip purple" onclick="sendTopic('psm')">💼 Sundry Invoicing</button>
+    <button class="chip purple" onclick="sendTopic('paiement')">💳 Paiements</button>
+    <button class="chip purple" onclick="sendTopic('rappels')">📢 Rappels</button>
+    <button class="chip purple" onclick="sendTopic('consult')">📊 Consultations</button>
+    <button class="chip purple" onclick="sendTopic('coda')">🏦 CODA</button>
+    <button class="chip orange" onclick="sendTopic('raccourcis')">⌨️ Raccourcis</button>
+  </div>`;
+}
+
+function addMessage(html, sender) {
+  const chat = document.getElementById('chat');
+  const div = document.createElement('div');
+  div.className = 'msg ' + sender;
+  div.innerHTML = html;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function sendTopic(key) {
+  addMessage(KB[key] || KB.default, 'bot');
+}
+
+function findAnswer(q) {
+  q = q.toLowerCase();
+  if (q.includes('adflow') || q.includes('scan') || q.includes('étiquette') || q.includes('pdf')) return KB.adflow;
+  if (q.includes('ocr') || q.includes('index me') || q.includes('reconnaissance')) return KB.ocr;
+  if (q.includes('achat') || q.includes('fournisseur') || q.includes('encoder') || q.includes('facture d\'achat') || q.includes('imputation')) return KB.encode_achat;
+  if (q.includes('psm') || q.includes('sundry') || q.includes('vente') || q.includes('facture de vente') || q.includes('changement de statut')) return KB.psm;
+  if (q.includes('paiement') || q.includes('fichier sepa') || q.includes('lot de paiement') || q.includes('wrkpaysup')) return KB.paiement;
+  if (q.includes('rappel') || q.includes('reminder') || q.includes('wrkrem')) return KB.rappels;
+  if (q.includes('consult') || q.includes('solde') || q.includes('balance') || q.includes('grand livre') || q.includes('dspacc')) return KB.consult;
+  if (q.includes('coda') || q.includes('camt') || q.includes('bancaire') || q.includes('extrait')) return KB.coda;
+  if (q.includes('réconcil') || q.includes('bon de commande') || q.includes('livraison')) return KB.reconciliation;
+  if (q.includes('étalement') || q.includes('phasing')) return KB.etalements;
+  if (q.includes('litige') || q.includes('bloquer') || q.includes('dispute')) return KB.litiges;
+  if (q.includes('raccourci') || q.includes('touche') || q.includes('astuce') || q.includes('shortcut')) return KB.raccourcis;
+  return KB.default;
+}
+
+function handleUser() {
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+  addMessage(text, 'user');
+  input.value = '';
+  setTimeout(() => {
+    const reply = findAnswer(text);
+    addMessage(reply, 'bot');
+  }, 350);
+}
+
+// Welcome
+window.onload = () => {
+  addMessage(`<b>Bienvenue !</b> Je suis votre assistant Adfinity autonome. Posez-moi une question ou choisissez un module ci-dessous.<br>${renderQuickButtons()}`, 'bot');
+};
+</script>
+</body>
+</html>
